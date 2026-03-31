@@ -4,91 +4,157 @@ import './TimelineSection.css';
 const timelineData = [
   {
     id: 1,
+    type: 'year',
     year: 1996,
-    title: 'Landed on earth',
-    coordinates: '11.0430°N, 75.9273°E',
-    position: 'right',
-    type: 'milestone'
+    position: 'center'
   },
   {
     id: 2,
-    year: 1996,
-    title: 'Relocated to Riyadh, Saudi Arabia',
+    type: 'event',
+    title: 'Landed on earth',
     coordinates: '11.0430°N, 75.9273°E',
     position: 'right',
-    type: 'milestone'
+    dotColor: 'green'
   },
   {
     id: 3,
-    year: 1999,
-    title: 'First day at School',
-    coordinates: '11.0430°N, 75.9273°E',
-    position: 'left',
-    type: 'milestone'
+    type: 'year',
+    year: 1996,
+    position: 'center'
   },
   {
     id: 4,
-    year: 2013,
-    title: 'Relocated to India',
+    type: 'event',
+    title: 'Relocated to Riyadh, Saudi Arabia',
     coordinates: '11.0430°N, 75.9273°E',
     position: 'right',
-    type: 'milestone'
+    dotColor: 'green'
   },
   {
     id: 5,
-    year: 2013,
-    title: 'Graduated senior higher secondary',
-    coordinates: '11.0430°N, 75.9273°E',
-    position: 'left',
-    type: 'milestone'
+    type: 'year',
+    year: 1999,
+    position: 'center'
   },
   {
     id: 6,
-    year: 2014,
-    title: 'Got my driving license',
+    type: 'event',
+    title: 'First day at School',
     coordinates: '11.0430°N, 75.9273°E',
-    position: 'right',
-    type: 'milestone'
+    position: 'left',
+    dotColor: 'white'
   },
   {
     id: 7,
-    year: 2014,
-    title: 'Started Bachelors in University',
-    coordinates: '11.0430°N, 75.9273°E',
-    position: 'left',
-    type: 'milestone'
+    type: 'year',
+    year: 2013,
+    position: 'center'
   },
   {
     id: 8,
+    type: 'event',
+    title: 'Relocated to India',
+    coordinates: '11.0430°N, 75.9273°E',
+    position: 'right',
+    dotColor: 'green'
+  },
+  {
+    id: 9,
+    type: 'year',
+    year: 2013,
+    position: 'center'
+  },
+  {
+    id: 10,
+    type: 'event',
+    title: 'Graduated senior higher secondary',
+    coordinates: '11.0430°N, 75.9273°E',
+    position: 'left',
+    dotColor: 'white'
+  },
+  {
+    id: 11,
+    type: 'year',
+    year: 2014,
+    position: 'center'
+  },
+  {
+    id: 12,
+    type: 'event',
+    title: 'Got my driving license',
+    coordinates: '11.0430°N, 75.9273°E',
+    position: 'right',
+    dotColor: 'green'
+  },
+  {
+    id: 13,
+    type: 'year',
+    year: 2014,
+    position: 'center'
+  },
+  {
+    id: 14,
+    type: 'event',
+    title: 'Started Bachelors in University',
+    coordinates: '11.0430°N, 75.9273°E',
+    position: 'left',
+    dotColor: 'white'
+  },
+  {
+    id: 15,
+    type: 'year',
     year: 2018,
+    position: 'center'
+  },
+  {
+    id: 16,
+    type: 'event',
     title: 'Site Supervision Engineer',
     company: 'TC One Builders',
     coordinates: '11.0430°N, 75.9273°E',
     position: 'left',
-    type: 'work'
+    dotColor: 'white'
   },
   {
-    id: 9,
+    id: 17,
+    type: 'year',
     year: 2019,
+    position: 'center'
+  },
+  {
+    id: 18,
+    type: 'event',
     title: 'Graduated from university',
     coordinates: '11.0430°N, 75.9273°E',
     position: 'left',
-    type: 'milestone'
+    dotColor: 'white'
   },
   {
-    id: 10,
+    id: 19,
+    type: 'year',
     year: 2019,
+    position: 'center'
+  },
+  {
+    id: 20,
+    type: 'event',
     title: 'Business Development Associate',
     company: 'Think & Learn Pvt Ltd',
     position: 'left',
-    type: 'work'
+    dotColor: 'white'
   },
   {
-    id: 11,
+    id: 21,
+    type: 'year',
     year: 2020,
+    position: 'center'
+  },
+  {
+    id: 22,
+    type: 'event',
     title: 'Federico II',
-    position: 'center',
-    type: 'section'
+    position: 'left',
+    dotColor: 'white'
   }
 ];
 
@@ -100,34 +166,43 @@ const TimelineSection = () => {
       <div className="timeline-container">
         <div className="timeline-line"></div>
         
-        {timelineData.map((item, index) => (
-          <div
-            key={item.id}
-            className={`timeline-item ${item.position} ${item.type || ''}`}
-            onMouseEnter={() => setHoveredItem(item.id)}
-            onMouseLeave={() => setHoveredItem(null)}
-            style={{ animationDelay: `${index * 0.2}s` }}
-          >
-            <div className="timeline-marker">
-              <div className={`marker-shape ${hoveredItem === item.id ? 'hovered' : ''}`}>
-                {item.year}
+        {timelineData.map((item, index) => {
+          if (item.type === 'year') {
+            return (
+              <div
+                key={item.id}
+                className="timeline-year-marker"
+                style={{ animationDelay: `${index * 0.1}s` }}
+              >
+                <div className="year-blob">
+                  {item.year}
+                </div>
               </div>
-            </div>
-            
-            <div className="timeline-content">
-              <div className="timeline-connector"></div>
-              <div className="event-details">
-                <h3 className="event-title">{item.title}</h3>
-                {item.company && (
-                  <p className="event-company">{item.company}</p>
-                )}
-                {item.coordinates && (
-                  <p className="event-coordinates">{item.coordinates}</p>
-                )}
+            );
+          } else {
+            return (
+              <div
+                key={item.id}
+                className={`timeline-event ${item.position}`}
+                onMouseEnter={() => setHoveredItem(item.id)}
+                onMouseLeave={() => setHoveredItem(null)}
+                style={{ animationDelay: `${index * 0.1}s` }}
+              >
+                <div className={`event-dot ${item.dotColor} ${hoveredItem === item.id ? 'hovered' : ''}`}></div>
+                <div className="event-connector"></div>
+                <div className="event-content">
+                  <h3 className="event-title">{item.title}</h3>
+                  {item.company && (
+                    <p className="event-company">{item.company}</p>
+                  )}
+                  {item.coordinates && (
+                    <p className="event-coordinates">{item.coordinates}</p>
+                  )}
+                </div>
               </div>
-            </div>
-          </div>
-        ))}
+            );
+          }
+        })}
       </div>
     </section>
   );
