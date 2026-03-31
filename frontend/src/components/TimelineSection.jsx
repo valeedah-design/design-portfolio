@@ -47,7 +47,7 @@ const timelineData = [
   {
     id: 7,
     type: 'year',
-    year: 2013,
+    year: 2012,
     position: 'center'
   },
   {
