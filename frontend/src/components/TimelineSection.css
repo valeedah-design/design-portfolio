@@ -1,0 +1,230 @@
+.timeline-section {
+  min-height: 100vh;
+  padding: 100px 60px;
+  position: relative;
+  background-image: 
+    linear-gradient(rgba(0, 255, 0, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 255, 0, 0.03) 1px, transparent 1px);
+  background-size: 50px 50px;
+  background-position: -1px -1px;
+}
+
+.timeline-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+  padding: 40px 0;
+}
+
+.timeline-line {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgba(0, 255, 0, 0.3) 10%,
+    rgba(0, 255, 0, 0.3) 90%,
+    transparent
+  );
+  transform: translateX(-50%);
+}
+
+.timeline-item {
+  position: relative;
+  margin-bottom: 120px;
+  display: flex;
+  align-items: center;
+  opacity: 0;
+  animation: fadeInUp 0.8s ease forwards;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.timeline-item.left {
+  flex-direction: row;
+}
+
+.timeline-item.right {
+  flex-direction: row-reverse;
+}
+
+.timeline-marker {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+}
+
+.marker-shape {
+  width: 120px;
+  height: 140px;
+  border: 2px solid #00FF00;
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  background: rgba(0, 0, 0, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'JetBrains Mono', 'Courier New', monospace;
+  font-size: 24px;
+  font-weight: 600;
+  color: #ffffff;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 20px rgba(0, 255, 0, 0.2);
+}
+
+.marker-shape:hover,
+.marker-shape.hovered {
+  background: rgba(0, 255, 0, 0.1);
+  border-color: #00FF00;
+  box-shadow: 0 0 40px rgba(0, 255, 0, 0.5);
+  transform: scale(1.1);
+}
+
+.timeline-content {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  padding: 0 40px;
+}
+
+.timeline-item.left .timeline-content {
+  justify-content: flex-end;
+  padding-right: calc(50% + 100px);
+}
+
+.timeline-item.right .timeline-content {
+  justify-content: flex-start;
+  padding-left: calc(50% + 100px);
+}
+
+.timeline-connector {
+  width: 80px;
+  height: 2px;
+  background: rgba(0, 255, 0, 0.4);
+  position: absolute;
+  left: 50%;
+}
+
+.timeline-item.left .timeline-connector {
+  transform: translateX(-100%);
+  margin-left: -60px;
+}
+
+.timeline-item.right .timeline-connector {
+  transform: translateX(0%);
+  margin-left: 60px;
+}
+
+.event-details {
+  max-width: 400px;
+  padding: 20px;
+  transition: all 0.3s ease;
+}
+
+.timeline-item.left .event-details {
+  text-align: right;
+}
+
+.timeline-item.right .event-details {
+  text-align: left;
+}
+
+.event-title {
+  font-family: 'JetBrains Mono', 'Courier New', monospace;
+  font-size: 20px;
+  font-weight: 500;
+  color: #ffffff;
+  margin: 0 0 8px 0;
+  transition: color 0.3s ease;
+}
+
+.timeline-item:hover .event-title {
+  color: #00FF00;
+}
+
+.event-coordinates {
+  font-family: 'JetBrains Mono', 'Courier New', monospace;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.5);
+  margin: 0;
+  letter-spacing: 0.5px;
+}
+
+/* Responsive */
+@media (max-width: 968px) {
+  .timeline-line {
+    left: 60px;
+  }
+
+  .timeline-marker {
+    left: 60px;
+  }
+
+  .timeline-item {
+    flex-direction: row !important;
+  }
+
+  .timeline-item.left .timeline-content,
+  .timeline-item.right .timeline-content {
+    justify-content: flex-start;
+    padding-left: 160px;
+    padding-right: 20px;
+  }
+
+  .timeline-item.left .event-details,
+  .timeline-item.right .event-details {
+    text-align: left;
+  }
+
+  .timeline-connector {
+    left: 60px;
+  }
+
+  .timeline-item.left .timeline-connector,
+  .timeline-item.right .timeline-connector {
+    transform: translateX(0%);
+    margin-left: 60px;
+  }
+
+  .marker-shape {
+    width: 100px;
+    height: 120px;
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .timeline-section {
+    padding: 80px 30px;
+  }
+
+  .timeline-item {
+    margin-bottom: 80px;
+  }
+
+  .marker-shape {
+    width: 80px;
+    height: 100px;
+    font-size: 18px;
+  }
+
+  .event-title {
+    font-size: 18px;
+  }
+
+  .event-coordinates {
+    font-size: 12px;
+  }
+}
