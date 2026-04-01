@@ -14,13 +14,85 @@
   font-size: 72px;
   font-weight: 400;
   color: #00FF00;
-  margin: 0 0 80px 0;
+  margin: 0 0 40px 0;
   letter-spacing: -2px;
   text-align: left;
   text-shadow: 
     0 0 10px rgba(0, 255, 0, 0.5),
     0 0 20px rgba(0, 255, 0, 0.3),
     0 0 30px rgba(0, 255, 0, 0.2);
+}
+
+/* Flip CTA Button */
+.timeline-flip-cta {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 40px;
+}
+
+.flip-button {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(0, 255, 0, 0.1);
+  border: 2px solid #00FF00;
+  color: #00FF00;
+  padding: 14px 28px;
+  font-family: 'Share Tech Mono', 'Courier New', monospace;
+  font-size: 16px;
+  font-weight: 500;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.flip-button::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(0, 255, 0, 0.2);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.flip-button:hover::before {
+  width: 300px;
+  height: 300px;
+}
+
+.flip-button:hover {
+  background: rgba(0, 255, 0, 0.2);
+  box-shadow: 
+    0 0 30px rgba(0, 255, 0, 0.6),
+    0 0 50px rgba(0, 255, 0, 0.4);
+  transform: translateY(-2px);
+}
+
+.flip-button:active {
+  transform: translateY(0);
+}
+
+.flip-icon {
+  font-size: 24px;
+  font-weight: bold;
+  transition: transform 0.3s ease;
+  display: inline-block;
+}
+
+.flip-button:hover .flip-icon {
+  transform: scale(1.2) rotate(180deg);
+}
+
+.flip-text {
+  position: relative;
+  z-index: 1;
 }
 
 .timeline-container {
@@ -295,14 +367,16 @@
 
 .timeline-event.left .event-connector {
   right: 50%;
-  width: 80px;
-  margin-right: -40px;
+  left: auto;
+  width: 40px;
+  margin-right: 8px;
 }
 
 .timeline-event.right .event-connector {
   left: 50%;
-  width: 80px;
-  margin-left: -40px;
+  right: auto;
+  width: 40px;
+  margin-left: 8px;
 }
 
 /* Event content */

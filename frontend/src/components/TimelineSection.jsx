@@ -224,14 +224,31 @@ const timelineData = [
 
 const TimelineSection = () => {
   const [hoveredItem, setHoveredItem] = useState(null);
+  const [isReversed, setIsReversed] = useState(false);
+
+  const displayData = isReversed ? [...timelineData].reverse() : timelineData;
 
   return (
     <section id="timeline" className="timeline-section">
       <h1 className="timeline-title">\Timeline</h1>
+      
+      {/* Interactive CTA to flip timeline */}
+      <div className="timeline-flip-cta">
+        <button 
+          className="flip-button"
+          onClick={() => setIsReversed(!isReversed)}
+        >
+          <span className="flip-icon">{isReversed ? '↓' : '↑'}</span>
+          <span className="flip-text">
+            {isReversed ? 'View Past → Present' : 'View Present → Past'}
+          </span>
+        </button>
+      </div>
+
       <div className="timeline-container">
         <div className="timeline-line"></div>
         
-        {timelineData.map((item, index) => {
+        {displayData.map((item, index) => {
           if (item.type === 'year') {
             return (
               <div
