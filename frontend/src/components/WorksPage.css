@@ -1,0 +1,235 @@
+.works-section {
+  min-height: 100vh;
+  padding: 100px 60px;
+  background-image: 
+    linear-gradient(rgba(0, 255, 0, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 255, 0, 0.03) 1px, transparent 1px);
+  background-size: 50px 50px;
+  background-position: -1px -1px;
+  background-color: #000000;
+}
+
+.works-title {
+  font-family: 'Share Tech Mono', 'Courier New', monospace;
+  font-size: 72px;
+  font-weight: 400;
+  color: #00FF00;
+  margin: 0 0 60px 0;
+  letter-spacing: -2px;
+  text-shadow: 
+    0 0 10px rgba(0, 255, 0, 0.5),
+    0 0 20px rgba(0, 255, 0, 0.3);
+}
+
+/* Category Tabs */
+.category-tabs {
+  display: flex;
+  gap: 40px;
+  margin-bottom: 60px;
+  border-bottom: 2px solid rgba(0, 255, 0, 0.2);
+}
+
+.category-tab {
+  font-family: 'Share Tech Mono', 'Courier New', monospace;
+  font-size: 18px;
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.5);
+  padding: 12px 0;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.category-tab:hover {
+  color: #00FF00;
+}
+
+.category-tab.active {
+  color: #00FF00;
+}
+
+.tab-indicator {
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #00FF00, #39FF14);
+  box-shadow: 0 0 10px rgba(0, 255, 0, 0.6);
+  animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+/* Projects Grid */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 40px;
+  max-width: 1400px;
+}
+
+.research-grid {
+  grid-template-columns: 1fr;
+  max-width: 900px;
+}
+
+/* Project Card */
+.project-card {
+  border-radius: 24px;
+  overflow: hidden;
+  border: 2px solid #00FF00;
+  transition: all 0.4s ease;
+  cursor: pointer;
+  position: relative;
+  min-height: 500px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 0 20px rgba(0, 255, 0, 0.2);
+}
+
+.project-card.green {
+  background: linear-gradient(135deg, #39FF14 0%, #00CC00 100%);
+}
+
+.project-card.black {
+  background: #0a0a0a;
+}
+
+.project-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 
+    0 0 40px rgba(0, 255, 0, 0.5),
+    0 20px 40px rgba(0, 0, 0, 0.5);
+  border-color: #39FF14;
+}
+
+.project-card.green:hover {
+  background: #0a0a0a;
+}
+
+.project-card.black:hover {
+  background: linear-gradient(135deg, rgba(57, 255, 20, 0.1) 0%, rgba(0, 204, 0, 0.1) 100%);
+}
+
+/* Project Tag */
+.project-tag {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: rgba(0, 0, 0, 0.8);
+  color: #00FF00;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-family: 'Share Tech Mono', 'Courier New', monospace;
+  font-size: 12px;
+  border: 1px solid #00FF00;
+  z-index: 2;
+  backdrop-filter: blur(10px);
+}
+
+/* Project Image */
+.project-image-wrapper {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px 20px 20px;
+  overflow: hidden;
+}
+
+.project-image {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.5));
+  transition: transform 0.4s ease;
+}
+
+.project-card:hover .project-image {
+  transform: scale(1.05);
+}
+
+/* Project Info */
+.project-info {
+  padding: 30px;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(10px);
+  border-top: 1px solid rgba(0, 255, 0, 0.3);
+}
+
+.project-title {
+  font-family: 'Share Tech Mono', 'Courier New', monospace;
+  font-size: 28px;
+  font-weight: 700;
+  color: #00FF00;
+  margin: 0 0 10px 0;
+  text-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
+}
+
+.project-description {
+  font-family: 'Share Tech Mono', 'Courier New', monospace;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.7);
+  margin: 0;
+  line-height: 1.6;
+}
+
+/* Research Cards */
+.research-card {
+  border: 2px solid #00FF00;
+  border-radius: 12px;
+  padding: 40px;
+  background: rgba(0, 255, 0, 0.05);
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.research-card:hover {
+  background: rgba(0, 255, 0, 0.1);
+  box-shadow: 0 0 30px rgba(0, 255, 0, 0.3);
+  transform: translateX(10px);
+}
+
+.research-title {
+  font-family: 'Share Tech Mono', 'Courier New', monospace;
+  font-size: 24px;
+  font-weight: 600;
+  color: #ffffff;
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+  .projects-grid {
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 30px;
+  }
+}
+
+@media (max-width: 768px) {
+  .works-section {
+    padding: 80px 30px;
+  }
+
+  .works-title {
+    font-size: 56px;
+  }
+
+  .projects-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .project-card {
+    min-height: 450px;
+  }
+}

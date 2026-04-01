@@ -3,6 +3,7 @@ import { Home, TrendingUp, Copy, Pen, Wifi } from 'lucide-react';
 import './Portfolio.css';
 import HeroSection from './HeroSection';
 import TimelineSection from './TimelineSection';
+import WorksPage from './WorksPage';
 import MouseSpotlight from './MouseSpotlight';
 
 const Portfolio = () => {
@@ -18,7 +19,7 @@ const Portfolio = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ['home', 'timeline'];
+      const sections = ['home', 'timeline', 'works'];
       const scrollPosition = window.scrollY + 200;
 
       for (const section of sections) {
@@ -58,7 +59,11 @@ const Portfolio = () => {
         >
           <TrendingUp size={24} />
         </button>
-        <button className="nav-icon" aria-label="Projects">
+        <button 
+          className={`nav-icon ${activeSection === 'works' ? 'active' : ''}`}
+          onClick={() => scrollToSection('works')}
+          aria-label="Works"
+        >
           <Copy size={24} />
         </button>
         <button className="nav-icon" aria-label="Skills">
@@ -73,6 +78,7 @@ const Portfolio = () => {
       <main className="main-content">
         <HeroSection />
         <TimelineSection />
+        <WorksPage />
       </main>
     </div>
   );
