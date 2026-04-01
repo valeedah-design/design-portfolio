@@ -4,26 +4,20 @@ import './TimelineSection.css';
 const timelineData = [
   {
     id: 1,
-    type: 'year',
-    year: 1996,
-    position: 'center'
-  },
-  {
-    id: 2,
     type: 'event',
     title: 'Landed on earth',
     coordinates: '11.0430°N, 75.9273°E',
     position: 'right',
-    dotColor: 'green'
+    dotColor: 'radar'
   },
   {
-    id: 3,
+    id: 2,
     type: 'year',
     year: 1996,
     position: 'center'
   },
   {
-    id: 4,
+    id: 3,
     type: 'event',
     title: 'Relocated to Riyadh, Saudi Arabia',
     coordinates: '11.0430°N, 75.9273°E',
@@ -31,13 +25,13 @@ const timelineData = [
     dotColor: 'green'
   },
   {
-    id: 5,
+    id: 4,
     type: 'year',
     year: 1999,
     position: 'center'
   },
   {
-    id: 6,
+    id: 5,
     type: 'event',
     title: 'First day at School',
     coordinates: '11.0430°N, 75.9273°E',
@@ -45,13 +39,13 @@ const timelineData = [
     dotColor: 'white'
   },
   {
-    id: 7,
+    id: 6,
     type: 'year',
     year: 2012,
     position: 'center'
   },
   {
-    id: 8,
+    id: 7,
     type: 'event',
     title: 'Relocated to India',
     coordinates: '11.0430°N, 75.9273°E',
@@ -59,13 +53,13 @@ const timelineData = [
     dotColor: 'green'
   },
   {
-    id: 9,
+    id: 8,
     type: 'year',
     year: 2013,
     position: 'center'
   },
   {
-    id: 10,
+    id: 9,
     type: 'event',
     title: 'Graduated senior higher secondary',
     coordinates: '11.0430°N, 75.9273°E',
@@ -73,13 +67,13 @@ const timelineData = [
     dotColor: 'white'
   },
   {
-    id: 11,
+    id: 10,
     type: 'year',
     year: 2014,
     position: 'center'
   },
   {
-    id: 12,
+    id: 11,
     type: 'event',
     title: 'Got my driving license',
     coordinates: '11.0430°N, 75.9273°E',
@@ -87,13 +81,7 @@ const timelineData = [
     dotColor: 'green'
   },
   {
-    id: 13,
-    type: 'year',
-    year: 2014,
-    position: 'center'
-  },
-  {
-    id: 14,
+    id: 12,
     type: 'event',
     title: 'Started Bachelors in University',
     coordinates: '11.0430°N, 75.9273°E',
@@ -101,13 +89,13 @@ const timelineData = [
     dotColor: 'white'
   },
   {
-    id: 15,
+    id: 13,
     type: 'year',
     year: 2018,
     position: 'center'
   },
   {
-    id: 16,
+    id: 14,
     type: 'event',
     title: 'Graduated from Bachelors',
     coordinates: '11.0430°N, 75.9273°E',
@@ -115,13 +103,7 @@ const timelineData = [
     dotColor: 'white'
   },
   {
-    id: 17,
-    type: 'year',
-    year: 2018,
-    position: 'center'
-  },
-  {
-    id: 18,
+    id: 15,
     type: 'event',
     title: 'Site Supervision Engineer',
     company: 'TC One Builders',
@@ -130,13 +112,13 @@ const timelineData = [
     dotColor: 'white'
   },
   {
-    id: 19,
+    id: 16,
     type: 'year',
     year: 2019,
     position: 'center'
   },
   {
-    id: 20,
+    id: 17,
     type: 'event',
     title: 'Business Development Associate',
     company: 'Think & Learn Pvt Ltd',
@@ -145,13 +127,13 @@ const timelineData = [
     dotColor: 'white'
   },
   {
-    id: 21,
+    id: 18,
     type: 'year',
     year: 2020,
     position: 'center'
   },
   {
-    id: 22,
+    id: 19,
     type: 'event',
     title: 'Moved to Napoli, Italy',
     coordinates: '40.8522°N, 14.2681°E',
@@ -159,13 +141,7 @@ const timelineData = [
     dotColor: 'green'
   },
   {
-    id: 23,
-    type: 'year',
-    year: 2020,
-    position: 'center'
-  },
-  {
-    id: 24,
+    id: 20,
     type: 'event',
     title: 'Started Pursuing Master degree',
     company: 'University of Naples Federico II',
@@ -174,13 +150,13 @@ const timelineData = [
     dotColor: 'white'
   },
   {
-    id: 25,
+    id: 21,
     type: 'year',
     year: 2022,
     position: 'center'
   },
   {
-    id: 26,
+    id: 22,
     type: 'event',
     title: 'Student',
     company: 'Apple Developer Academy',
@@ -189,13 +165,13 @@ const timelineData = [
     dotColor: 'white'
   },
   {
-    id: 27,
+    id: 23,
     type: 'year',
     year: 2024,
     position: 'center'
   },
   {
-    id: 28,
+    id: 24,
     type: 'event',
     title: 'Relocated to Budapest, Hungary',
     coordinates: '47.4979°N, 19.0402°E',
@@ -203,13 +179,7 @@ const timelineData = [
     dotColor: 'green'
   },
   {
-    id: 29,
-    type: 'year',
-    year: 2024,
-    position: 'center'
-  },
-  {
-    id: 30,
+    id: 25,
     type: 'event',
     title: 'UX Designer-Intern',
     company: 'Company HQ',
@@ -218,13 +188,7 @@ const timelineData = [
     dotColor: 'white'
   },
   {
-    id: 31,
-    type: 'year',
-    year: 2024,
-    position: 'center'
-  },
-  {
-    id: 32,
+    id: 26,
     type: 'event',
     title: 'Graduated in Masters',
     company: 'University of Naples Federico II',
@@ -233,13 +197,13 @@ const timelineData = [
     dotColor: 'white'
   },
   {
-    id: 33,
+    id: 27,
     type: 'year',
     year: 2025,
     position: 'center'
   },
   {
-    id: 34,
+    id: 28,
     type: 'event',
     title: 'UX Designer',
     company: 'Flowerwork',
@@ -248,13 +212,7 @@ const timelineData = [
     dotColor: 'white'
   },
   {
-    id: 35,
-    type: 'year',
-    year: 2025,
-    position: 'center'
-  },
-  {
-    id: 36,
+    id: 29,
     type: 'event',
     title: 'PhD in ESTIMO',
     company: 'University of Naples Federico II',
