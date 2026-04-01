@@ -3,7 +3,7 @@ import './MatrixGreeting.css';
 
 const greetings = [
   { text: "Ciao, I'm Valeed", lang: "Italian/English" },
-  { text: "مرحبا، أنا ڤاليد", lang: "Arabic" },
+  { text: "مرحبا، أنا وليد", lang: "Arabic" },
   { text: "नमस्ते, मैं वलीद हूं", lang: "Hindi" },
   { text: "ഹലോ, ഞാൻ വലീദ് ആണ്", lang: "Malayalam" },
   { text: "Hello, I'm Valeed", lang: "English" }
