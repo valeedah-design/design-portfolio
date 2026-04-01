@@ -1,7 +1,7 @@
 .mouse-spotlight {
   position: fixed;
-  width: 400px;
-  height: 400px;
+  width: 80px;
+  height: 80px;
   border-radius: 50%;
   pointer-events: none;
   z-index: 1;
