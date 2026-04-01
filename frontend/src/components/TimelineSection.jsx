@@ -53,10 +53,10 @@ const timelineData = [
   {
     id: 8,
     type: 'event',
-    title: 'Relocated to India',
+    title: 'Graduated High School',
     coordinates: '11.0430°N, 75.9273°E',
-    position: 'right',
-    dotColor: 'green'
+    position: 'left',
+    dotColor: 'white'
   },
   {
     id: 9,
@@ -67,10 +67,10 @@ const timelineData = [
   {
     id: 10,
     type: 'event',
-    title: 'Graduated senior higher secondary',
+    title: 'Relocated to India',
     coordinates: '11.0430°N, 75.9273°E',
-    position: 'left',
-    dotColor: 'white'
+    position: 'right',
+    dotColor: 'green'
   },
   {
     id: 11,
@@ -81,10 +81,10 @@ const timelineData = [
   {
     id: 12,
     type: 'event',
-    title: 'Got my driving license',
+    title: 'Graduated senior higher secondary',
     coordinates: '11.0430°N, 75.9273°E',
-    position: 'right',
-    dotColor: 'green'
+    position: 'left',
+    dotColor: 'white'
   },
   {
     id: 13,
@@ -95,10 +95,10 @@ const timelineData = [
   {
     id: 14,
     type: 'event',
-    title: 'Started Bachelors in University',
+    title: 'Got my driving license',
     coordinates: '11.0430°N, 75.9273°E',
-    position: 'left',
-    dotColor: 'white'
+    position: 'right',
+    dotColor: 'green'
   },
   {
     id: 15,
@@ -109,8 +109,7 @@ const timelineData = [
   {
     id: 16,
     type: 'event',
-    title: 'Site Supervision Engineer',
-    company: 'TC One Builders',
+    title: 'Started Bachelors in University',
     coordinates: '11.0430°N, 75.9273°E',
     position: 'left',
     dotColor: 'white'
@@ -118,13 +117,14 @@ const timelineData = [
   {
     id: 17,
     type: 'year',
-    year: 2019,
+    year: 2018,
     position: 'center'
   },
   {
     id: 18,
     type: 'event',
-    title: 'Graduated from university',
+    title: 'Site Supervision Engineer',
+    company: 'TC One Builders',
     coordinates: '11.0430°N, 75.9273°E',
     position: 'left',
     dotColor: 'white'
@@ -138,21 +138,119 @@ const timelineData = [
   {
     id: 20,
     type: 'event',
-    title: 'Business Development Associate',
-    company: 'Think & Learn Pvt Ltd',
+    title: 'Graduated from university',
+    coordinates: '11.0430°N, 75.9273°E',
     position: 'left',
     dotColor: 'white'
   },
   {
     id: 21,
     type: 'year',
-    year: 2020,
+    year: 2019,
     position: 'center'
   },
   {
     id: 22,
     type: 'event',
-    title: 'Federico II',
+    title: 'Business Development Associate',
+    company: 'Think & Learn Pvt Ltd',
+    position: 'left',
+    dotColor: 'white'
+  },
+  {
+    id: 23,
+    type: 'year',
+    year: 2020,
+    position: 'center'
+  },
+  {
+    id: 24,
+    type: 'event',
+    title: 'Started Pursuing Master degree',
+    company: 'University of Limerick, Ireland',
+    position: 'left',
+    dotColor: 'white'
+  },
+  {
+    id: 25,
+    type: 'year',
+    year: 2022,
+    position: 'center'
+  },
+  {
+    id: 26,
+    type: 'event',
+    title: 'Relocated to Monali',
+    coordinates: '40.0518°N, 4.3261°E',
+    position: 'right',
+    dotColor: 'green'
+  },
+  {
+    id: 27,
+    type: 'year',
+    year: 2024,
+    position: 'center'
+  },
+  {
+    id: 28,
+    type: 'event',
+    title: 'Relocated to Budapest, Hungary',
+    coordinates: '47.4979°N, 19.0402°E',
+    position: 'right',
+    dotColor: 'green'
+  },
+  {
+    id: 29,
+    type: 'year',
+    year: 2024,
+    position: 'center'
+  },
+  {
+    id: 30,
+    type: 'event',
+    title: 'Student',
+    company: 'Apple Developer Academy',
+    position: 'left',
+    dotColor: 'white'
+  },
+  {
+    id: 31,
+    type: 'year',
+    year: 2024,
+    position: 'center'
+  },
+  {
+    id: 32,
+    type: 'event',
+    title: 'UX Designer-Intern',
+    company: 'Company HQ',
+    position: 'left',
+    dotColor: 'white'
+  },
+  {
+    id: 33,
+    type: 'year',
+    year: 2025,
+    position: 'center'
+  },
+  {
+    id: 34,
+    type: 'event',
+    title: 'Graduated in Masters',
+    company: 'University of Limerick, Ireland',
+    position: 'left',
+    dotColor: 'white'
+  },
+  {
+    id: 35,
+    type: 'year',
+    year: 2026,
+    position: 'center'
+  },
+  {
+    id: 36,
+    type: 'event',
+    title: 'UX Designer',
     position: 'left',
     dotColor: 'white'
   }
