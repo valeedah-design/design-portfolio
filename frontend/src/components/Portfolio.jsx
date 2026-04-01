@@ -3,6 +3,7 @@ import { Home, TrendingUp, Copy, Pen, Wifi } from 'lucide-react';
 import './Portfolio.css';
 import HeroSection from './HeroSection';
 import TimelineSection from './TimelineSection';
+import MouseSpotlight from './MouseSpotlight';
 
 const Portfolio = () => {
   const [activeSection, setActiveSection] = useState('home');
@@ -38,6 +39,9 @@ const Portfolio = () => {
 
   return (
     <div className="portfolio-container">
+      {/* Mouse Spotlight Effect */}
+      <MouseSpotlight />
+      
       {/* Fixed Sidebar Navigation */}
       <nav className="sidebar-nav">
         <button
