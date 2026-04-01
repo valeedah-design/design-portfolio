@@ -21,10 +21,10 @@ const MouseSpotlight = () => {
 
   return (
     <div
-      className="mouse-spotlight"
+      className="grid-reveal-layer"
       style={{
-        left: `${mousePosition.x}px`,
-        top: `${mousePosition.y}px`,
+        maskImage: `radial-gradient(circle 80px at ${mousePosition.x}px ${mousePosition.y}px, black 0%, transparent 100%)`,
+        WebkitMaskImage: `radial-gradient(circle 80px at ${mousePosition.x}px ${mousePosition.y}px, black 0%, transparent 100%)`,
       }}
     />
   );
