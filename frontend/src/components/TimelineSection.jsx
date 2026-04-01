@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import './TimelineSection.css';
-import BlinkingEye from './BlinkingEye';
 
 const timelineData = [
   {
@@ -169,46 +168,39 @@ const TimelineSection = () => {
         <div className="timeline-line"></div>
         
         {timelineData.map((item, index) => {
-          // Add blinking eye after "First day at School" (id: 6)
-          const showEye = item.id === 6;
-          
           if (item.type === 'year') {
             return (
-              <React.Fragment key={item.id}>
-                <div
-                  className="timeline-year-marker"
-                  style={{ animationDelay: `${index * 0.1}s` }}
-                >
-                  <div className="year-blob">
-                    {item.year}
-                  </div>
+              <div
+                key={item.id}
+                className="timeline-year-marker"
+                style={{ animationDelay: `${index * 0.1}s` }}
+              >
+                <div className="year-blob">
+                  {item.year}
                 </div>
-                {showEye && <BlinkingEye />}
-              </React.Fragment>
+              </div>
             );
           } else {
             return (
-              <React.Fragment key={item.id}>
-                <div
-                  className={`timeline-event ${item.position}`}
-                  onMouseEnter={() => setHoveredItem(item.id)}
-                  onMouseLeave={() => setHoveredItem(null)}
-                  style={{ animationDelay: `${index * 0.1}s` }}
-                >
-                  <div className={`event-dot ${item.dotColor} ${hoveredItem === item.id ? 'hovered' : ''}`}></div>
-                  <div className="event-connector"></div>
-                  <div className="event-content">
-                    <h3 className="event-title">{item.title}</h3>
-                    {item.company && (
-                      <p className="event-company">{item.company}</p>
-                    )}
-                    {item.coordinates && (
-                      <p className="event-coordinates">{item.coordinates}</p>
-                    )}
-                  </div>
+              <div
+                key={item.id}
+                className={`timeline-event ${item.position}`}
+                onMouseEnter={() => setHoveredItem(item.id)}
+                onMouseLeave={() => setHoveredItem(null)}
+                style={{ animationDelay: `${index * 0.1}s` }}
+              >
+                <div className={`event-dot ${item.dotColor} ${hoveredItem === item.id ? 'hovered' : ''}`}></div>
+                <div className="event-connector"></div>
+                <div className="event-content">
+                  <h3 className="event-title">{item.title}</h3>
+                  {item.company && (
+                    <p className="event-company">{item.company}</p>
+                  )}
+                  {item.coordinates && (
+                    <p className="event-coordinates">{item.coordinates}</p>
+                  )}
                 </div>
-                {showEye && <BlinkingEye />}
-              </React.Fragment>
+              </div>
             );
           }
         })}
