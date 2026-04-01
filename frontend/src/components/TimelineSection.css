@@ -152,7 +152,7 @@
   box-shadow: 
     0 0 50px rgba(0, 255, 0, 0.7),
     inset 0 0 40px rgba(0, 255, 0, 0.2);
-  transform: scale(1.15) rotate(3deg);
+  transform: scale(1.2);
   color: #39FF14;
 }
 
