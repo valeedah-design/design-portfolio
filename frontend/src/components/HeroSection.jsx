@@ -26,7 +26,7 @@ const HeroSection = () => {
           <div className="profile-card">
             <div className="profile-image-wrapper">
               <img
-                src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=500&fit=crop"
+                src="https://customer-assets.emergentagent.com/job_work-gallery-139/artifacts/0f16w011_photo_2023-06-26%2022.58.07.jpeg"
                 alt="Valeed"
                 className="profile-image"
               />

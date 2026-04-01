@@ -3,11 +3,10 @@ import './MatrixGreeting.css';
 
 const greetings = [
   { text: "Ciao, I'm Valeed", lang: "Italian/English" },
-  { text: "مرحبا، أنا ڤاليد", lang: "Arabic" }, // Using ڤ for 'v' sound
+  { text: "مرحبا، أنا ڤاليد", lang: "Arabic" },
   { text: "नमस्ते, मैं वलीद हूं", lang: "Hindi" },
   { text: "ഹലോ, ഞാൻ വലീദ് ആണ്", lang: "Malayalam" },
-  { text: "Hello, I'm Valeed", lang: "English" },
-  { text: "Bonjour, je suis Valeed", lang: "French" }
+  { text: "Hello, I'm Valeed", lang: "English" }
 ];
 
 const randomChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$%&*';
@@ -33,23 +32,20 @@ const MatrixGreeting = () => {
     
     setIsAnimating(true);
     let frame = 0;
-    const totalFrames = 20;
+    const totalFrames = 15;
 
     const animate = () => {
       if (frame < totalFrames) {
         let newText = '';
         
         for (let i = 0; i < maxLength; i++) {
-          const progress = (frame - i) / totalFrames;
+          const progress = (frame - i * 0.5) / totalFrames;
           
           if (progress < 0) {
             // Haven't started flipping this character yet
             newText += currentText[i] || '';
-          } else if (progress < 0.5) {
+          } else if (progress < 0.8) {
             // Flipping - show random character
-            newText += randomChars[Math.floor(Math.random() * randomChars.length)];
-          } else if (progress < 1) {
-            // Still flipping - more random
             newText += randomChars[Math.floor(Math.random() * randomChars.length)];
           } else {
             // Settled on final character
@@ -61,6 +57,7 @@ const MatrixGreeting = () => {
         frame++;
         requestAnimationFrame(animate);
       } else {
+        // Ensure final text is clean and readable
         setDisplayText(targetText);
         setCurrentIndex(nextIndex);
         setIsAnimating(false);
@@ -72,17 +69,7 @@ const MatrixGreeting = () => {
 
   return (
     <h2 className={`matrix-greeting ${isAnimating ? 'animating' : ''}`}>
-      {displayText.split('').map((char, index) => (
-        <span 
-          key={index} 
-          className="char"
-          style={{
-            animationDelay: `${index * 0.05}s`
-          }}
-        >
-          {char}
-        </span>
-      ))}
+      {displayText}
     </h2>
   );
 };

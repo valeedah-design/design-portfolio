@@ -163,6 +163,7 @@ const TimelineSection = () => {
 
   return (
     <section id="timeline" className="timeline-section">
+      <h1 className="timeline-title">\Timeline</h1>
       <div className="timeline-container">
         <div className="timeline-line"></div>
         
