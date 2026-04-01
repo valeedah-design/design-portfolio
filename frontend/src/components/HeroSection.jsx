@@ -1,5 +1,6 @@
 import React from 'react';
 import './HeroSection.css';
+import MatrixGreeting from './MatrixGreeting';
 
 const HeroSection = () => {
   return (
@@ -9,7 +10,7 @@ const HeroSection = () => {
           <h1 className="welcome-text">\Welcome</h1>
           
           <div className="intro-section">
-            <h2 className="greeting">Ciao, I'm Valeed</h2>
+            <MatrixGreeting />
             
             <div className="about-box">
               <h3 className="about-title">Who am I?</h3>
