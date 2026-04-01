@@ -4,7 +4,6 @@ import './Portfolio.css';
 import HeroSection from './HeroSection';
 import TimelineSection from './TimelineSection';
 import WorksPage from './WorksPage';
-import AppIcons from './AppIcons';
 import MouseSpotlight from './MouseSpotlight';
 
 const Portfolio = () => {
@@ -20,7 +19,7 @@ const Portfolio = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ['home', 'timeline', 'works', 'app-icons'];
+      const sections = ['home', 'timeline', 'works'];
       const scrollPosition = window.scrollY + 200;
 
       for (const section of sections) {
@@ -67,11 +66,7 @@ const Portfolio = () => {
         >
           <Copy size={24} />
         </button>
-        <button 
-          className={`nav-icon ${activeSection === 'app-icons' ? 'active' : ''}`}
-          onClick={() => scrollToSection('app-icons')}
-          aria-label="App Icons"
-        >
+        <button className="nav-icon" aria-label="Skills">
           <Pen size={24} />
         </button>
         <button className="nav-icon" aria-label="Contact">
@@ -84,7 +79,6 @@ const Portfolio = () => {
         <HeroSection />
         <TimelineSection />
         <WorksPage />
-        <AppIcons />
       </main>
     </div>
   );

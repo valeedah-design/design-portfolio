@@ -48,11 +48,22 @@ const worksData = {
       type: 'text',
       bgColor: 'transparent'
     }
+  ],
+  'App Icons': [
+    { id: 7, name: 'FOODQ', category: 'Food & Social', color: '#39FF14', type: 'icon' },
+    { id: 8, name: 'CCJournal', category: 'Career & Education', color: '#00BFFF', type: 'icon' },
+    { id: 9, name: 'The Guardian', category: 'News & Media', color: '#FF6B6B', type: 'icon' },
+    { id: 10, name: 'Compocity', category: 'Sustainability', color: '#4ECDC4', type: 'icon' },
+    { id: 11, name: 'MindFlow', category: 'Productivity', color: '#FFD93D', type: 'icon' },
+    { id: 12, name: 'SnapFit', category: 'Health & Fitness', color: '#FF6FB5', type: 'icon' },
+    { id: 13, name: 'EcoTrack', category: 'Environment', color: '#95E1D3', type: 'icon' },
+    { id: 14, name: 'SoundWave', category: 'Music & Audio', color: '#A8E6CF', type: 'icon' }
   ]
 };
 
 const WorksPage = () => {
   const [activeCategory, setActiveCategory] = useState('App Design');
+  const [hoveredIcon, setHoveredIcon] = useState(null);
 
   return (
     <section id="works" className="works-section">
@@ -73,32 +84,66 @@ const WorksPage = () => {
       </div>
 
       {/* Projects Grid */}
-      <div className={`projects-grid ${activeCategory === 'Research Lab' ? 'research-grid' : ''}`}>
-        {worksData[activeCategory].map((project) => (
-          project.type === 'text' ? (
-            <div key={project.id} className="research-card">
-              <h3 className="research-title">{project.title}</h3>
-            </div>
-          ) : (
-            <div 
-              key={project.id} 
-              className={`project-card ${project.bgColor}`}
-            >
-              {project.tag && <span className="project-tag">{project.tag}</span>}
-              <div className="project-image-wrapper">
-                <img 
-                  src={project.image} 
-                  alt={project.title}
-                  className="project-image"
-                />
+      <div className={`projects-grid ${activeCategory === 'Research Lab' ? 'research-grid' : ''} ${activeCategory === 'App Icons' ? 'icons-grid' : ''}`}>
+        {worksData[activeCategory].map((project) => {
+          if (project.type === 'text') {
+            return (
+              <div key={project.id} className="research-card">
+                <h3 className="research-title">{project.title}</h3>
               </div>
-              <div className="project-info">
-                <h3 className="project-title">{project.title}</h3>
-                <p className="project-description">{project.description}</p>
+            );
+          } else if (project.type === 'icon') {
+            return (
+              <div
+                key={project.id}
+                className="icon-frame"
+                onMouseEnter={() => setHoveredIcon(project.id)}
+                onMouseLeave={() => setHoveredIcon(null)}
+              >
+                <div className={`frame-3d ${hoveredIcon === project.id ? 'hovered' : ''}`}>
+                  <div 
+                    className="icon-display"
+                    style={{ background: `linear-gradient(135deg, ${project.color}DD, ${project.color}AA)` }}
+                  >
+                    <div className="icon-placeholder">
+                      <div className="icon-shape" style={{ borderColor: project.color }}></div>
+                    </div>
+                  </div>
+                  <div className="frame-border"></div>
+                  <div className="corner corner-tl"></div>
+                  <div className="corner corner-tr"></div>
+                  <div className="corner corner-bl"></div>
+                  <div className="corner corner-br"></div>
+                  <div className="frame-glow"></div>
+                </div>
+                <div className="icon-info">
+                  <h3 className="icon-name">{project.name}</h3>
+                  <p className="icon-category">{project.category}</p>
+                </div>
               </div>
-            </div>
-          )
-        ))}
+            );
+          } else {
+            return (
+              <div 
+                key={project.id} 
+                className={`project-card ${project.bgColor}`}
+              >
+                {project.tag && <span className="project-tag">{project.tag}</span>}
+                <div className="project-image-wrapper">
+                  <img 
+                    src={project.image} 
+                    alt={project.title}
+                    className="project-image"
+                  />
+                </div>
+                <div className="project-info">
+                  <h3 className="project-title">{project.title}</h3>
+                  <p className="project-description">{project.description}</p>
+                </div>
+              </div>
+            );
+          }
+        })}
       </div>
     </section>
   );
