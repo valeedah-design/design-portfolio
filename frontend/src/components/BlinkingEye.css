@@ -7,150 +7,194 @@
   z-index: 3;
 }
 
-.eye {
+.eye-wrapper {
   position: relative;
-  width: 60px;
-  height: 40px;
+  width: 80px;
+  height: 50px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.eye-outer {
-  width: 60px;
-  height: 40px;
-  background: rgba(0, 0, 0, 0.9);
-  border: 2px solid #00FF00;
-  border-radius: 50%;
-  position: relative;
-  overflow: hidden;
-  box-shadow: 
-    0 0 15px rgba(0, 255, 0, 0.4),
-    inset 0 0 10px rgba(0, 255, 0, 0.1);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.eye-inner {
-  width: 24px;
-  height: 24px;
-  background: #00FF00;
+/* The eye ball - white part */
+.eye-ball {
+  width: 50px;
+  height: 50px;
+  background: radial-gradient(circle at 35% 35%, #ffffff, #e8e8e8);
   border-radius: 50%;
   position: relative;
   box-shadow: 
-    0 0 10px rgba(0, 255, 0, 0.6),
-    0 0 20px rgba(0, 255, 0, 0.3);
-  animation: lookAround 4s ease-in-out infinite;
+    0 0 20px rgba(0, 255, 0, 0.4),
+    inset -5px -5px 10px rgba(0, 0, 0, 0.1);
+  overflow: visible;
+  z-index: 1;
 }
 
-.pupil {
-  width: 10px;
-  height: 10px;
-  background: #000000;
-  border-radius: 50%;
+/* The iris - green colored part */
+.iris {
   position: absolute;
+  width: 30px;
+  height: 30px;
+  background: radial-gradient(circle at 40% 40%, #39FF14, #00FF00, #00CC00);
+  border-radius: 50%;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+  box-shadow: 
+    0 0 15px rgba(0, 255, 0, 0.8),
+    inset 0 0 10px rgba(0, 0, 0, 0.3);
+  animation: lookAround 5s ease-in-out infinite;
 }
 
-.eyelid {
+/* The pupil - black center */
+.pupil {
   position: absolute;
-  width: 62px;
-  height: 22px;
+  width: 14px;
+  height: 14px;
+  background: radial-gradient(circle at 30% 30%, #1a1a1a, #000000);
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.8);
+}
+
+/* Light reflection on pupil */
+.pupil-highlight {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 50%;
+  top: 20%;
+  left: 25%;
+  box-shadow: 0 0 3px rgba(255, 255, 255, 0.8);
+}
+
+/* Upper eyelid */
+.upper-eyelid {
+  position: absolute;
+  top: -2px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 30px;
   background: #000000;
   border: 2px solid #00FF00;
-  z-index: 2;
-  left: -2px;
-}
-
-.eyelid.top {
-  top: -2px;
-  border-radius: 50% 50% 0 0;
   border-bottom: none;
-  transform-origin: bottom;
-  animation: blinkTop 3s ease-in-out infinite;
+  border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+  z-index: 2;
+  box-shadow: 
+    0 0 15px rgba(0, 255, 0, 0.5),
+    inset 0 2px 5px rgba(0, 255, 0, 0.2);
+  animation: blinkUpper 3.5s ease-in-out infinite;
+  transform-origin: bottom center;
 }
 
-.eyelid.bottom {
+/* Lower eyelid */
+.lower-eyelid {
+  position: absolute;
   bottom: -2px;
-  border-radius: 0 0 50% 50%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 20px;
+  background: #000000;
+  border: 2px solid #00FF00;
   border-top: none;
-  transform-origin: top;
-  animation: blinkBottom 3s ease-in-out infinite;
+  border-radius: 0 0 50% 50% / 0 0 100% 100%;
+  z-index: 2;
+  box-shadow: 
+    0 0 15px rgba(0, 255, 0, 0.5),
+    inset 0 -2px 5px rgba(0, 255, 0, 0.2);
+  animation: blinkLower 3.5s ease-in-out infinite;
+  transform-origin: top center;
 }
 
-@keyframes blinkTop {
-  0%, 45%, 55%, 100% {
-    transform: translateY(0);
-  }
-  48%, 52% {
-    transform: translateY(20px);
-  }
-}
-
-@keyframes blinkBottom {
-  0%, 45%, 55%, 100% {
-    transform: translateY(0);
-  }
-  48%, 52% {
-    transform: translateY(-20px);
-  }
-}
-
-@keyframes lookAround {
-  0%, 100% {
-    transform: translate(0, 0);
-  }
-  25% {
-    transform: translate(-3px, -2px);
+/* Blinking animation for upper eyelid */
+@keyframes blinkUpper {
+  0%, 46%, 54%, 100% {
+    transform: translateX(-50%) scaleY(1);
   }
   50% {
-    transform: translate(3px, 0);
+    transform: translateX(-50%) scaleY(3.5) translateY(12px);
+  }
+}
+
+/* Blinking animation for lower eyelid */
+@keyframes blinkLower {
+  0%, 46%, 54%, 100% {
+    transform: translateX(-50%) scaleY(1);
+  }
+  50% {
+    transform: translateX(-50%) scaleY(2.5) translateY(-8px);
+  }
+}
+
+/* Eye looking around animation */
+@keyframes lookAround {
+  0%, 100% {
+    transform: translate(-50%, -50%);
+  }
+  25% {
+    transform: translate(-55%, -52%);
+  }
+  50% {
+    transform: translate(-45%, -50%);
   }
   75% {
-    transform: translate(-2px, 2px);
+    transform: translate(-52%, -48%);
   }
 }
 
-/* Add glow effect */
-.eye-outer::after {
+/* Outer glow effect */
+.eye-wrapper::after {
   content: '';
   position: absolute;
-  inset: -5px;
-  border: 1px solid #00FF00;
+  width: 90px;
+  height: 60px;
+  border: 1px solid rgba(0, 255, 0, 0.3);
   border-radius: 50%;
-  opacity: 0.3;
-  filter: blur(5px);
-  animation: pulse 2s ease-in-out infinite;
+  filter: blur(8px);
+  animation: pulseGlow 2.5s ease-in-out infinite;
+  z-index: 0;
 }
 
-@keyframes pulse {
+@keyframes pulseGlow {
   0%, 100% {
-    opacity: 0.3;
+    opacity: 0.4;
     transform: scale(1);
   }
   50% {
-    opacity: 0.6;
-    transform: scale(1.05);
+    opacity: 0.7;
+    transform: scale(1.08);
   }
 }
 
 /* Responsive */
 @media (max-width: 968px) {
-  .eye {
-    width: 50px;
-    height: 35px;
+  .eye-wrapper {
+    width: 70px;
+    height: 45px;
   }
   
-  .eye-outer {
-    width: 50px;
-    height: 35px;
+  .eye-ball {
+    width: 45px;
+    height: 45px;
   }
   
-  .eyelid {
-    width: 52px;
+  .iris {
+    width: 26px;
+    height: 26px;
+  }
+  
+  .pupil {
+    width: 12px;
+    height: 12px;
+  }
+  
+  .upper-eyelid,
+  .lower-eyelid {
+    width: 70px;
   }
 }
