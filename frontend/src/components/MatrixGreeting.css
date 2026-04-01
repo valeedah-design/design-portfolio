@@ -6,91 +6,55 @@
   margin: 0 0 60px 0;
   letter-spacing: -1px;
   text-shadow: 0 0 10px rgba(0, 255, 0, 0.4);
-  transition: all 0.3s ease;
   position: relative;
   min-height: 60px;
+  display: inline-block;
 }
 
-.matrix-greeting.glitching {
-  animation: matrixGlitch 0.5s steps(2, end);
-  text-shadow: 
-    2px 0 10px rgba(255, 0, 0, 0.7),
-    -2px 0 10px rgba(0, 255, 255, 0.7),
-    0 0 20px rgba(0, 255, 0, 0.5);
+.matrix-greeting .char {
+  display: inline-block;
+  transition: transform 0.1s ease;
 }
 
-@keyframes matrixGlitch {
+.matrix-greeting.animating .char {
+  animation: flipChar 0.6s ease-in-out;
+}
+
+@keyframes flipChar {
   0% {
-    transform: translate(0);
+    transform: rotateX(0deg);
     opacity: 1;
   }
-  10% {
-    transform: translate(-5px, 2px);
-    opacity: 0.8;
-  }
-  20% {
-    transform: translate(3px, -2px);
-    opacity: 0.9;
-  }
-  30% {
-    transform: translate(-2px, 3px);
+  25% {
+    transform: rotateX(90deg);
     opacity: 0.7;
-  }
-  40% {
-    transform: translate(4px, -1px);
-    opacity: 0.85;
+    color: #00FF00;
   }
   50% {
-    transform: translate(-3px, -3px);
-    opacity: 0.6;
+    transform: rotateX(180deg);
+    opacity: 0.5;
+    color: #39FF14;
+    text-shadow: 
+      0 0 10px rgba(0, 255, 0, 0.8),
+      0 0 20px rgba(0, 255, 0, 0.5);
   }
-  60% {
-    transform: translate(2px, 1px);
-    opacity: 0.75;
-  }
-  70% {
-    transform: translate(-4px, 2px);
-    opacity: 0.8;
-  }
-  80% {
-    transform: translate(3px, -2px);
-    opacity: 0.9;
-  }
-  90% {
-    transform: translate(-1px, 1px);
-    opacity: 0.95;
+  75% {
+    transform: rotateX(270deg);
+    opacity: 0.7;
+    color: #00FF00;
   }
   100% {
-    transform: translate(0);
+    transform: rotateX(360deg);
     opacity: 1;
   }
 }
 
-/* Additional scanline effect during glitch */
-.matrix-greeting.glitching::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -10%;
-  width: 120%;
-  height: 100%;
-  background: linear-gradient(
-    to bottom,
-    transparent 0%,
-    rgba(0, 255, 0, 0.3) 50%,
-    transparent 100%
-  );
-  animation: scanline 0.5s linear;
-  pointer-events: none;
-}
-
-@keyframes scanline {
-  0% {
-    transform: translateY(-100%);
-  }
-  100% {
-    transform: translateY(100%);
-  }
+/* Add glow effect during animation */
+.matrix-greeting.animating {
+  text-shadow: 
+    0 0 20px rgba(0, 255, 0, 0.6),
+    0 0 40px rgba(0, 255, 0, 0.4),
+    0 0 60px rgba(0, 255, 0, 0.2);
 }
 
 /* Responsive */

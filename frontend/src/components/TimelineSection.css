@@ -33,7 +33,7 @@
   transform: translateX(-50%);
 }
 
-/* Year markers - blob shapes in center */
+/* Year markers - rounded triangular shapes in center */
 .timeline-year-marker {
   position: relative;
   display: flex;
@@ -55,29 +55,46 @@
 }
 
 .year-blob {
-  width: 120px;
-  height: 140px;
-  border: 2px solid #00FF00;
-  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  width: 110px;
+  height: 110px;
   background: rgba(0, 0, 0, 0.9);
   display: flex;
   align-items: center;
   justify-content: center;
   font-family: 'Share Tech Mono', 'Courier New', monospace;
-  font-size: 24px;
+  font-size: 22px;
   font-weight: 600;
   color: #ffffff;
   transition: all 0.3s ease;
-  box-shadow: 0 0 20px rgba(0, 255, 0, 0.2);
+  box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
   z-index: 2;
   position: relative;
+  /* Rounded triangle using clip-path */
+  clip-path: path('M 55,10 L 95,80 Q 95,85 90,90 L 60,95 Q 55,98 50,95 L 20,90 Q 15,85 15,80 L 45,10 Q 50,5 55,10 Z');
+  border: 3px solid #00FF00;
+}
+
+.year-blob::before {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  background: linear-gradient(135deg, #00FF00, #39FF14);
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  clip-path: path('M 55,10 L 95,80 Q 95,85 90,90 L 60,95 Q 55,98 50,95 L 20,90 Q 15,85 15,80 L 45,10 Q 50,5 55,10 Z');
 }
 
 .year-blob:hover {
-  background: rgba(0, 255, 0, 0.1);
-  border-color: #00FF00;
-  box-shadow: 0 0 40px rgba(0, 255, 0, 0.5);
-  transform: scale(1.05);
+  background: rgba(0, 255, 0, 0.15);
+  border-color: #39FF14;
+  box-shadow: 0 0 40px rgba(0, 255, 0, 0.6);
+  transform: scale(1.1) rotate(2deg);
+  color: #39FF14;
+}
+
+.year-blob:hover::before {
+  opacity: 0.2;
 }
 
 /* Event items with dots */
