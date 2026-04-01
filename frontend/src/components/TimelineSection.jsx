@@ -53,10 +53,10 @@ const timelineData = [
   {
     id: 8,
     type: 'event',
-    title: 'Graduated High School',
+    title: 'Relocated to India',
     coordinates: '11.0430°N, 75.9273°E',
-    position: 'left',
-    dotColor: 'white'
+    position: 'right',
+    dotColor: 'green'
   },
   {
     id: 9,
@@ -67,10 +67,10 @@ const timelineData = [
   {
     id: 10,
     type: 'event',
-    title: 'Relocated to India',
+    title: 'Graduated senior higher secondary',
     coordinates: '11.0430°N, 75.9273°E',
-    position: 'right',
-    dotColor: 'green'
+    position: 'left',
+    dotColor: 'white'
   },
   {
     id: 11,
@@ -81,10 +81,10 @@ const timelineData = [
   {
     id: 12,
     type: 'event',
-    title: 'Graduated senior higher secondary',
+    title: 'Got my driving license',
     coordinates: '11.0430°N, 75.9273°E',
-    position: 'left',
-    dotColor: 'white'
+    position: 'right',
+    dotColor: 'green'
   },
   {
     id: 13,
@@ -95,10 +95,10 @@ const timelineData = [
   {
     id: 14,
     type: 'event',
-    title: 'Got my driving license',
+    title: 'Started Bachelors in University',
     coordinates: '11.0430°N, 75.9273°E',
-    position: 'right',
-    dotColor: 'green'
+    position: 'left',
+    dotColor: 'white'
   },
   {
     id: 15,
@@ -109,7 +109,7 @@ const timelineData = [
   {
     id: 16,
     type: 'event',
-    title: 'Started Bachelors in University',
+    title: 'Graduated from Bachelors',
     coordinates: '11.0430°N, 75.9273°E',
     position: 'left',
     dotColor: 'white'
@@ -138,24 +138,25 @@ const timelineData = [
   {
     id: 20,
     type: 'event',
-    title: 'Graduated from university',
-    coordinates: '11.0430°N, 75.9273°E',
+    title: 'Business Development Associate',
+    company: 'Think & Learn Pvt Ltd',
+    coordinates: '12.4997°N, 74.9870°E',
     position: 'left',
     dotColor: 'white'
   },
   {
     id: 21,
     type: 'year',
-    year: 2019,
+    year: 2020,
     position: 'center'
   },
   {
     id: 22,
     type: 'event',
-    title: 'Business Development Associate',
-    company: 'Think & Learn Pvt Ltd',
-    position: 'left',
-    dotColor: 'white'
+    title: 'Moved to Napoli, Italy',
+    coordinates: '40.8522°N, 14.2681°E',
+    position: 'right',
+    dotColor: 'green'
   },
   {
     id: 23,
@@ -167,7 +168,8 @@ const timelineData = [
     id: 24,
     type: 'event',
     title: 'Started Pursuing Master degree',
-    company: 'University of Limerick, Ireland',
+    company: 'University of Naples Federico II',
+    coordinates: '40.8522°N, 14.2681°E',
     position: 'left',
     dotColor: 'white'
   },
@@ -180,10 +182,11 @@ const timelineData = [
   {
     id: 26,
     type: 'event',
-    title: 'Relocated to Monali',
-    coordinates: '40.0518°N, 4.3261°E',
-    position: 'right',
-    dotColor: 'green'
+    title: 'Student',
+    company: 'Apple Developer Academy',
+    coordinates: '40.8359°N, 14.3039°E',
+    position: 'left',
+    dotColor: 'white'
   },
   {
     id: 27,
@@ -208,8 +211,9 @@ const timelineData = [
   {
     id: 30,
     type: 'event',
-    title: 'Student',
-    company: 'Apple Developer Academy',
+    title: 'UX Designer-Intern',
+    company: 'Company HQ',
+    coordinates: '47.4764°N, 19.0359°E',
     position: 'left',
     dotColor: 'white'
   },
@@ -222,8 +226,9 @@ const timelineData = [
   {
     id: 32,
     type: 'event',
-    title: 'UX Designer-Intern',
-    company: 'Company HQ',
+    title: 'Graduated in Masters',
+    company: 'University of Naples Federico II',
+    coordinates: '40.8522°N, 14.2681°E',
     position: 'left',
     dotColor: 'white'
   },
@@ -236,21 +241,24 @@ const timelineData = [
   {
     id: 34,
     type: 'event',
-    title: 'Graduated in Masters',
-    company: 'University of Limerick, Ireland',
+    title: 'UX Designer',
+    company: 'Flowerwork',
+    coordinates: '47.4764°N, 19.0359°E',
     position: 'left',
     dotColor: 'white'
   },
   {
     id: 35,
     type: 'year',
-    year: 2026,
+    year: 2025,
     position: 'center'
   },
   {
     id: 36,
     type: 'event',
-    title: 'UX Designer',
+    title: 'PhD in ESTIMO',
+    company: 'University of Naples Federico II',
+    coordinates: '40.8522°N, 14.2681°E',
     position: 'left',
     dotColor: 'white'
   }
