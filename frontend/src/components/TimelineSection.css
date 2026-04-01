@@ -57,18 +57,19 @@
 .year-blob {
   width: 120px;
   height: 120px;
-  background: rgba(0, 0, 0, 0.95);
+  background: #3d3d3d;
   display: flex;
   align-items: center;
   justify-content: center;
   font-family: 'Share Tech Mono', 'Courier New', monospace;
   font-size: 22px;
   font-weight: 600;
-  color: #ffffff;
+  color: #e0e0e0;
   transition: all 0.3s ease;
   box-shadow: 
-    0 0 20px rgba(0, 255, 0, 0.3),
-    inset 0 0 30px rgba(0, 255, 0, 0.1);
+    0 0 20px rgba(0, 255, 0, 0.6),
+    0 0 35px rgba(0, 255, 0, 0.4),
+    inset 0 2px 10px rgba(255, 255, 255, 0.05);
   z-index: 2;
   position: relative;
   border: 3px solid #00FF00;
@@ -109,10 +110,10 @@
 .year-blob::after {
   content: '';
   position: absolute;
-  inset: -3px;
-  background: #00FF00;
+  inset: -8px;
+  background: linear-gradient(135deg, #00FF00, #39FF14);
   z-index: -1;
-  opacity: 0.2;
+  opacity: 0.25;
   clip-path: polygon(
     50% 8%,
     60% 12%,
@@ -143,21 +144,23 @@
     32% 18%,
     40% 12%
   );
-  filter: blur(8px);
+  filter: blur(12px);
 }
 
 .year-blob:hover {
-  background: rgba(0, 255, 0, 0.2);
+  background: #4a4a4a;
   border-color: #39FF14;
   box-shadow: 
-    0 0 50px rgba(0, 255, 0, 0.7),
-    inset 0 0 40px rgba(0, 255, 0, 0.2);
+    0 0 35px rgba(0, 255, 0, 0.9),
+    0 0 55px rgba(0, 255, 0, 0.6),
+    0 0 75px rgba(0, 255, 0, 0.3),
+    inset 0 2px 15px rgba(255, 255, 255, 0.1);
   transform: scale(1.2);
-  color: #39FF14;
+  color: #ffffff;
 }
 
 .year-blob:hover::after {
-  opacity: 0.4;
+  opacity: 0.45;
 }
 
 /* Event items with dots */
