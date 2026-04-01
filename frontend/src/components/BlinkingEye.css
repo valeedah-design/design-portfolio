@@ -1,0 +1,156 @@
+.blinking-eye-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 60px 0;
+  z-index: 3;
+}
+
+.eye {
+  position: relative;
+  width: 60px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.eye-outer {
+  width: 60px;
+  height: 40px;
+  background: rgba(0, 0, 0, 0.9);
+  border: 2px solid #00FF00;
+  border-radius: 50%;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 
+    0 0 15px rgba(0, 255, 0, 0.4),
+    inset 0 0 10px rgba(0, 255, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.eye-inner {
+  width: 24px;
+  height: 24px;
+  background: #00FF00;
+  border-radius: 50%;
+  position: relative;
+  box-shadow: 
+    0 0 10px rgba(0, 255, 0, 0.6),
+    0 0 20px rgba(0, 255, 0, 0.3);
+  animation: lookAround 4s ease-in-out infinite;
+}
+
+.pupil {
+  width: 10px;
+  height: 10px;
+  background: #000000;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+
+.eyelid {
+  position: absolute;
+  width: 62px;
+  height: 22px;
+  background: #000000;
+  border: 2px solid #00FF00;
+  z-index: 2;
+  left: -2px;
+}
+
+.eyelid.top {
+  top: -2px;
+  border-radius: 50% 50% 0 0;
+  border-bottom: none;
+  transform-origin: bottom;
+  animation: blinkTop 3s ease-in-out infinite;
+}
+
+.eyelid.bottom {
+  bottom: -2px;
+  border-radius: 0 0 50% 50%;
+  border-top: none;
+  transform-origin: top;
+  animation: blinkBottom 3s ease-in-out infinite;
+}
+
+@keyframes blinkTop {
+  0%, 45%, 55%, 100% {
+    transform: translateY(0);
+  }
+  48%, 52% {
+    transform: translateY(20px);
+  }
+}
+
+@keyframes blinkBottom {
+  0%, 45%, 55%, 100% {
+    transform: translateY(0);
+  }
+  48%, 52% {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes lookAround {
+  0%, 100% {
+    transform: translate(0, 0);
+  }
+  25% {
+    transform: translate(-3px, -2px);
+  }
+  50% {
+    transform: translate(3px, 0);
+  }
+  75% {
+    transform: translate(-2px, 2px);
+  }
+}
+
+/* Add glow effect */
+.eye-outer::after {
+  content: '';
+  position: absolute;
+  inset: -5px;
+  border: 1px solid #00FF00;
+  border-radius: 50%;
+  opacity: 0.3;
+  filter: blur(5px);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scale(1.05);
+  }
+}
+
+/* Responsive */
+@media (max-width: 968px) {
+  .eye {
+    width: 50px;
+    height: 35px;
+  }
+  
+  .eye-outer {
+    width: 50px;
+    height: 35px;
+  }
+  
+  .eyelid {
+    width: 52px;
+  }
+}
