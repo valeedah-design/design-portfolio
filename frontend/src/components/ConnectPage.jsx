@@ -127,99 +127,41 @@ const ConnectPage = () => {
           <div className="download-progress"></div>
         </button>
 
-        {/* Social Links Grid with DNA Helix */}
-        <div className="social-section-wrapper">
-          <div className="social-grid">
-            {socialLinks.map((social) => (
-              <div
-                key={social.id}
-                className={`social-button ${hoveredButton === social.id ? 'hovered' : ''} ${clickedButton === social.id ? 'clicked' : ''}`}
-                onMouseEnter={() => setHoveredButton(social.id)}
-                onMouseLeave={() => setHoveredButton(null)}
-                onClick={() => handleClick(social.id, social.url)}
-              >
-                <div className="social-icon-wrapper">
-                  <div className="social-icon" style={{ background: social.color }}>
-                    {social.icon}
-                  </div>
-                  <div className="ripple"></div>
+        {/* Social Links Grid */}
+        <div className="social-grid">
+          {socialLinks.map((social) => (
+            <div
+              key={social.id}
+              className={`social-button ${hoveredButton === social.id ? 'hovered' : ''} ${clickedButton === social.id ? 'clicked' : ''}`}
+              onMouseEnter={() => setHoveredButton(social.id)}
+              onMouseLeave={() => setHoveredButton(null)}
+              onClick={() => handleClick(social.id, social.url)}
+            >
+              <div className="social-icon-wrapper">
+                <div className="social-icon" style={{ background: social.color }}>
+                  {social.icon}
                 </div>
-                <h3 className="social-name">{social.name}</h3>
-                
-                {clickedButton === social.id && (
-                  <div className="connection-feedback">
-                    <CheckCircle size={24} />
-                    <span>Connected!</span>
-                  </div>
-                )}
-
-                {/* Hover pulse rings */}
-                {hoveredButton === social.id && (
-                  <>
-                    <div className="pulse-ring ring-1"></div>
-                    <div className="pulse-ring ring-2"></div>
-                    <div className="pulse-ring ring-3"></div>
-                  </>
-                )}
+                <div className="ripple"></div>
               </div>
-            ))}
-          </div>
-
-          {/* DNA Helix Animation */}
-          <div className="dna-helix-container">
-            <svg className="dna-helix" viewBox="0 0 200 400" preserveAspectRatio="xMidYMid meet">
-              {/* Left strand */}
-              <path
-                className="dna-strand left-strand"
-                d="M60,0 Q40,50 60,100 T60,200 T60,300 T60,400"
-                fill="none"
-                stroke="#00FF00"
-                strokeWidth="3"
-              />
+              <h3 className="social-name">{social.name}</h3>
               
-              {/* Right strand */}
-              <path
-                className="dna-strand right-strand"
-                d="M140,0 Q160,50 140,100 T140,200 T140,300 T140,400"
-                fill="none"
-                stroke="#00FF00"
-                strokeWidth="3"
-              />
+              {clickedButton === social.id && (
+                <div className="connection-feedback">
+                  <CheckCircle size={24} />
+                  <span>Connected!</span>
+                </div>
+              )}
 
-              {/* Base pairs (rungs) */}
-              {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15].map((i) => {
-                const y = i * 25 + 12.5;
-                const offset = Math.sin((i * Math.PI) / 4) * 40;
-                return (
-                  <g key={i} className="base-pair" style={{ animationDelay: `${i * 0.1}s` }}>
-                    <line
-                      x1={100 - offset}
-                      y1={y}
-                      x2={100 + offset}
-                      y2={y}
-                      stroke="#00FF00"
-                      strokeWidth="2"
-                      opacity="0.6"
-                    />
-                    <circle
-                      cx={100 - offset}
-                      cy={y}
-                      r="4"
-                      fill="#00FF00"
-                      className="dna-node"
-                    />
-                    <circle
-                      cx={100 + offset}
-                      cy={y}
-                      r="4"
-                      fill="#00FF00"
-                      className="dna-node"
-                    />
-                  </g>
-                );
-              })}
-            </svg>
-          </div>
+              {/* Hover pulse rings */}
+              {hoveredButton === social.id && (
+                <>
+                  <div className="pulse-ring ring-1"></div>
+                  <div className="pulse-ring ring-2"></div>
+                  <div className="pulse-ring ring-3"></div>
+                </>
+              )}
+            </div>
+          ))}
         </div>
 
         {/* Quick Contact Info */}
