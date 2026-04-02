@@ -67,10 +67,10 @@ const ConnectPage = () => {
   };
 
   const handleDownloadCV = () => {
-    // Replace with actual CV download link
     const link = document.createElement('a');
-    link.href = '/cv-valeed.pdf';
-    link.download = 'Valeed_CV.pdf';
+    link.href = 'https://customer-assets.emergentagent.com/job_work-gallery-139/artifacts/irmcer3q_resume%20valeed.pdf';
+    link.download = 'Valeed_Resume.pdf';
+    link.target = '_blank';
     link.click();
   };
 
