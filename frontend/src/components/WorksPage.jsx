@@ -35,14 +35,10 @@ const worksData = {
       }
     ],
     'App Icons': [
-      { id: 7, name: 'FOODQ', category: 'Food & Social', color: '#39FF14', type: 'icon' },
-      { id: 8, name: 'CCJournal', category: 'Career & Education', color: '#00BFFF', type: 'icon' },
-      { id: 9, name: 'The Guardian', category: 'News & Media', color: '#FF6B6B', type: 'icon' },
-      { id: 10, name: 'Compocity', category: 'Sustainability', color: '#4ECDC4', type: 'icon' },
-      { id: 11, name: 'MindFlow', category: 'Productivity', color: '#FFD93D', type: 'icon' },
-      { id: 12, name: 'SnapFit', category: 'Health & Fitness', color: '#FF6FB5', type: 'icon' },
-      { id: 13, name: 'EcoTrack', category: 'Environment', color: '#95E1D3', type: 'icon' },
-      { id: 14, name: 'SoundWave', category: 'Music & Audio', color: '#A8E6CF', type: 'icon' }
+      { id: 1, name: 'ADHD', image: 'https://customer-assets.emergentagent.com/job_work-gallery-139/artifacts/y1ednfmg_adhd.png' },
+      { id: 2, name: 'BET', image: 'https://customer-assets.emergentagent.com/job_work-gallery-139/artifacts/cnzkwtka_bet.png' },
+      { id: 3, name: 'CCJ', image: 'https://customer-assets.emergentagent.com/job_work-gallery-139/artifacts/8s6a6pof_ccj.png' },
+      { id: 4, name: 'FOODQ', image: 'https://customer-assets.emergentagent.com/job_work-gallery-139/artifacts/8j5ldjts_foodq.png' }
     ]
   },
   'Research Lab': [
@@ -66,6 +62,10 @@ const worksData = {
 const WorksPage = () => {
   const [activeCategory, setActiveCategory] = useState('Digital Designs');
   const [hoveredIcon, setHoveredIcon] = useState(null);
+  
+  // Duplicate icons for seamless infinite loop
+  const appIcons = worksData['Digital Designs']['App Icons'];
+  const duplicatedIcons = [...appIcons, ...appIcons, ...appIcons];
 
   const renderContent = () => {
     if (activeCategory === 'Digital Designs') {
@@ -100,36 +100,23 @@ const WorksPage = () => {
           {/* App Icons Section */}
           <div className="subsection">
             <h2 className="subsection-title">App Icons</h2>
-            <div className="icons-grid">
-              {worksData['Digital Designs']['App Icons'].map((project) => (
-                <div
-                  key={project.id}
-                  className="icon-frame"
-                  onMouseEnter={() => setHoveredIcon(project.id)}
-                  onMouseLeave={() => setHoveredIcon(null)}
-                >
-                  <div className={`frame-3d ${hoveredIcon === project.id ? 'hovered' : ''}`}>
-                    <div 
-                      className="icon-display"
-                      style={{ background: `linear-gradient(135deg, ${project.color}DD, ${project.color}AA)` }}
-                    >
-                      <div className="icon-placeholder">
-                        <div className="icon-shape" style={{ borderColor: project.color }}></div>
-                      </div>
-                    </div>
-                    <div className="frame-border"></div>
-                    <div className="corner corner-tl"></div>
-                    <div className="corner corner-tr"></div>
-                    <div className="corner corner-bl"></div>
-                    <div className="corner corner-br"></div>
-                    <div className="frame-glow"></div>
+            <div className="icons-marquee-container">
+              <div className="icons-marquee">
+                {duplicatedIcons.map((icon, index) => (
+                  <div
+                    key={`${icon.id}-${index}`}
+                    className={`icon-item ${hoveredIcon === `${icon.id}-${index}` ? 'hovered' : ''}`}
+                    onMouseEnter={() => setHoveredIcon(`${icon.id}-${index}`)}
+                    onMouseLeave={() => setHoveredIcon(null)}
+                  >
+                    <img 
+                      src={icon.image} 
+                      alt={icon.name}
+                      className="icon-image"
+                    />
                   </div>
-                  <div className="icon-info">
-                    <h3 className="icon-name">{project.name}</h3>
-                    <p className="icon-category">{project.category}</p>
-                  </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
           </div>
         </>
