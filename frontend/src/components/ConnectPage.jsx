@@ -42,6 +42,7 @@ const ConnectPage = () => {
   const [clickedButton, setClickedButton] = useState(null);
   const [typedText, setTypedText] = useState('');
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [trail, setTrail] = useState([]);
   const fullText = 'Send a digital handshake! Connect on socials or download my CV to see the full player stats.';
 
   // Typing animation
@@ -65,15 +66,34 @@ const ConnectPage = () => {
       const section = document.getElementById('connect');
       if (section) {
         const rect = section.getBoundingClientRect();
-        setMousePosition({
-          x: ((e.clientX - rect.left) / rect.width) * 100,
-          y: ((e.clientY - rect.top) / rect.height) * 100
-        });
+        const x = ((e.clientX - rect.left) / rect.width) * 100;
+        const y = ((e.clientY - rect.top) / rect.height) * 100;
+        
+        setMousePosition({ x, y });
+        
+        // Add position to trail with timestamp
+        const now = Date.now();
+        setTrail(prevTrail => [
+          ...prevTrail,
+          { x, y, timestamp: now }
+        ]);
       }
     };
 
     window.addEventListener('mousemove', handleMouseMove);
     return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, []);
+
+  // Clean up old trail positions after 4 seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const now = Date.now();
+      setTrail(prevTrail => 
+        prevTrail.filter(point => now - point.timestamp < 4000)
+      );
+    }, 100);
+
+    return () => clearInterval(interval);
   }, []);
 
   const handleClick = (id, url) => {
@@ -97,14 +117,53 @@ const ConnectPage = () => {
       {/* Breathing Glow Effect */}
       <div className="breathing-glow"></div>
       
-      {/* Mouse Interactive Glow */}
-      <div 
-        className="mouse-glow" 
-        style={{
-          left: `${mousePosition.x}%`,
-          top: `${mousePosition.y}%`
-        }}
-      ></div>
+      {/* Mouse Trail Drawing */}
+      <svg className="mouse-trail" viewBox="0 0 100 100" preserveAspectRatio="none">
+        {trail.length > 1 && trail.map((point, index) => {
+          if (index === 0) return null;
+          const prevPoint = trail[index - 1];
+          const now = Date.now();
+          const age = now - point.timestamp;
+          const opacity = Math.max(0, 1 - (age / 4000)); // Fade over 4 seconds
+          
+          return (
+            <line
+              key={`${point.timestamp}-${index}`}
+              x1={prevPoint.x}
+              y1={prevPoint.y}
+              x2={point.x}
+              y2={point.y}
+              stroke="#00FF00"
+              strokeWidth="0.3"
+              opacity={opacity}
+              strokeLinecap="round"
+            />
+          );
+        })}
+        
+        {/* Tail dot at cursor position */}
+        {trail.length > 0 && (
+          <circle
+            cx={mousePosition.x}
+            cy={mousePosition.y}
+            r="0.5"
+            fill="#00FF00"
+            opacity="0.8"
+            filter="url(#glow)"
+          />
+        )}
+        
+        {/* Glow filter definition */}
+        <defs>
+          <filter id="glow">
+            <feGaussianBlur stdDeviation="0.5" result="coloredBlur"/>
+            <feMerge>
+              <feMergeNode in="coloredBlur"/>
+              <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+          </filter>
+        </defs>
+      </svg>
 
       <div className="connect-content">
         <h1 className="connect-title">\Connect_me</h1>
