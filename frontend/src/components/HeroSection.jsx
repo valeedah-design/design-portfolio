@@ -1,8 +1,31 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './HeroSection.css';
 import MatrixGreeting from './MatrixGreeting';
 
 const HeroSection = () => {
+  const titles = [
+    'UX Designer',
+    'Wireframe Wizard',
+    'Figma Ninja',
+    'Interface Matchmaker'
+  ];
+  
+  const [currentTitleIndex, setCurrentTitleIndex] = useState(0);
+  const [isAnimating, setIsAnimating] = useState(false);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setIsAnimating(true);
+      
+      setTimeout(() => {
+        setCurrentTitleIndex((prevIndex) => (prevIndex + 1) % titles.length);
+        setIsAnimating(false);
+      }, 500);
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, [titles.length]);
+
   return (
     <section id="home" className="hero-section">
       <div className="hero-content">
@@ -32,7 +55,9 @@ const HeroSection = () => {
               />
             </div>
           </div>
-          <h2 className="brand-title">Wireframe Wizard</h2>
+          <h2 className={`brand-title ${isAnimating ? 'fade-out' : 'fade-in'}`}>
+            {titles[currentTitleIndex]}
+          </h2>
         </div>
       </div>
     </section>
