@@ -133,7 +133,7 @@
   transition: all 0.4s ease;
   cursor: pointer;
   position: relative;
-  width: 600px;
+  width: 339.4px;
   height: 600px;
   display: flex;
   flex-direction: column;
@@ -269,7 +269,7 @@
   border: 2px solid #00FF00 !important;
   border-radius: 30px !important;
   width: 339.4px;
-  height: 500px;
+  height: 600px;
   display: flex;
   align-items: center;
   justify-content: center;
