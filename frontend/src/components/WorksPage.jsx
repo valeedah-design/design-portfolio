@@ -9,7 +9,7 @@ const worksData = {
         title: 'FOODQ',
         description: 'Bringing Food and People Together',
         tag: 'Case study',
-        image: 'https://customer-assets.emergentagent.com/job_work-gallery-139/artifacts/v6dqpfmq_iPhone%2016%20Pro%20mockup%20natural%20titanium.png',
+        image: 'https://customer-assets.emergentagent.com/job_work-gallery-139/artifacts/7uckbj7f_iPhone%2016%20Pro%20mockup%20natural%20titanium.png',
         bgColor: 'green'
       },
       {
