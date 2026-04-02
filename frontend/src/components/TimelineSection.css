@@ -142,14 +142,14 @@
 .year-blob {
   width: 120px;
   height: 120px;
-  background: #00FF00;
+  background: rgba(22, 21, 21, 1);
   display: flex;
   align-items: center;
   justify-content: center;
   font-family: 'Share Tech Mono', 'Courier New', monospace;
   font-size: 22px;
   font-weight: 600;
-  color: #000000;
+  color: #00FF00;
   transition: all 0.3s ease;
   box-shadow: 
     0 0 20px rgba(0, 255, 0, 0.6),
