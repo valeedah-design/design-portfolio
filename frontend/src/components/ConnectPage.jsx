@@ -41,6 +41,7 @@ const ConnectPage = () => {
   const [hoveredButton, setHoveredButton] = useState(null);
   const [clickedButton, setClickedButton] = useState(null);
   const [typedText, setTypedText] = useState('');
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const fullText = 'Send a digital handshake! Connect on socials or download my CV to see the full player stats.';
 
   // Typing animation
@@ -56,6 +57,23 @@ const ConnectPage = () => {
     }, 30);
 
     return () => clearInterval(timer);
+  }, []);
+
+  // Mouse tracking for interactive glow
+  useEffect(() => {
+    const handleMouseMove = (e) => {
+      const section = document.getElementById('connect');
+      if (section) {
+        const rect = section.getBoundingClientRect();
+        setMousePosition({
+          x: ((e.clientX - rect.left) / rect.width) * 100,
+          y: ((e.clientY - rect.top) / rect.height) * 100
+        });
+      }
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
   const handleClick = (id, url) => {
@@ -76,6 +94,18 @@ const ConnectPage = () => {
 
   return (
     <section id="connect" className="connect-section">
+      {/* Breathing Glow Effect */}
+      <div className="breathing-glow"></div>
+      
+      {/* Mouse Interactive Glow */}
+      <div 
+        className="mouse-glow" 
+        style={{
+          left: `${mousePosition.x}%`,
+          top: `${mousePosition.y}%`
+        }}
+      ></div>
+
       <div className="connect-content">
         <h1 className="connect-title">\Connect_me</h1>
 

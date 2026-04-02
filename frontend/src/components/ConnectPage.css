@@ -8,6 +8,52 @@
   background-position: -1px -1px;
   background-color: #000000;
   position: relative;
+  overflow: hidden;
+}
+
+/* Breathing Glow Effect */
+.breathing-glow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at 50% 50%,
+    rgba(0, 255, 0, 0.15) 0%,
+    rgba(0, 255, 0, 0.08) 30%,
+    transparent 70%
+  );
+  pointer-events: none;
+  animation: breathe 4s ease-in-out infinite;
+  z-index: 1;
+}
+
+@keyframes breathe {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scale(1.05);
+  }
+}
+
+/* Mouse Interactive Glow */
+.mouse-glow {
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(
+    circle,
+    rgba(0, 255, 0, 0.2) 0%,
+    rgba(0, 255, 0, 0.1) 30%,
+    transparent 70%
+  );
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  transition: left 0.1s ease, top 0.1s ease;
+  filter: blur(40px);
+  z-index: 1;
+  mix-blend-mode: screen;
 }
 
 /* Connection Lines Background */
@@ -44,7 +90,8 @@
 .connect-content {
   max-width: 900px;
   width: 100%;
-  z-index: 1;
+  position: relative;
+  z-index: 2;
 }
 
 .connect-title {
