@@ -120,13 +120,6 @@
   max-width: 1400px;
 }
 
-.projects-grid > .hire-me-card {
-  grid-column: 1 / -1;
-  justify-self: center;
-  max-width: 680px;
-  width: 100%;
-}
-
 .research-grid {
   grid-template-columns: 1fr;
   max-width: 900px;
@@ -264,8 +257,8 @@
 .hire-me-card {
   background: transparent !important;
   border: 3px dashed rgba(0, 255, 0, 0.4) !important;
-  border-radius: 24px !important;
-  min-height: 400px;
+  border-radius: 18px !important;
+  min-height: 300px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -273,6 +266,8 @@
   overflow: hidden;
   transition: all 0.5s ease;
   cursor: pointer;
+  max-width: 400px;
+  margin: 0 auto;
 }
 
 .hire-me-card::before {
@@ -282,6 +277,156 @@
   background: radial-gradient(circle at center, rgba(0, 255, 0, 0.03) 0%, transparent 70%);
   opacity: 0;
   transition: opacity 0.5s ease;
+}
+
+/* Matrix Rain Effect */
+.matrix-rain {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  pointer-events: none;
+  overflow: hidden;
+  transition: opacity 0.3s ease;
+  z-index: 1;
+}
+
+.hire-me-card:hover .matrix-rain {
+  opacity: 1;
+}
+
+.matrix-column {
+  position: absolute;
+  top: -100%;
+  font-family: 'Share Tech Mono', 'Courier New', monospace;
+  font-size: 14px;
+  color: #00FF00;
+  text-shadow: 0 0 8px rgba(0, 255, 0, 0.8);
+  writing-mode: vertical-rl;
+  letter-spacing: 2px;
+  animation: matrixFall linear infinite;
+  opacity: 0.7;
+  filter: blur(0.5px);
+}
+
+@keyframes matrixFall {
+  0% {
+    top: -100%;
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.7;
+  }
+  90% {
+    opacity: 0.7;
+  }
+  100% {
+    top: 100%;
+    opacity: 0;
+  }
+}
+
+/* Network Lines Effect */
+.network-lines {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  pointer-events: none;
+  overflow: hidden;
+  transition: opacity 0.4s ease;
+  z-index: 1;
+}
+
+.hire-me-card:hover .network-lines {
+  opacity: 1;
+}
+
+.network-svg {
+  width: 100%;
+  height: 100%;
+}
+
+.network-line {
+  stroke: #00FF00;
+  stroke-width: 1;
+  stroke-opacity: 0;
+  animation: lineAppear 2s ease-in-out infinite;
+  filter: drop-shadow(0 0 3px rgba(0, 255, 0, 0.8));
+}
+
+.network-node {
+  fill: #00FF00;
+  opacity: 0;
+  animation: nodeAppear 2s ease-in-out infinite;
+  filter: drop-shadow(0 0 5px rgba(0, 255, 0, 1));
+}
+
+@keyframes lineAppear {
+  0%, 100% {
+    stroke-opacity: 0;
+  }
+  50% {
+    stroke-opacity: 0.6;
+  }
+}
+
+@keyframes nodeAppear {
+  0%, 100% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+}
+
+/* Star Burst Effect */
+.star-burst {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.hire-me-card:hover .star-burst {
+  opacity: 1;
+}
+
+.star {
+  position: absolute;
+  font-size: 20px;
+  color: #00FF00;
+  text-shadow: 
+    0 0 10px rgba(0, 255, 0, 0.8),
+    0 0 20px rgba(0, 255, 0, 0.6);
+  animation: starBurst 2s ease-out infinite;
+  opacity: 0;
+}
+
+.star:nth-child(1) { animation-delay: 0s; }
+.star:nth-child(2) { animation-delay: 0.1s; }
+.star:nth-child(3) { animation-delay: 0.2s; }
+.star:nth-child(4) { animation-delay: 0.3s; }
+.star:nth-child(5) { animation-delay: 0.4s; }
+.star:nth-child(6) { animation-delay: 0.5s; }
+.star:nth-child(7) { animation-delay: 0.6s; }
+.star:nth-child(8) { animation-delay: 0.7s; }
+
+@keyframes starBurst {
+  0% {
+    transform: translate(0, 0) scale(0.5);
+    opacity: 0;
+  }
+  30% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate(0, -80px) scale(1.2);
+    opacity: 0;
+  }
 }
 
 .hire-me-card:hover {
@@ -312,8 +457,9 @@
 
 .hire-me-content {
   text-align: center;
-  z-index: 1;
+  z-index: 2;
   padding: 24px;
+  position: relative;
 }
 
 .plus-sign-container {
@@ -442,6 +588,7 @@
   
   .hire-me-card {
     max-width: 100%;
+    min-height: 270px;
   }
   
   .plus-sign {

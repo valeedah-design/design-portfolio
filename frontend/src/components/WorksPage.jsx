@@ -84,8 +84,38 @@ const WorksPage = () => {
               {worksData['Digital Designs']['App Designs'].map((project) => (
                 project.type === 'hire-me' ? (
                   <div key={project.id} className="project-card hire-me-card">
+                    <div className="matrix-rain">
+                      <div className="matrix-column" style={{left: '10%', animationDelay: '0s', animationDuration: '3s'}}>01010101</div>
+                      <div className="matrix-column" style={{left: '25%', animationDelay: '0.5s', animationDuration: '2.5s'}}>10110010</div>
+                      <div className="matrix-column" style={{left: '40%', animationDelay: '1s', animationDuration: '3.5s'}}>11001100</div>
+                      <div className="matrix-column" style={{left: '55%', animationDelay: '0.3s', animationDuration: '2.8s'}}>01101110</div>
+                      <div className="matrix-column" style={{left: '70%', animationDelay: '0.8s', animationDuration: '3.2s'}}>10011001</div>
+                      <div className="matrix-column" style={{left: '85%', animationDelay: '0.2s', animationDuration: '2.7s'}}>11100011</div>
+                    </div>
+                    <div className="network-lines">
+                      <svg className="network-svg" viewBox="0 0 400 300" preserveAspectRatio="none">
+                        <line x1="50" y1="50" x2="200" y2="150" className="network-line" style={{animationDelay: '0s'}} />
+                        <line x1="350" y1="80" x2="200" y2="150" className="network-line" style={{animationDelay: '0.3s'}} />
+                        <line x1="100" y1="250" x2="200" y2="150" className="network-line" style={{animationDelay: '0.6s'}} />
+                        <line x1="300" y1="250" x2="200" y2="150" className="network-line" style={{animationDelay: '0.9s'}} />
+                        <circle cx="50" cy="50" r="3" className="network-node" style={{animationDelay: '0s'}} />
+                        <circle cx="350" cy="80" r="3" className="network-node" style={{animationDelay: '0.3s'}} />
+                        <circle cx="100" cy="250" r="3" className="network-node" style={{animationDelay: '0.6s'}} />
+                        <circle cx="300" cy="250" r="3" className="network-node" style={{animationDelay: '0.9s'}} />
+                      </svg>
+                    </div>
                     <div className="hire-me-content">
                       <div className="plus-sign-container">
+                        <div className="star-burst">
+                          <div className="star" style={{transform: 'rotate(0deg)'}}>✦</div>
+                          <div className="star" style={{transform: 'rotate(45deg)'}}>✦</div>
+                          <div className="star" style={{transform: 'rotate(90deg)'}}>✦</div>
+                          <div className="star" style={{transform: 'rotate(135deg)'}}>✦</div>
+                          <div className="star" style={{transform: 'rotate(180deg)'}}>✦</div>
+                          <div className="star" style={{transform: 'rotate(225deg)'}}>✦</div>
+                          <div className="star" style={{transform: 'rotate(270deg)'}}>✦</div>
+                          <div className="star" style={{transform: 'rotate(315deg)'}}>✦</div>
+                        </div>
                         <div className="plus-sign">+</div>
                         <div className="plus-glow"></div>
                       </div>
