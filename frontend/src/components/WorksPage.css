@@ -142,7 +142,7 @@
   box-shadow: 0 0 20px rgba(0, 255, 0, 0.2);
   margin: 0 auto;
   background: #1a1a1a !important;
-  padding: 30px;
+  padding: 40px 40px 120px 40px;
 }
 
 .project-card.green {
