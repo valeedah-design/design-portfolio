@@ -237,11 +237,30 @@ const TimelineSection = () => {
         <button 
           className="flip-button"
           onClick={() => setIsReversed(!isReversed)}
+          title={isReversed ? 'View Past → Present' : 'View Present → Past'}
         >
-          <span className="flip-icon">{isReversed ? '↓' : '↑'}</span>
-          <span className="flip-text">
-            {isReversed ? 'View Past → Present' : 'View Present → Past'}
-          </span>
+          <svg 
+            className="flip-icon" 
+            width="24" 
+            height="24" 
+            viewBox="0 0 24 24" 
+            fill="none"
+            style={{ transform: isReversed ? 'rotate(180deg)' : 'rotate(0deg)' }}
+          >
+            <path 
+              d="M7 10L12 15L17 10" 
+              stroke="currentColor" 
+              strokeWidth="2" 
+              strokeLinecap="round" 
+              strokeLinejoin="round"
+            />
+            <path 
+              d="M12 3V15" 
+              stroke="currentColor" 
+              strokeWidth="2" 
+              strokeLinecap="round"
+            />
+          </svg>
         </button>
       </div>
 
