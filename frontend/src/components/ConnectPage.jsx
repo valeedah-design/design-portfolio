@@ -76,22 +76,6 @@ const ConnectPage = () => {
 
   return (
     <section id="connect" className="connect-section">
-      {/* Connection lines canvas */}
-      <svg className="connection-lines" viewBox="0 0 100 100" preserveAspectRatio="none">
-        {socialLinks.map((link, i) => 
-          socialLinks.slice(i + 1).map((otherLink, j) => (
-            <line
-              key={`${link.id}-${otherLink.id}`}
-              x1={link.position.x}
-              y1={link.position.y}
-              x2={otherLink.position.x}
-              y2={otherLink.position.y}
-              className={`connection-line ${hoveredButton === link.id || hoveredButton === otherLink.id ? 'active' : ''}`}
-            />
-          ))
-        )}
-      </svg>
-
       <div className="connect-content">
         <h1 className="connect-title">\Connect_me</h1>
 
