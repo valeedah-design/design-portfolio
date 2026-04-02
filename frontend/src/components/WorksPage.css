@@ -256,7 +256,7 @@
 /* Hire Me Card */
 .hire-me-card {
   background: transparent !important;
-  border: 3px dashed rgba(0, 255, 0, 0.4) !important;
+  border: 2px solid #00FF00 !important;
   border-radius: 18px !important;
   min-height: 300px;
   display: flex;
@@ -430,8 +430,7 @@
 }
 
 .hire-me-card:hover {
-  border-style: solid;
-  border-color: #00FF00 !important;
+  border-color: #39FF14 !important;
   background: rgba(0, 255, 0, 0.05) !important;
   box-shadow: 
     0 0 60px rgba(0, 255, 0, 0.4),
