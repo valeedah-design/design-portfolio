@@ -31,7 +31,7 @@ const worksData = {
         id: 4,
         title: 'Compocity',
         description: 'Foodwaste to compost',
-        image: 'https://images.unsplash.com/photo-1555774698-0b77e0d5fac6?w=600&h=800&fit=crop',
+        image: 'https://customer-assets.emergentagent.com/job_work-gallery-139/artifacts/d87y6hdm_comp.png',
         bgColor: 'black'
       },
       {
