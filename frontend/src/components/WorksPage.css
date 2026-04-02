@@ -208,14 +208,14 @@
   transform: scale(1.05);
 }
 
-/* Project Info - Overlaid at bottom */
+/* Project Info - Overlaid at bottom right */
 .project-info {
   position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  padding: 30px;
-  text-align: center;
+  bottom: 30px;
+  right: 30px;
+  left: auto;
+  padding: 0;
+  text-align: right;
   background: transparent;
   z-index: 1;
 }
