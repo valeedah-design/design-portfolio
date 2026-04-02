@@ -133,7 +133,7 @@
   transition: all 0.4s ease;
   cursor: pointer;
   position: relative;
-  min-height: 300px;
+  height: 300px;
   display: flex;
   flex-direction: column;
   box-shadow: 0 0 20px rgba(0, 255, 0, 0.2);
@@ -258,7 +258,7 @@
   background: transparent !important;
   border: 2px solid #00FF00 !important;
   border-radius: 18px !important;
-  min-height: 300px;
+  height: 300px;
   display: flex;
   align-items: center;
   justify-content: center;
