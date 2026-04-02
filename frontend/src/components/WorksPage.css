@@ -208,14 +208,14 @@
   transform: scale(1.05);
 }
 
-/* Project Info - Overlaid at bottom right */
+/* Project Info - Overlaid at bottom left */
 .project-info {
   position: absolute;
-  bottom: 30px;
-  right: 30px;
-  left: auto;
+  bottom: 20px;
+  left: 20px;
+  right: auto;
   padding: 0;
-  text-align: right;
+  text-align: left;
   background: transparent;
   z-index: 1;
 }
@@ -225,7 +225,7 @@
   font-size: 32px;
   font-weight: 700;
   color: #00FF00;
-  margin: 0 0 10px 0;
+  margin: 0 0 20px 0;
   text-shadow: 0 0 15px rgba(0, 255, 0, 0.5);
   letter-spacing: 2px;
 }
