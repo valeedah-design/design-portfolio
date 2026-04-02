@@ -7,7 +7,7 @@ const socialLinks = [
     id: 'behance',
     name: 'Behance',
     icon: 'Be',
-    url: 'https://behance.net/valeed',
+    url: 'https://www.behance.net/valeedah',
     color: '#1769FF',
     position: { x: 25, y: 30 }
   },
@@ -15,7 +15,7 @@ const socialLinks = [
     id: 'medium',
     name: 'Medium',
     icon: 'M',
-    url: 'https://medium.com/@valeed',
+    url: 'https://medium.com/@valeedah',
     color: '#00AB6C',
     position: { x: 75, y: 30 }
   },
@@ -23,7 +23,7 @@ const socialLinks = [
     id: 'linkedin',
     name: 'Linkedin',
     icon: 'in',
-    url: 'https://linkedin.com/in/valeed',
+    url: 'https://www.linkedin.com/in/valeedah/',
     color: '#0A66C2',
     position: { x: 25, y: 70 }
   },
@@ -31,7 +31,7 @@ const socialLinks = [
     id: 'mail',
     name: 'Mail',
     icon: '✉',
-    url: 'mailto:valeed@example.com',
+    url: 'mailto:valeedah@gmail.com',
     color: '#EA4335',
     position: { x: 75, y: 70 }
   }
