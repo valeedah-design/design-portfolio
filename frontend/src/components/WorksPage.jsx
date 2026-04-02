@@ -16,14 +16,15 @@ const worksData = {
         id: 2,
         title: 'CCJournal',
         description: 'Find your career and passion',
-        image: 'https://images.unsplash.com/photo-1551650975-87deedd944c3?w=600&h=800&fit=crop',
+        image: 'https://customer-assets.emergentagent.com/job_work-gallery-139/artifacts/hmaa12tg_jjjjj.png',
         bgColor: 'black'
       },
       {
         id: 3,
         title: 'The Guardian',
         description: 'Redesign of the news app',
-        image: 'https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=600&h=800&fit=crop',
+        image: 'https://customer-assets.emergentagent.com/job_work-gallery-139/artifacts/zyxmw9wv_jjjjjjj.png',
+        tags: ['Case study', 'Redesign'],
         bgColor: 'black'
       },
       {
@@ -129,6 +130,9 @@ const WorksPage = () => {
                     className={`project-card ${project.bgColor}`}
                   >
                     {project.tag && <span className="project-tag">{project.tag}</span>}
+                    {project.tags && project.tags.map((tag, index) => (
+                      <span key={index} className="project-tag" style={{top: `${12 + (index * 35)}px`}}>{tag}</span>
+                    ))}
                     <div className="project-image-wrapper">
                       <img 
                         src={project.image} 
