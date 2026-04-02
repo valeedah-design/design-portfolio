@@ -32,6 +32,12 @@ const worksData = {
         description: 'Foodwaste to compost',
         image: 'https://images.unsplash.com/photo-1555774698-0b77e0d5fac6?w=600&h=800&fit=crop',
         bgColor: 'black'
+      },
+      {
+        id: 5,
+        type: 'hire-me',
+        title: 'This could be your app project',
+        bgColor: 'hire'
       }
     ],
     'App Icons': [
@@ -76,23 +82,36 @@ const WorksPage = () => {
             <h2 className="subsection-title">App Designs</h2>
             <div className="projects-grid">
               {worksData['Digital Designs']['App Designs'].map((project) => (
-                <div 
-                  key={project.id} 
-                  className={`project-card ${project.bgColor}`}
-                >
-                  {project.tag && <span className="project-tag">{project.tag}</span>}
-                  <div className="project-image-wrapper">
-                    <img 
-                      src={project.image} 
-                      alt={project.title}
-                      className="project-image"
-                    />
+                project.type === 'hire-me' ? (
+                  <div key={project.id} className="project-card hire-me-card">
+                    <div className="hire-me-content">
+                      <div className="plus-sign-container">
+                        <div className="plus-sign">+</div>
+                        <div className="plus-glow"></div>
+                      </div>
+                      <h3 className="hire-me-title">{project.title}</h3>
+                      <p className="hire-me-subtitle">Let's create something amazing together</p>
+                    </div>
                   </div>
-                  <div className="project-info">
-                    <h3 className="project-title">{project.title}</h3>
-                    <p className="project-description">{project.description}</p>
+                ) : (
+                  <div 
+                    key={project.id} 
+                    className={`project-card ${project.bgColor}`}
+                  >
+                    {project.tag && <span className="project-tag">{project.tag}</span>}
+                    <div className="project-image-wrapper">
+                      <img 
+                        src={project.image} 
+                        alt={project.title}
+                        className="project-image"
+                      />
+                    </div>
+                    <div className="project-info">
+                      <h3 className="project-title">{project.title}</h3>
+                      <p className="project-description">{project.description}</p>
+                    </div>
                   </div>
-                </div>
+                )
               ))}
             </div>
           </div>

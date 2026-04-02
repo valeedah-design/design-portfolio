@@ -115,9 +115,16 @@
 /* Projects Grid */
 .projects-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  grid-template-columns: repeat(2, 1fr);
   gap: 40px;
   max-width: 1400px;
+}
+
+.projects-grid > .hire-me-card {
+  grid-column: 1 / -1;
+  justify-self: center;
+  max-width: 680px;
+  width: 100%;
 }
 
 .research-grid {
@@ -251,10 +258,160 @@
   line-height: 1.5;
 }
 
-/* Responsive */
+/* Hire Me Card */
+.hire-me-card {
+  background: transparent !important;
+  border: 3px dashed rgba(0, 255, 0, 0.4) !important;
+  border-radius: 24px !important;
+  min-height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.5s ease;
+  cursor: pointer;
+}
+
+.hire-me-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(0, 255, 0, 0.03) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.hire-me-card:hover {
+  border-style: solid;
+  border-color: #00FF00 !important;
+  background: rgba(0, 255, 0, 0.05) !important;
+  box-shadow: 
+    0 0 60px rgba(0, 255, 0, 0.4),
+    inset 0 0 60px rgba(0, 255, 0, 0.1) !important;
+  transform: translateY(-5px) scale(1.02);
+}
+
+.hire-me-card:hover::before {
+  opacity: 1;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { 
+    transform: scale(1); 
+    opacity: 0.3;
+  }
+  50% { 
+    transform: scale(1.1); 
+    opacity: 0.6;
+  }
+}
+
+.hire-me-content {
+  text-align: center;
+  z-index: 1;
+  padding: 40px;
+}
+
+.plus-sign-container {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 30px;
+}
+
+.plus-sign {
+  font-family: 'Share Tech Mono', 'Courier New', monospace;
+  font-size: 120px;
+  font-weight: 300;
+  color: #00FF00;
+  line-height: 1;
+  text-shadow: 
+    0 0 20px rgba(0, 255, 0, 0.6),
+    0 0 40px rgba(0, 255, 0, 0.4),
+    0 0 60px rgba(0, 255, 0, 0.2);
+  transition: all 0.4s ease;
+  display: block;
+  animation: plusGlow 3s ease-in-out infinite;
+}
+
+@keyframes plusGlow {
+  0%, 100% { 
+    text-shadow: 
+      0 0 20px rgba(0, 255, 0, 0.6),
+      0 0 40px rgba(0, 255, 0, 0.4),
+      0 0 60px rgba(0, 255, 0, 0.2);
+    transform: scale(1);
+  }
+  50% { 
+    text-shadow: 
+      0 0 30px rgba(0, 255, 0, 0.8),
+      0 0 60px rgba(0, 255, 0, 0.6),
+      0 0 90px rgba(0, 255, 0, 0.4);
+    transform: scale(1.05);
+  }
+}
+
+.hire-me-card:hover .plus-sign {
+  transform: rotate(90deg) scale(1.15);
+  color: #39FF14;
+  text-shadow: 
+    0 0 40px rgba(0, 255, 0, 0.9),
+    0 0 80px rgba(0, 255, 0, 0.7),
+    0 0 120px rgba(0, 255, 0, 0.5);
+}
+
+.plus-glow {
+  position: absolute;
+  inset: -40px;
+  background: radial-gradient(circle, rgba(0, 255, 0, 0.3) 0%, transparent 60%);
+  filter: blur(40px);
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  pointer-events: none;
+}
+
+.hire-me-card:hover .plus-glow {
+  opacity: 1;
+  animation: rotatePlus 4s linear infinite;
+}
+
+@keyframes rotatePlus {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.hire-me-title {
+  font-family: 'Share Tech Mono', 'Courier New', monospace;
+  font-size: 28px;
+  font-weight: 600;
+  color: #00FF00;
+  margin: 0 0 15px 0;
+  text-shadow: 0 0 15px rgba(0, 255, 0, 0.4);
+  transition: all 0.3s ease;
+}
+
+.hire-me-card:hover .hire-me-title {
+  color: #39FF14;
+  text-shadow: 0 0 25px rgba(0, 255, 0, 0.7);
+  transform: translateY(-5px);
+}
+
+.hire-me-subtitle {
+  font-family: 'Share Tech Mono', 'Courier New', monospace;
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.6);
+  margin: 0;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+}
+
+.hire-me-card:hover .hire-me-subtitle {
+  color: rgba(255, 255, 255, 0.9);
+}
 @media (max-width: 1200px) {
   .projects-grid {
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    grid-template-columns: repeat(2, 1fr);
     gap: 30px;
   }
 }
@@ -271,9 +428,25 @@
   .projects-grid {
     grid-template-columns: 1fr;
   }
+  
+  .projects-grid > .hire-me-card {
+    max-width: 100%;
+  }
 
   .project-card {
     min-height: 450px;
+  }
+  
+  .plus-sign {
+    font-size: 90px;
+  }
+  
+  .hire-me-title {
+    font-size: 24px;
+  }
+  
+  .hire-me-subtitle {
+    font-size: 14px;
   }
 }
 
