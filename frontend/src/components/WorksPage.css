@@ -134,16 +134,18 @@
 
 /* Project Card */
 .project-card {
-  border-radius: 24px;
+  border-radius: 18px;
   overflow: hidden;
   border: 2px solid #00FF00;
   transition: all 0.4s ease;
   cursor: pointer;
   position: relative;
-  min-height: 500px;
+  min-height: 300px;
   display: flex;
   flex-direction: column;
   box-shadow: 0 0 20px rgba(0, 255, 0, 0.2);
+  max-width: 400px;
+  margin: 0 auto;
 }
 
 .project-card.green {
@@ -173,14 +175,14 @@
 /* Project Tag */
 .project-tag {
   position: absolute;
-  top: 20px;
-  right: 20px;
+  top: 12px;
+  right: 12px;
   background: rgba(0, 0, 0, 0.8);
   color: #00FF00;
-  padding: 8px 16px;
-  border-radius: 20px;
+  padding: 6px 12px;
+  border-radius: 16px;
   font-family: 'Share Tech Mono', 'Courier New', monospace;
-  font-size: 12px;
+  font-size: 10px;
   border: 1px solid #00FF00;
   z-index: 2;
   backdrop-filter: blur(10px);
@@ -192,7 +194,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 40px 20px 20px 20px;
+  padding: 24px 12px 12px 12px;
   overflow: hidden;
 }
 
@@ -210,7 +212,7 @@
 
 /* Project Info */
 .project-info {
-  padding: 30px;
+  padding: 18px;
   background: rgba(0, 0, 0, 0.8);
   backdrop-filter: blur(10px);
   border-top: 1px solid rgba(0, 255, 0, 0.3);
@@ -218,19 +220,19 @@
 
 .project-title {
   font-family: 'Share Tech Mono', 'Courier New', monospace;
-  font-size: 28px;
+  font-size: 20px;
   font-weight: 700;
   color: #00FF00;
-  margin: 0 0 10px 0;
+  margin: 0 0 8px 0;
   text-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
 }
 
 .project-description {
   font-family: 'Share Tech Mono', 'Courier New', monospace;
-  font-size: 14px;
+  font-size: 12px;
   color: rgba(255, 255, 255, 0.7);
   margin: 0;
-  line-height: 1.6;
+  line-height: 1.5;
 }
 
 /* Research Cards */
@@ -311,18 +313,18 @@
 .hire-me-content {
   text-align: center;
   z-index: 1;
-  padding: 40px;
+  padding: 24px;
 }
 
 .plus-sign-container {
   position: relative;
   display: inline-block;
-  margin-bottom: 30px;
+  margin-bottom: 18px;
 }
 
 .plus-sign {
   font-family: 'Share Tech Mono', 'Courier New', monospace;
-  font-size: 120px;
+  font-size: 72px;
   font-weight: 300;
   color: #00FF00;
   line-height: 1;
@@ -383,10 +385,10 @@
 
 .hire-me-title {
   font-family: 'Share Tech Mono', 'Courier New', monospace;
-  font-size: 28px;
+  font-size: 18px;
   font-weight: 600;
   color: #00FF00;
-  margin: 0 0 15px 0;
+  margin: 0 0 10px 0;
   text-shadow: 0 0 15px rgba(0, 255, 0, 0.4);
   transition: all 0.3s ease;
 }
@@ -394,12 +396,12 @@
 .hire-me-card:hover .hire-me-title {
   color: #39FF14;
   text-shadow: 0 0 25px rgba(0, 255, 0, 0.7);
-  transform: translateY(-5px);
+  transform: translateY(-3px);
 }
 
 .hire-me-subtitle {
   font-family: 'Share Tech Mono', 'Courier New', monospace;
-  font-size: 16px;
+  font-size: 12px;
   color: rgba(255, 255, 255, 0.6);
   margin: 0;
   letter-spacing: 0.5px;
@@ -434,19 +436,24 @@
   }
 
   .project-card {
-    min-height: 450px;
+    min-height: 270px;
+    max-width: 100%;
+  }
+  
+  .hire-me-card {
+    max-width: 100%;
   }
   
   .plus-sign {
-    font-size: 90px;
+    font-size: 60px;
   }
   
   .hire-me-title {
-    font-size: 24px;
+    font-size: 16px;
   }
   
   .hire-me-subtitle {
-    font-size: 14px;
+    font-size: 11px;
   }
 }
 
