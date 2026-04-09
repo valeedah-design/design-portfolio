@@ -77,7 +77,7 @@
 /* Subsection Tabs (for Digital Designs sub-categories) */
 .subsection-tabs {
   display: flex;
-  gap: 30px;
+  gap: 40px;
   margin-bottom: 50px;
   padding-bottom: 15px;
   border-bottom: 1px solid rgba(0, 255, 0, 0.15);
@@ -87,27 +87,36 @@
   font-family: 'Share Tech Mono', 'Courier New', monospace;
   font-size: 16px;
   background: transparent;
-  border: 2px solid rgba(0, 255, 0, 0.3);
-  color: rgba(255, 255, 255, 0.6);
-  padding: 10px 24px;
+  border: none;
+  color: rgba(255, 255, 255, 0.5);
+  padding: 10px 0;
   cursor: pointer;
   transition: all 0.3s ease;
   position: relative;
-  border-radius: 4px;
 }
 
 .subsection-tab:hover {
   color: #00FF00;
-  border-color: rgba(0, 255, 0, 0.6);
-  box-shadow: 0 0 15px rgba(0, 255, 0, 0.2);
 }
 
 .subsection-tab.active {
-  color: #000000;
-  background: #00FF00;
-  border-color: #00FF00;
-  box-shadow: 0 0 20px rgba(0, 255, 0, 0.4);
-  font-weight: 600;
+  color: #00FF00;
+  text-shadow: 
+    0 0 10px rgba(0, 255, 0, 0.8),
+    0 0 20px rgba(0, 255, 0, 0.5),
+    0 0 30px rgba(0, 255, 0, 0.3);
+}
+
+.subsection-tab.active::after {
+  content: '';
+  position: absolute;
+  bottom: -15px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #00FF00, #39FF14);
+  box-shadow: 0 0 10px rgba(0, 255, 0, 0.6);
+  animation: slideIn 0.3s ease;
 }
 
 .subsection-content {
