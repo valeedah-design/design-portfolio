@@ -95,28 +95,37 @@
 }
 
 .timeline-container {
-  max-width: 1600px;
+  max-width: 1200px;
   margin: 0 auto;
   position: relative;
-  padding: 20px 0;
-  min-height: 100vh;
+  padding: 40px 0;
 }
 
-/* Diagonal zigzag line - no longer needed as individual connector */
+/* Central vertical timeline line */
 .timeline-line {
-  display: none;
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgba(0, 255, 0, 0.3) 10%,
+    rgba(0, 255, 0, 0.3) 90%,
+    transparent
+  );
+  transform: translateX(-50%);
 }
 
-/* Year markers - compact inline badges */
+/* Year markers - rounded triangular shapes in center */
 .timeline-year-marker {
   position: relative;
   display: flex;
   justify-content: center;
-  align-items: center;
+  margin: 40px 0;
   opacity: 0;
   animation: fadeInUp 0.8s ease forwards;
-  margin: 15px auto;
-  width: 100%;
 }
 
 @keyframes fadeInUp {
@@ -131,14 +140,14 @@
 }
 
 .year-blob {
-  width: 100px;
-  height: 48px;
+  width: 120px;
+  height: 120px;
   background: #3d3d3d;
   display: flex;
   align-items: center;
   justify-content: center;
   font-family: 'Share Tech Mono', 'Courier New', monospace;
-  font-size: 18px;
+  font-size: 22px;
   font-weight: 600;
   color: #00FF00;
   transition: all 0.3s ease;
@@ -148,21 +157,80 @@
     inset 0 2px 10px rgba(255, 255, 255, 0.05);
   z-index: 2;
   position: relative;
-  border: 2px solid #00FF00;
+  border: 3px solid #00FF00;
   filter: drop-shadow(0 0 15px rgba(0, 255, 0, 0.5));
-  border-radius: 24px;
-  padding: 8px 18px;
+  /* Flipped triangle - pointing downwards */
+  clip-path: polygon(
+    50% 92%,
+    60% 88%,
+    68% 82%,
+    74% 74%,
+    80% 64%,
+    84% 54%,
+    88% 42%,
+    90% 30%,
+    90% 20%,
+    88% 14%,
+    84% 10%,
+    78% 7%,
+    70% 5%,
+    60% 4%,
+    50% 3%,
+    40% 4%,
+    30% 5%,
+    22% 7%,
+    16% 10%,
+    12% 14%,
+    10% 20%,
+    10% 30%,
+    12% 42%,
+    16% 54%,
+    20% 64%,
+    26% 74%,
+    32% 82%,
+    40% 88%
+  );
+  padding: 20px;
 }
 
 .year-blob::after {
   content: '';
   position: absolute;
-  inset: -6px;
+  inset: -8px;
   background: linear-gradient(135deg, #00FF00, #39FF14);
   z-index: -1;
   opacity: 0.25;
-  border-radius: 30px;
-  filter: blur(10px);
+  clip-path: polygon(
+    50% 92%,
+    60% 88%,
+    68% 82%,
+    74% 74%,
+    80% 64%,
+    84% 54%,
+    88% 42%,
+    90% 30%,
+    90% 20%,
+    88% 14%,
+    84% 10%,
+    78% 7%,
+    70% 5%,
+    60% 4%,
+    50% 3%,
+    40% 4%,
+    30% 5%,
+    22% 7%,
+    16% 10%,
+    12% 14%,
+    10% 20%,
+    10% 30%,
+    12% 42%,
+    16% 54%,
+    20% 64%,
+    26% 74%,
+    32% 82%,
+    40% 88%
+  );
+  filter: blur(12px);
 }
 
 .year-blob:hover {
@@ -173,7 +241,7 @@
     0 0 55px rgba(0, 255, 0, 0.6),
     0 0 75px rgba(0, 255, 0, 0.3),
     inset 0 2px 15px rgba(255, 255, 255, 0.1);
-  transform: scale(1.15);
+  transform: scale(1.2);
   color: #ffffff;
 }
 
@@ -181,89 +249,59 @@
   opacity: 0.45;
 }
 
-/* Event items with dots - zigzag grid layout */
+/* Event items with dots */
 .timeline-event {
   position: relative;
   display: flex;
-  align-items: flex-start;
+  align-items: center;
+  margin: 30px 0;
   opacity: 0;
   animation: fadeInUp 0.8s ease forwards;
-  padding: 5px 20px;
-  transition: all 0.3s ease;
 }
 
 .timeline-event.left {
-  justify-content: flex-start;
-  grid-column: 1;
-  text-align: left;
+  justify-content: flex-end;
+  padding-right: calc(50% + 40px);
 }
 
 .timeline-event.right {
   justify-content: flex-start;
-  grid-column: 2;
-  text-align: left;
+  padding-left: calc(50% + 40px);
 }
 
-/* Diagonal connector line for varied zigzag effect */
+/* Flowing diagonal connector lines */
 .timeline-event::before {
   content: '';
   position: absolute;
-  width: 120px;
+  width: 100px;
   height: 2px;
   background: linear-gradient(
     to right,
-    rgba(0, 255, 0, 0.5),
-    rgba(0, 255, 0, 0.1)
+    rgba(0, 255, 0, 0.6),
+    rgba(0, 255, 0, 0.2)
   );
-  top: 12px;
+  top: 15px;
+  left: -80px;
   z-index: 0;
-  transform-origin: left center;
+  transform-origin: right center;
+  transform: rotate(-30deg);
 }
 
-.timeline-event.left::before {
-  right: 100%;
-  margin-right: 10px;
-  transform: rotate(-25deg);
+.timeline-event:nth-child(even)::before {
+  transform: rotate(30deg);
 }
 
-.timeline-event.right::before {
-  left: 100%;
-  margin-left: 10px;
-  transform: rotate(25deg);
-  background: linear-gradient(
-    to left,
-    rgba(0, 255, 0, 0.5),
-    rgba(0, 255, 0, 0.1)
-  );
-}
-
-/* Varied angles for organic flow */
-.timeline-event:nth-child(3n)::before {
-  transform: rotate(-15deg);
-}
-
-.timeline-event:nth-child(3n).right::before {
-  transform: rotate(15deg);
-}
-
-.timeline-event:nth-child(5n)::before {
-  transform: rotate(-35deg);
-  width: 100px;
-}
-
-.timeline-event:nth-child(5n).right::before {
-  transform: rotate(35deg);
-  width: 100px;
+.timeline-event:first-child::before {
+  display: none;
 }
 
 /* Event dot */
 .event-dot {
-  position: relative;
-  flex-shrink: 0;
-  margin-right: 15px;
-  margin-top: 4px;
-  width: 12px;
-  height: 12px;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 16px;
+  height: 16px;
   border-radius: 50%;
   border: 2px solid;
   transition: all 0.3s ease;
@@ -285,8 +323,8 @@
 .event-dot.radar {
   background: #FF0000;
   border-color: #FF0000;
-  width: 16px;
-  height: 16px;
+  width: 20px;
+  height: 20px;
   box-shadow: 0 0 20px rgba(255, 0, 0, 0.8);
   animation: radarBlink 2s ease-in-out infinite;
 }
@@ -312,12 +350,12 @@
 @keyframes radarBlink {
   0%, 100% {
     opacity: 1;
-    transform: scale(1);
+    transform: translateX(-50%) scale(1);
     box-shadow: 0 0 20px rgba(255, 0, 0, 0.8);
   }
   50% {
     opacity: 0.3;
-    transform: scale(0.9);
+    transform: translateX(-50%) scale(0.9);
     box-shadow: 0 0 30px rgba(255, 0, 0, 1);
   }
 }
@@ -350,20 +388,26 @@
 
 /* Event content */
 .event-content {
-  flex: 1;
-  padding: 0;
+  max-width: 400px;
+  padding: 20px;
   transition: all 0.3s ease;
+}
+
+.timeline-event.left .event-content {
+  text-align: right;
+}
+
+.timeline-event.right .event-content {
   text-align: left;
 }
 
 .event-title {
   font-family: 'Share Tech Mono', 'Courier New', monospace;
-  font-size: 16px;
+  font-size: 20px;
   font-weight: 500;
   color: #ffffff;
-  margin: 0 0 6px 0;
+  margin: 0 0 8px 0;
   transition: color 0.3s ease;
-  line-height: 1.3;
 }
 
 .timeline-event:hover .event-title {
@@ -372,51 +416,57 @@
 
 .event-company {
   font-family: 'Share Tech Mono', 'Courier New', monospace;
-  font-size: 13px;
+  font-size: 16px;
   color: rgba(255, 255, 255, 0.6);
-  margin: 0 0 5px 0;
+  margin: 0 0 8px 0;
   font-style: normal;
-  line-height: 1.3;
 }
 
 .event-coordinates {
   font-family: 'Share Tech Mono', 'Courier New', monospace;
-  font-size: 11px;
-  color: rgba(255, 255, 255, 0.4);
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.5);
   margin: 0;
-  letter-spacing: 0.3px;
-  line-height: 1.3;
+  letter-spacing: 0.5px;
 }
 
 /* Responsive */
 @media (max-width: 968px) {
-  .timeline-container {
-    padding: 10px 20px;
-  }
-
-  .timeline-event,
-  .timeline-event.left,
-  .timeline-event.right,
-  .timeline-event:nth-child(3n),
-  .timeline-event:nth-child(5n),
-  .timeline-event:nth-child(7n) {
-    margin-left: 0 !important;
-    margin-right: 0 !important;
-    width: 100%;
-  }
-
-  .timeline-event::before {
-    display: none;
+  .timeline-line {
+    left: 60px;
   }
 
   .timeline-year-marker {
-    margin: 15px auto;
+    justify-content: flex-start;
+    padding-left: 0;
   }
 
   .year-blob {
-    width: 90px;
-    height: 45px;
-    font-size: 16px;
+    margin-left: 0;
+    width: 100px;
+    height: 120px;
+    font-size: 20px;
+  }
+
+  .timeline-event {
+    padding-left: 140px !important;
+    padding-right: 20px !important;
+    justify-content: flex-start !important;
+  }
+
+  .event-dot {
+    left: 60px;
+  }
+
+  .event-connector {
+    left: 60px !important;
+    right: auto !important;
+    margin-left: 8px !important;
+    margin-right: 0 !important;
+  }
+
+  .event-content {
+    text-align: left !important;
   }
 }
 
