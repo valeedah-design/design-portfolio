@@ -177,24 +177,34 @@ const WorksPage = () => {
       );
     } else if (activeSubsection === 'App Icons') {
       return (
-        <div className="icons-marquee-container">
-          <div className="icons-marquee">
-            {duplicatedIcons.map((icon, index) => (
-              <div
-                key={`${icon.id}-${index}`}
-                className={`icon-item ${hoveredIcon === `${icon.id}-${index}` ? 'hovered' : ''}`}
-                onMouseEnter={() => setHoveredIcon(`${icon.id}-${index}`)}
-                onMouseLeave={() => setHoveredIcon(null)}
-              >
-                <img 
-                  src={icon.image} 
-                  alt={icon.name}
-                  className="icon-image"
-                />
-              </div>
-            ))}
+        <>
+          <div className="icons-marquee-container">
+            <div className="icons-marquee">
+              {duplicatedIcons.map((icon, index) => (
+                <div
+                  key={`${icon.id}-${index}`}
+                  className={`icon-item ${hoveredIcon === `${icon.id}-${index}` ? 'hovered' : ''}`}
+                  onMouseEnter={() => setHoveredIcon(`${icon.id}-${index}`)}
+                  onMouseLeave={() => setHoveredIcon(null)}
+                >
+                  <img 
+                    src={icon.image} 
+                    alt={icon.name}
+                    className="icon-image"
+                  />
+                </div>
+              ))}
+            </div>
           </div>
-        </div>
+          
+          {/* Hire Me Icon */}
+          <div className="hire-me-icon-container">
+            <div className="hire-me-icon">
+              <div className="hire-me-icon-plus">+</div>
+              <div className="hire-me-icon-text">Your brand deserves its own spotlight</div>
+            </div>
+          </div>
+        </>
       );
     } else if (activeSubsection === 'Web Design') {
       return (
