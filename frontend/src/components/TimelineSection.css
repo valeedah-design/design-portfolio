@@ -269,32 +269,6 @@
   padding-left: calc(50% + 40px);
 }
 
-/* Flowing diagonal connector lines */
-.timeline-event::before {
-  content: '';
-  position: absolute;
-  width: 100px;
-  height: 2px;
-  background: linear-gradient(
-    to right,
-    rgba(0, 255, 0, 0.6),
-    rgba(0, 255, 0, 0.2)
-  );
-  top: 15px;
-  left: -80px;
-  z-index: 0;
-  transform-origin: right center;
-  transform: rotate(-30deg);
-}
-
-.timeline-event:nth-child(even)::before {
-  transform: rotate(30deg);
-}
-
-.timeline-event:first-child::before {
-  display: none;
-}
-
 /* Event dot */
 .event-dot {
   position: absolute;
