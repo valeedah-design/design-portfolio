@@ -74,6 +74,57 @@
   width: 100%;
 }
 
+/* Subsection Tabs (for Digital Designs sub-categories) */
+.subsection-tabs {
+  display: flex;
+  gap: 30px;
+  margin-bottom: 50px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid rgba(0, 255, 0, 0.15);
+}
+
+.subsection-tab {
+  font-family: 'Share Tech Mono', 'Courier New', monospace;
+  font-size: 16px;
+  background: transparent;
+  border: 2px solid rgba(0, 255, 0, 0.3);
+  color: rgba(255, 255, 255, 0.6);
+  padding: 10px 24px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  border-radius: 4px;
+}
+
+.subsection-tab:hover {
+  color: #00FF00;
+  border-color: rgba(0, 255, 0, 0.6);
+  box-shadow: 0 0 15px rgba(0, 255, 0, 0.2);
+}
+
+.subsection-tab.active {
+  color: #000000;
+  background: #00FF00;
+  border-color: #00FF00;
+  box-shadow: 0 0 20px rgba(0, 255, 0, 0.4);
+  font-weight: 600;
+}
+
+.subsection-content {
+  animation: fadeInUp 0.5s ease;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 /* Subsections */
 .subsection {
   margin-bottom: 80px;
