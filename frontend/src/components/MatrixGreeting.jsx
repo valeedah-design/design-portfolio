@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './MatrixGreeting.css';
 
 const greetings = [
-  { text: "Ciao, I'm Valeed", lang: "Italian/English" },
+  { text: "Ciao, sono Valeed", lang: "Italian" },
   { text: "مرحبا، أنا وليد", lang: "Arabic" },
   { text: "नमस्ते, मैं वलीद हूं", lang: "Hindi" },
   { text: "ഹലോ, ഞാൻ വലീദ് ആണ്", lang: "Malayalam" },
