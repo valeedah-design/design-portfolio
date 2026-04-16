@@ -227,11 +227,11 @@ const ConnectPage = () => {
         <div className="quick-contact">
           <p className="contact-info">
             <span className="label">Email:</span>
-            <a href="mailto:valeed@example.com" className="contact-link">valeed@example.com</a>
+            <a href="mailto:valeedah@gmail.com" className="contact-link">valeedah@gmail.com</a>
           </p>
           <p className="contact-info">
             <span className="label">Location:</span>
-            <span className="value">Budapest, Hungary 🇭🇺</span>
+            <span className="value">Napoli, Italy 🇮🇹</span>
           </p>
         </div>
       </div>

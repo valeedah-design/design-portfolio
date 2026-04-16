@@ -173,8 +173,8 @@ const timelineData = [
   {
     id: 24,
     type: 'event',
-    title: 'Relocated to Budapest, Hungary',
-    coordinates: '47.4979°N, 19.0402°E',
+    title: 'Relocated to Napoli, Italy',
+    coordinates: '40.8518°N, 14.2681°E',
     position: 'right',
     dotColor: 'green'
   },
