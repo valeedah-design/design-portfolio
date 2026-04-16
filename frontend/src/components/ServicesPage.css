@@ -254,14 +254,272 @@
 
 /* Service Icon */
 .service-icon {
-  font-size: 48px;
   margin-bottom: 20px;
   transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
   display: inline-block;
+  height: 64px;
+}
+
+.service-icon-svg {
+  display: block;
+  filter: drop-shadow(0 0 8px rgba(0, 255, 0, 0.5));
+  transition: all 0.4s ease;
+}
+
+.service-card:hover .service-icon-svg {
+  filter: drop-shadow(0 0 15px rgba(0, 255, 0, 0.8));
 }
 
 .service-card:hover .service-icon {
-  transform: scale(1.2) rotate(5deg);
+  transform: scale(1.15);
+}
+
+/* Mobile Icon Animations */
+.icon-mobile .screen-pulse {
+  fill: rgba(0, 255, 0, 0.2);
+  animation: screenPulse 2s ease-in-out infinite;
+}
+
+@keyframes screenPulse {
+  0%, 100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 0.8;
+    fill: rgba(0, 255, 0, 0.4);
+  }
+}
+
+/* Web Icon Animations */
+.icon-web .globe-rotate {
+  transform-origin: center;
+  animation: globeRotate 4s linear infinite;
+}
+
+.icon-web .globe-path {
+  stroke-dasharray: 100;
+  stroke-dashoffset: 100;
+  animation: drawPath 3s ease-in-out infinite;
+}
+
+@keyframes globeRotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes drawPath {
+  0%, 100% {
+    stroke-dashoffset: 100;
+  }
+  50% {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* Branding Icon Animations */
+.icon-branding .palette-circle {
+  animation: colorPulse 2s ease-in-out infinite;
+}
+
+.icon-branding .palette-circle:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.icon-branding .palette-circle:nth-child(2) {
+  animation-delay: 0.3s;
+}
+
+.icon-branding .palette-circle:nth-child(3) {
+  animation-delay: 0.6s;
+}
+
+.icon-branding .brush-stroke {
+  stroke-dasharray: 50;
+  stroke-dashoffset: 50;
+  animation: brushPaint 2s ease-in-out infinite;
+}
+
+@keyframes colorPulse {
+  0%, 100% {
+    fill: transparent;
+    opacity: 0.5;
+  }
+  50% {
+    fill: rgba(0, 255, 0, 0.3);
+    opacity: 1;
+  }
+}
+
+@keyframes brushPaint {
+  0%, 100% {
+    stroke-dashoffset: 50;
+  }
+  50% {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* Dashboard Icon Animations */
+.icon-dashboard .bar {
+  transform-origin: bottom;
+  animation: barGrow 2s ease-in-out infinite;
+}
+
+.icon-dashboard .bar-1 {
+  animation-delay: 0s;
+}
+
+.icon-dashboard .bar-2 {
+  animation-delay: 0.2s;
+}
+
+.icon-dashboard .bar-3 {
+  animation-delay: 0.4s;
+}
+
+.icon-dashboard .bar-4 {
+  animation-delay: 0.6s;
+}
+
+.icon-dashboard .trend-line {
+  stroke-dasharray: 120;
+  stroke-dashoffset: 120;
+  animation: trendDraw 3s ease-in-out infinite;
+  stroke-width: 3;
+}
+
+@keyframes barGrow {
+  0%, 100% {
+    transform: scaleY(0.7);
+    fill: transparent;
+  }
+  50% {
+    transform: scaleY(1);
+    fill: rgba(0, 255, 0, 0.2);
+  }
+}
+
+@keyframes trendDraw {
+  0%, 100% {
+    stroke-dashoffset: 120;
+  }
+  50% {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* Rocket Icon Animations */
+.icon-rocket .rocket-body {
+  animation: rocketFloat 2s ease-in-out infinite;
+}
+
+.icon-rocket .flame {
+  opacity: 0.8;
+  stroke-width: 3;
+  animation: flameFlicker 0.3s ease-in-out infinite;
+}
+
+.icon-rocket .flame-1 {
+  animation-delay: 0s;
+}
+
+.icon-rocket .flame-2 {
+  animation-delay: 0.1s;
+}
+
+.icon-rocket .flame-3 {
+  animation-delay: 0.2s;
+}
+
+@keyframes rocketFloat {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes flameFlicker {
+  0%, 100% {
+    opacity: 0.6;
+    stroke-width: 2;
+  }
+  50% {
+    opacity: 1;
+    stroke-width: 4;
+  }
+}
+
+/* Code Icon Animations */
+.icon-code .code-bracket {
+  stroke-dasharray: 60;
+  stroke-dashoffset: 60;
+  animation: bracketDraw 2s ease-in-out infinite;
+}
+
+.icon-code .code-bracket:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.icon-code .code-bracket:nth-child(2) {
+  animation-delay: 0.3s;
+}
+
+.icon-code .code-slash {
+  stroke-dasharray: 40;
+  stroke-dashoffset: 40;
+  animation: slashDraw 2s ease-in-out 0.6s infinite;
+}
+
+.icon-code .code-dot {
+  fill: #00FF00;
+  animation: dotBlink 1.5s ease-in-out infinite;
+}
+
+.icon-code .code-dot-1 {
+  animation-delay: 0s;
+}
+
+.icon-code .code-dot-2 {
+  animation-delay: 0.2s;
+}
+
+.icon-code .code-dot-3 {
+  animation-delay: 0.4s;
+}
+
+@keyframes bracketDraw {
+  0%, 100% {
+    stroke-dashoffset: 60;
+  }
+  50% {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes slashDraw {
+  0%, 100% {
+    stroke-dashoffset: 40;
+  }
+  50% {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes dotBlink {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scale(0.8);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
 }
 
 /* Service Content */
