@@ -64,9 +64,10 @@ body.light-mode .rotating-title {
 
 /* Matrix Greeting */
 body.light-mode .matrix-greeting {
-  background: var(--cream-card) !important;
-  border: 2px solid var(--border-green) !important;
-  box-shadow: 0 4px 20px var(--shadow-green) !important;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
 }
 
 body.light-mode .greeting-text {
@@ -101,22 +102,22 @@ body.light-mode .timeline-line {
 }
 
 body.light-mode .year-blob {
-  background: linear-gradient(145deg, #E8F5E3, #D4EAC7) !important;
+  background: #D4EAC7 !important;
   color: var(--dark-green) !important;
   border-color: var(--accent-green) !important;
   box-shadow: 
     0 0 15px var(--shadow-green),
-    0 8px 16px rgba(45, 80, 22, 0.2),
+    0 8px 16px rgba(15, 35, 7, 0.2),
     inset 0 2px 10px rgba(255, 255, 255, 0.5) !important;
 }
 
 body.light-mode .year-blob:hover {
-  background: linear-gradient(145deg, #D4EAC7, #C8E6C9) !important;
+  background: #C8E6C9 !important;
   color: var(--dark-green) !important;
   border-color: var(--dark-green) !important;
   box-shadow: 
     0 0 20px var(--shadow-green),
-    0 10px 20px rgba(45, 80, 22, 0.25) !important;
+    0 10px 20px rgba(15, 35, 7, 0.25) !important;
 }
 
 body.light-mode .event-dot.white {
