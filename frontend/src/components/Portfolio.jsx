@@ -7,6 +7,7 @@ import WorksPage from './WorksPage';
 import ServicesPage from './ServicesPage';
 import ConnectPage from './ConnectPage';
 import MouseSpotlight from './MouseSpotlight';
+import ThemeToggle from './ThemeToggle';
 
 const Portfolio = () => {
   const [activeSection, setActiveSection] = useState('home');
@@ -44,6 +45,9 @@ const Portfolio = () => {
     <div className="portfolio-container">
       {/* Mouse Spotlight Effect */}
       <MouseSpotlight />
+      
+      {/* Theme Toggle */}
+      <ThemeToggle />
       
       {/* Fixed Sidebar Navigation */}
       <nav className="sidebar-nav">
