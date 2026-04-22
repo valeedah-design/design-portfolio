@@ -102,8 +102,8 @@ body.light-mode .cta-button:hover {
 }
 
 body.light-mode .about-box {
-  background: var(--cream-card) !important;
-  border-color: var(--very-light-olive) !important;
+  background: transparent !important;
+  border: none !important;
 }
 
 body.light-mode .about-title {
