@@ -321,6 +321,27 @@ body.light-mode .icon-item {
   box-shadow: 0 0 20px var(--shadow-green) !important;
 }
 
+body.light-mode .icon-item.hovered {
+  border-color: var(--dark-olive) !important;
+  background: var(--very-light-olive) !important;
+  box-shadow: 
+    0 0 60px rgba(107, 142, 35, 0.4),
+    0 10px 30px rgba(107, 142, 35, 0.15),
+    inset 0 0 50px rgba(107, 142, 35, 0.1) !important;
+}
+
+body.light-mode .icon-image {
+  filter: 
+    drop-shadow(0 4px 12px rgba(107, 142, 35, 0.15))
+    drop-shadow(0 0 20px rgba(107, 142, 35, 0.1)) !important;
+}
+
+body.light-mode .icon-item.hovered .icon-image {
+  filter: 
+    drop-shadow(0 8px 20px rgba(107, 142, 35, 0.25))
+    drop-shadow(0 0 40px rgba(107, 142, 35, 0.3)) !important;
+}
+
 body.light-mode .icon-item:hover {
   border-color: var(--dark-olive) !important;
   background: var(--very-light-olive) !important;
