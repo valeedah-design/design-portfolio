@@ -60,7 +60,7 @@ body.light-mode .nav-icon:hover {
 
 body.light-mode .nav-icon.active {
   background: var(--dark-green) !important;
-  color: var(--text-grey) !important;
+  color: #FFFFFF !important;
   border-color: var(--dark-green) !important;
   box-shadow: 0 0 20px var(--shadow-green) !important;
 }
