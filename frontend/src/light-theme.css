@@ -7,22 +7,27 @@
   --cream-bg: #FFFEF5;
   --cream-card: #FFF8E7;
   
-  /* Main Green Tones */
-  --olive-green: #6B8E23;
-  --fern-green: #4F7942;
-  --deep-forest-green: #2E5E4E;
+  /* Olive Green Palette - All variations of olive green */
+  --olive-green: #6B8E23;           /* Main olive green */
+  --dark-olive: #556A1C;            /* Darker olive for primary elements */
+  --medium-olive: #6B8E23;          /* Medium olive for accents */
+  --light-olive: #8BA832;           /* Light olive for highlights */
+  --very-light-olive: #C5D9A4;      /* Very light olive for badges */
+  --pale-olive: #E8F0D8;            /* Pale olive for backgrounds */
   
-  /* Accent Greens */
-  --sage-green: #A3B18A;
-  --muted-natural-green: #588157;
-  --rich-earthy-green: #3A5A40;
+  /* Mapped Variables - All using olive variations */
+  --dark-green: #556A1C;            /* dark olive - primary dark */
+  --medium-green: #6B8E23;          /* olive green - medium elements */
+  --accent-green: #6B8E23;          /* olive green - accents */
+  --light-green: #E8F0D8;           /* pale olive - light background */
+  --border-green: #C5D9A4;          /* very light olive - borders */
   
-  /* Mapped Variables for easy use */
-  --dark-green: #2E5E4E;        /* deep forest green - primary dark */
-  --medium-green: #4F7942;       /* fern green - medium elements */
-  --accent-green: #6B8E23;       /* olive green - accents */
-  --light-green: #E8F5E3;        /* light background tint */
-  --border-green: #A3B18A;       /* sage green - borders */
+  /* Additional olive variations */
+  --deep-forest-green: #556A1C;    /* dark olive */
+  --fern-green: #6B8E23;            /* olive green */
+  --sage-green: #C5D9A4;            /* very light olive */
+  --muted-natural-green: #8BA832;   /* light olive */
+  --rich-earthy-green: #556A1C;     /* dark olive */
   
   /* Text Colors */
   --text-primary: #2A2A2A;
@@ -30,7 +35,7 @@
   --text-grey: #707070;
   
   /* Shadow */
-  --shadow-green: rgba(46, 94, 78, 0.15);
+  --shadow-green: rgba(107, 142, 35, 0.15);
 }
 
 /* Portfolio Navigation */
@@ -65,16 +70,16 @@ body.light-mode .hero-section {
   background: var(--cream-bg) !important;
   color: var(--text-primary) !important;
   background-image: 
-    linear-gradient(rgba(163, 177, 138, 0.15) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(163, 177, 138, 0.15) 1px, transparent 1px) !important;
+    linear-gradient(rgba(197, 217, 164, 0.15) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(197, 217, 164, 0.15) 1px, transparent 1px) !important;
 }
 
 body.light-mode .welcome-text {
-  color: var(--deep-forest-green) !important;
+  color: var(--dark-olive) !important;
   text-shadow: 
-    0 0 10px rgba(46, 94, 78, 0.3),
-    0 0 20px rgba(46, 94, 78, 0.15),
-    0 0 30px rgba(46, 94, 78, 0.1) !important;
+    0 0 10px rgba(107, 142, 35, 0.3),
+    0 0 20px rgba(107, 142, 35, 0.15),
+    0 0 30px rgba(107, 142, 35, 0.1) !important;
 }
 
 body.light-mode .brand-title {
@@ -85,9 +90,9 @@ body.light-mode .brand-title {
 }
 
 body.light-mode .cta-button {
-  background: var(--deep-forest-green) !important;
+  background: var(--dark-olive) !important;
   color: #FFFFFF !important;
-  border-color: var(--deep-forest-green) !important;
+  border-color: var(--dark-olive) !important;
   box-shadow: 0 0 15px var(--shadow-green) !important;
 }
 
@@ -98,11 +103,11 @@ body.light-mode .cta-button:hover {
 
 body.light-mode .about-box {
   background: var(--cream-card) !important;
-  border-color: var(--sage-green) !important;
+  border-color: var(--very-light-olive) !important;
 }
 
 body.light-mode .about-title {
-  color: var(--deep-forest-green) !important;
+  color: var(--dark-olive) !important;
 }
 
 body.light-mode .about-description {
@@ -175,12 +180,12 @@ body.light-mode .language-tag {
 body.light-mode .timeline-section {
   background: var(--cream-bg) !important;
   background-image: 
-    linear-gradient(rgba(163, 177, 138, 0.2) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(163, 177, 138, 0.2) 1px, transparent 1px) !important;
+    linear-gradient(rgba(197, 217, 164, 0.2) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(197, 217, 164, 0.2) 1px, transparent 1px) !important;
 }
 
 body.light-mode .timeline-title {
-  color: var(--dark-green) !important;
+  color: var(--dark-olive) !important;
   text-shadow: none !important;
 }
 
@@ -188,29 +193,29 @@ body.light-mode .timeline-line {
   background: linear-gradient(
     to bottom,
     transparent,
-    rgba(79, 121, 66, 0.5) 10%,
-    rgba(79, 121, 66, 0.5) 90%,
+    rgba(107, 142, 35, 0.5) 10%,
+    rgba(107, 142, 35, 0.5) 90%,
     transparent
   ) !important;
 }
 
 body.light-mode .year-blob {
-  background: var(--sage-green) !important;
-  color: var(--deep-forest-green) !important;
-  border-color: var(--muted-natural-green) !important;
+  background: var(--very-light-olive) !important;
+  color: var(--dark-olive) !important;
+  border-color: var(--olive-green) !important;
   box-shadow: 
     0 0 15px var(--shadow-green),
-    0 8px 16px rgba(46, 94, 78, 0.2),
+    0 8px 16px rgba(107, 142, 35, 0.2),
     inset 0 2px 10px rgba(255, 255, 255, 0.5) !important;
 }
 
 body.light-mode .year-blob:hover {
-  background: var(--muted-natural-green) !important;
+  background: var(--olive-green) !important;
   color: #FFFFFF !important;
-  border-color: var(--dark-green) !important;
+  border-color: var(--dark-olive) !important;
   box-shadow: 
     0 0 20px var(--shadow-green),
-    0 10px 20px rgba(46, 94, 78, 0.25) !important;
+    0 10px 20px rgba(107, 142, 35, 0.25) !important;
 }
 
 body.light-mode .event-dot.white {
@@ -299,7 +304,7 @@ body.light-mode .project-card {
 
 body.light-mode .project-card:hover {
   border-color: var(--accent-green) !important;
-  box-shadow: 0 8px 30px rgba(45, 80, 22, 0.25) !important;
+  box-shadow: 0 8px 30px rgba(107, 142, 35, 0.25) !important;
 }
 
 body.light-mode .project-title {
@@ -317,8 +322,8 @@ body.light-mode .icon-item {
 }
 
 body.light-mode .icon-item:hover {
-  border-color: var(--dark-green) !important;
-  background: #D4EAC7 !important;
+  border-color: var(--dark-olive) !important;
+  background: var(--very-light-olive) !important;
 }
 
 body.light-mode .hire-me-card {
@@ -359,7 +364,7 @@ body.light-mode .service-card::before {
 }
 
 body.light-mode .service-card:hover {
-  border-color: var(--muted-natural-green) !important;
+  border-color: var(--olive-green) !important;
 }
 
 body.light-mode .corner {
@@ -367,7 +372,7 @@ body.light-mode .corner {
 }
 
 body.light-mode .service-number {
-  color: var(--fern-green) !important;
+  color: var(--olive-green) !important;
 }
 
 body.light-mode .service-title {
@@ -375,7 +380,7 @@ body.light-mode .service-title {
 }
 
 body.light-mode .service-card:hover .service-title {
-  color: var(--deep-forest-green) !important;
+  color: var(--dark-olive) !important;
 }
 
 body.light-mode .service-subtitle, .service-description {
@@ -387,16 +392,16 @@ body.light-mode .service-divider {
 }
 
 body.light-mode .service-arrow {
-  color: var(--rich-earthy-green) !important;
+  color: var(--dark-olive) !important;
 }
 
 body.light-mode .service-icon-svg {
-  stroke: var(--deep-forest-green) !important;
+  stroke: var(--dark-olive) !important;
   filter: drop-shadow(0 0 8px var(--shadow-green)) !important;
 }
 
 body.light-mode .service-card:hover .service-icon-svg {
-  filter: drop-shadow(0 0 15px rgba(58, 90, 64, 0.5)) !important;
+  filter: drop-shadow(0 0 15px rgba(107, 142, 35, 0.5)) !important;
 }
 
 body.light-mode .cta-text {
@@ -465,7 +470,7 @@ body.light-mode .value {
 
 /* Mouse Trail */
 body.light-mode .trail-point {
-  background: radial-gradient(circle, rgba(79, 121, 66, 0.3), transparent) !important;
+  background: radial-gradient(circle, rgba(107, 142, 35, 0.3), transparent) !important;
 }
 
 /* Scrollbar */
@@ -474,21 +479,21 @@ body.light-mode ::-webkit-scrollbar-track {
 }
 
 body.light-mode ::-webkit-scrollbar-thumb {
-  background: var(--muted-natural-green) !important;
+  background: var(--olive-green) !important;
 }
 
 body.light-mode ::-webkit-scrollbar-thumb:hover {
-  background: var(--dark-green) !important;
+  background: var(--dark-olive) !important;
 }
 
 /* Additional overrides for specific elements */
 body.light-mode .matrix-column {
-  color: var(--sage-green) !important;
+  color: var(--very-light-olive) !important;
   opacity: 0.4 !important;
 }
 
 body.light-mode .network-line {
-  stroke: var(--muted-natural-green) !important;
+  stroke: var(--olive-green) !important;
 }
 
 body.light-mode .network-node {
@@ -500,7 +505,7 @@ body.light-mode .card-glow {
 }
 
 body.light-mode .card-scanline {
-  background: linear-gradient(90deg, transparent, rgba(79, 121, 66, 0.4), transparent) !important;
+  background: linear-gradient(90deg, transparent, rgba(107, 142, 35, 0.4), transparent) !important;
 }
 
 body.light-mode .card-border rect {
