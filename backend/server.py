@@ -42,6 +42,35 @@ class StatusCheckCreate(BaseModel):
 async def root():
     return {"message": "Hello World"}
 
+# Health check endpoints for Kubernetes
+@api_router.get("/health")
+async def health_check():
+    """Health check endpoint for Kubernetes liveness probe"""
+    return {"status": "healthy", "service": "portfolio-api"}
+
+@api_router.get("/ready")
+async def readiness_check():
+    """Readiness check endpoint for Kubernetes readiness probe"""
+    try:
+        # Check MongoDB connection
+        await db.command("ping")
+        return {"status": "ready", "database": "connected"}
+    except Exception as e:
+        return {"status": "not ready", "error": str(e)}
+
+# GraphQL health check endpoints (for Kubernetes default health checks)
+@api_router.post("/gql")
+@api_router.get("/gql")
+async def graphql_health():
+    """GraphQL health check endpoint"""
+    return {"status": "ok", "message": "Health check endpoint"}
+
+@api_router.post("/graphql")
+@api_router.get("/graphql")
+async def graphql_alt_health():
+    """Alternative GraphQL health check endpoint"""
+    return {"status": "ok", "message": "Health check endpoint"}
+
 @api_router.post("/status", response_model=StatusCheck)
 async def create_status_check(input: StatusCheckCreate):
     status_dict = input.model_dump()
@@ -68,6 +97,17 @@ async def get_status_checks():
 
 # Include the router in the main app
 app.include_router(api_router)
+
+# Add root-level health check endpoints (without /api prefix)
+@app.get("/health")
+async def root_health():
+    """Root health check endpoint"""
+    return {"status": "healthy", "service": "portfolio-backend"}
+
+@app.get("/")
+async def root_endpoint():
+    """Root endpoint"""
+    return {"message": "Portfolio API", "status": "running", "version": "1.0"}
 
 app.add_middleware(
     CORSMiddleware,
