@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import './MatrixGreeting.css';
 
 const greetings = [
@@ -16,15 +16,7 @@ const MatrixGreeting = () => {
   const [displayText, setDisplayText] = useState(greetings[0].text);
   const [isAnimating, setIsAnimating] = useState(false);
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      animateToNextText();
-    }, 4000);
-
-    return () => clearInterval(interval);
-  }, [currentIndex]);
-
-  const animateToNextText = () => {
+  const animateToNextText = useCallback(() => {
     const nextIndex = (currentIndex + 1) % greetings.length;
     const targetText = greetings[nextIndex].text;
     const currentText = displayText;
@@ -65,7 +57,15 @@ const MatrixGreeting = () => {
     };
 
     requestAnimationFrame(animate);
-  };
+  }, [currentIndex, displayText]);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      animateToNextText();
+    }, 4000);
+
+    return () => clearInterval(interval);
+  }, [animateToNextText]);
 
   return (
     <h2 className={`matrix-greeting ${isAnimating ? 'animating' : ''}`}>

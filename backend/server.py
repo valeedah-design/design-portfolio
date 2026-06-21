@@ -6,7 +6,7 @@ import os
 import logging
 from pathlib import Path
 from pydantic import BaseModel, Field, ConfigDict
-from typing import List
+from typing import List, Dict, Any
 import uuid
 from datetime import datetime, timezone
 
@@ -24,34 +24,34 @@ api_router = APIRouter(prefix="/api")
 # These need to respond immediately for Kubernetes health checks
 
 @app.get("/health")
-async def root_health():
+async def root_health() -> Dict[str, Any]:
     """Root health check endpoint for Kubernetes"""
     return {"status": "healthy", "service": "portfolio-backend", "ready": True}
 
 @app.get("/")
-async def root_endpoint():
+async def root_endpoint() -> Dict[str, str]:
     """Root endpoint"""
     return {"message": "Portfolio API", "status": "running", "version": "1.0"}
 
 @app.post("/api/gql")
 @app.get("/api/gql")
-async def app_graphql_health():
+async def app_graphql_health() -> Dict[str, Any]:
     """GraphQL health check endpoint - app level"""
     return {"status": "ok", "message": "Health check endpoint", "ready": True}
 
 @app.post("/api/graphql")
 @app.get("/api/graphql")
-async def app_graphql_alt_health():
+async def app_graphql_alt_health() -> Dict[str, Any]:
     """Alternative GraphQL health check endpoint - app level"""
     return {"status": "ok", "message": "Health check endpoint", "ready": True}
 
 @app.get("/api/health")
-async def app_api_health():
+async def app_api_health() -> Dict[str, Any]:
     """API health check endpoint - app level"""
     return {"status": "healthy", "service": "portfolio-api", "ready": True}
 
 @app.get("/api/ready")
-async def app_readiness():
+async def app_readiness() -> Dict[str, str]:
     """Readiness check - always returns ready"""
     return {"status": "ready", "message": "Application ready"}
 
@@ -74,11 +74,11 @@ class StatusCheckCreate(BaseModel):
 
 # Add your routes to the router instead of directly to app
 @api_router.get("/")
-async def root():
+async def root() -> Dict[str, str]:
     return {"message": "Hello World"}
 
 @api_router.post("/status", response_model=StatusCheck)
-async def create_status_check(input: StatusCheckCreate):
+async def create_status_check(input: StatusCheckCreate) -> StatusCheck:
     status_dict = input.model_dump()
     status_obj = StatusCheck(**status_dict)
     
@@ -90,7 +90,7 @@ async def create_status_check(input: StatusCheckCreate):
     return status_obj
 
 @api_router.get("/status", response_model=List[StatusCheck])
-async def get_status_checks():
+async def get_status_checks() -> List[StatusCheck]:
     # Exclude MongoDB's _id field from the query results
     status_checks = await db.status_checks.find({}, {"_id": 0}).to_list(1000)
     
@@ -121,5 +121,6 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 @app.on_event("shutdown")
-async def shutdown_db_client():
+async def shutdown_db_client() -> None:
+    """Close MongoDB client connection on shutdown"""
     client.close()

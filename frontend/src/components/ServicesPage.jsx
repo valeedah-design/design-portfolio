@@ -144,7 +144,7 @@ const ServicesPage = () => {
         {/* Animated Background Grid */}
         <div className="services-grid-bg">
           {[...Array(20)].map((_, i) => (
-            <div key={i} className="grid-line" style={{ animationDelay: `${i * 0.1}s` }}></div>
+            <div key={`grid-line-${i}`} className="grid-line" style={{ animationDelay: `${i * 0.1}s` }}></div>
           ))}
         </div>
 

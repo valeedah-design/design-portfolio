@@ -147,7 +147,7 @@ const WorksPage = () => {
                     <div className="plus-glow"></div>
                   </div>
                   <h3 className="hire-me-title">{project.title}</h3>
-                  <p className="hire-me-subtitle">Let's create something amazing together</p>
+                  <p className="hire-me-subtitle">Let&apos;s create something amazing together</p>
                 </div>
               </div>
             ) : (
@@ -156,8 +156,8 @@ const WorksPage = () => {
                 className={`project-card ${project.bgColor}`}
               >
                 {project.tag && <span className="project-tag">{project.tag}</span>}
-                {project.tags && project.tags.map((tag, index) => (
-                  <span key={index} className="project-tag" style={{top: `${12 + (index * 35)}px`}}>{tag}</span>
+                {project.tags && project.tags.map((tag) => (
+                  <span key={`${project.id}-tag-${tag}`} className="project-tag" style={{top: `${12 + (project.tags.indexOf(tag) * 35)}px`}}>{tag}</span>
                 ))}
                 <div className="project-image-wrapper">
                   <img 
@@ -248,7 +248,7 @@ const WorksPage = () => {
                     <div className="plus-glow"></div>
                   </div>
                   <h3 className="hire-me-title">{project.title}</h3>
-                  <p className="hire-me-subtitle">Let's build something great together</p>
+                  <p className="hire-me-subtitle">Let&apos;s build something great together</p>
                 </div>
               </div>
             ) : (

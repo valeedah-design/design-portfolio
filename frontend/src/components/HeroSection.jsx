@@ -38,7 +38,7 @@ const HeroSection = () => {
             <div className="about-box">
               <h3 className="about-title">Who am I?</h3>
               <p className="about-description">
-                Think of me as a debugger for bad user experiences. Let's fix some problems and make them pretty!
+                Think of me as a debugger for bad user experiences. Let&apos;s fix some problems and make them pretty!
               </p>
               <button className="cta-button">Let me help you</button>
             </div>

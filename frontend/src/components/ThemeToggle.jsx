@@ -6,7 +6,7 @@ const ThemeToggle = () => {
   const [isDark, setIsDark] = useState(true);
 
   useEffect(() => {
-    // Check localStorage for saved theme preference
+    // Check localStorage for saved theme preference on mount
     const savedTheme = localStorage.getItem('theme');
     if (savedTheme === 'light') {
       setIsDark(false);
