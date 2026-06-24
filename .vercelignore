@@ -1,0 +1,42 @@
+# Dependencies
+node_modules/
+__pycache__/
+*.pyc
+.Python
+env/
+venv/
+
+# Backend (not needed for Vercel deployment)
+backend/
+
+# Build outputs
+frontend/build/
+*.log
+
+# Environment files (will be set in Vercel Dashboard)
+.env
+.env.*
+*.env
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Git
+.git/
+.gitignore
+
+# Testing
+coverage/
+.nyc_output/
+
+# Misc
+.emergent/
+memory/
+test_reports/
