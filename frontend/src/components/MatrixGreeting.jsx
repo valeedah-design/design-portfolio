@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './MatrixGreeting.css';
 
 const greetings = [
@@ -15,57 +15,57 @@ const MatrixGreeting = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [displayText, setDisplayText] = useState(greetings[0].text);
   const [isAnimating, setIsAnimating] = useState(false);
-
-  const animateToNextText = useCallback(() => {
-    const nextIndex = (currentIndex + 1) % greetings.length;
-    const targetText = greetings[nextIndex].text;
-    const currentText = displayText;
-    const maxLength = Math.max(targetText.length, currentText.length);
-    
-    setIsAnimating(true);
-    let frame = 0;
-    const totalFrames = 15;
-
-    const animate = () => {
-      if (frame < totalFrames) {
-        let newText = '';
-        
-        for (let i = 0; i < maxLength; i++) {
-          const progress = (frame - i * 0.5) / totalFrames;
-          
-          if (progress < 0) {
-            // Haven't started flipping this character yet
-            newText += currentText[i] || '';
-          } else if (progress < 0.8) {
-            // Flipping - show random character
-            newText += randomChars[Math.floor(Math.random() * randomChars.length)];
-          } else {
-            // Settled on final character
-            newText += targetText[i] || '';
-          }
-        }
-        
-        setDisplayText(newText);
-        frame++;
-        requestAnimationFrame(animate);
-      } else {
-        // Ensure final text is clean and readable
-        setDisplayText(targetText);
-        setCurrentIndex(nextIndex);
-        setIsAnimating(false);
-      }
-    };
-
-    requestAnimationFrame(animate);
-  }, [currentIndex, displayText]);
+  const animationFrameRef = useRef(null);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      animateToNextText();
-    }, 4000);
+    const animateToNextText = () => {
+      const nextIndex = (currentIndex + 1) % greetings.length;
+      const targetText = greetings[nextIndex].text;
+      const currentText = displayText;
+      const maxLength = Math.max(targetText.length, currentText.length);
+      
+      setIsAnimating(true);
+      let frame = 0;
+      const totalFrames = 15;
 
-    return () => clearInterval(interval);
-  }, [animateToNextText]);
+      const animate = () => {
+        if (frame < totalFrames) {
+          let newText = '';
+          
+          for (let i = 0; i < maxLength; i++) {
+            const progress = (frame - i * 0.5) / totalFrames;
+            
+            if (progress < 0) {
+              newText += currentText[i] || '';
+            } else if (progress < 0.8) {
+              newText += randomChars[Math.floor(Math.random() * randomChars.length)];
+            } else {
+              newText += targetText[i] || '';
+            }
+          }
+          
+          setDisplayText(newText);
+          frame++;
+          animationFrameRef.current = requestAnimationFrame(animate);
+        } else {
+          setDisplayText(targetText);
+          setCurrentIndex(nextIndex);
+          setIsAnimating(false);
+        }
+      };
+
+      animationFrameRef.current = requestAnimationFrame(animate);
+    };
+
+    const interval = setInterval(animateToNextText, 4000);
+
+    return () => {
+      clearInterval(interval);
+      if (animationFrameRef.current) {
+        cancelAnimationFrame(animationFrameRef.current);
+      }
+    };
+  }, [currentIndex, displayText]);
 
   return (
     <h2 className={`matrix-greeting ${isAnimating ? 'animating' : ''}`}>
