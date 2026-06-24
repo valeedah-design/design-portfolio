@@ -24,6 +24,8 @@ const HeroSection = () => {
     }, 3000);
 
     return () => clearInterval(interval);
+    // Intentionally only depend on titles.length to avoid recreating interval
+
   }, [titles.length]);
 
   return (

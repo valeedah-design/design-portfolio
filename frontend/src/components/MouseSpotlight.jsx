@@ -17,6 +17,8 @@ const MouseSpotlight = () => {
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
     };
+    // handleMouseMove is defined in the effect, no external dependencies
+
   }, []);
 
   return (

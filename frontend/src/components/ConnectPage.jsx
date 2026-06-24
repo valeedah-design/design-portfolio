@@ -58,6 +58,8 @@ const ConnectPage = () => {
     }, 30);
 
     return () => clearInterval(timer);
+    // fullText is a constant, no need to include
+
   }, []);
 
   // Mouse tracking for interactive glow
@@ -82,6 +84,8 @@ const ConnectPage = () => {
 
     window.addEventListener('mousemove', handleMouseMove);
     return () => window.removeEventListener('mousemove', handleMouseMove);
+    // handleMouseMove is defined in the effect, no external dependencies
+
   }, []);
 
   // Clean up old trail positions after 4 seconds
@@ -94,6 +98,8 @@ const ConnectPage = () => {
     }, 100);
 
     return () => clearInterval(interval);
+    // Using functional update for setTrail, no dependencies needed
+
   }, []);
 
   const handleClick = (id, url) => {

@@ -38,7 +38,10 @@ const Portfolio = () => {
     };
 
     window.addEventListener('scroll', handleScroll);
+    handleScroll(); // Check initial position
     return () => window.removeEventListener('scroll', handleScroll);
+    // handleScroll is defined in the effect, no external dependencies
+
   }, []);
 
   return (
