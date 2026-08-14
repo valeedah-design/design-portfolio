@@ -1,10 +1,10 @@
 {
   "version": 2,
-  "buildCommand": "cd frontend && yarn install && yarn build",
-  "devCommand": "cd frontend && yarn start",
-  "installCommand": "cd frontend && yarn install",
-  "framework": null,
-  "outputDirectory": "frontend/build",
+  "buildCommand": "yarn build",
+  "devCommand": "yarn start",
+  "installCommand": "yarn install",
+  "framework": "create-react-app",
+  "outputDirectory": "build",
   "rewrites": [
     {
       "source": "/api/:path*",
