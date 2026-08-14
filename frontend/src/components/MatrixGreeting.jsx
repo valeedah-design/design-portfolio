@@ -9,63 +9,80 @@ const greetings = [
   { text: "Hello, I'm Valeed", lang: "English" }
 ];
 
-const randomChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$%&*';
+const randomChars =
+  'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$%&*';
 
 const MatrixGreeting = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [displayText, setDisplayText] = useState(greetings[0].text);
   const [isAnimating, setIsAnimating] = useState(false);
+
   const animationFrameRef = useRef(null);
 
   useEffect(() => {
-    const animateToNextText = () => {
+    const interval = setInterval(() => {
       const nextIndex = (currentIndex + 1) % greetings.length;
-      const targetText = greetings[nextIndex].text;
-      const currentText = displayText;
-      const maxLength = Math.max(targetText.length, currentText.length);
-      
+
+      const currentText = Array.from(greetings[currentIndex].text);
+      const targetText = Array.from(greetings[nextIndex].text);
+
+      const maxLength = Math.max(
+        currentText.length,
+        targetText.length
+      );
+
       setIsAnimating(true);
+
       let frame = 0;
-      const totalFrames = 15;
+      const totalFrames = 30;
 
       const animate = () => {
-        if (frame < totalFrames) {
+        if (frame <= totalFrames) {
           let newText = '';
-          
+
           for (let i = 0; i < maxLength; i++) {
-            const progress = (frame - i * 0.5) / totalFrames;
-            
-            if (progress < 0) {
+            const progress = frame / totalFrames;
+
+            if (progress < 0.35) {
+              // Keep original characters at the beginning
               newText += currentText[i] || '';
             } else if (progress < 0.8) {
-              newText += randomChars[Math.floor(Math.random() * randomChars.length)];
+              // Matrix scrambling effect
+              newText +=
+                randomChars[
+                  Math.floor(Math.random() * randomChars.length)
+                ];
             } else {
+              // Reveal the actual target character
               newText += targetText[i] || '';
             }
           }
-          
+
           setDisplayText(newText);
+
           frame++;
-          animationFrameRef.current = requestAnimationFrame(animate);
+          animationFrameRef.current =
+            requestAnimationFrame(animate);
         } else {
-          setDisplayText(targetText);
+          // Always finish with the exact real text
+          setDisplayText(greetings[nextIndex].text);
           setCurrentIndex(nextIndex);
           setIsAnimating(false);
         }
       };
 
-      animationFrameRef.current = requestAnimationFrame(animate);
-    };
-
-    const interval = setInterval(animateToNextText, 4000);
+      animationFrameRef.current =
+        requestAnimationFrame(animate);
+    }, 4000);
 
     return () => {
       clearInterval(interval);
+
       if (animationFrameRef.current) {
         cancelAnimationFrame(animationFrameRef.current);
       }
     };
-  }, [currentIndex, displayText]);
+  }, [currentIndex]);
 
   return (
     <h2 className={`matrix-greeting ${isAnimating ? 'animating' : ''}`}>
