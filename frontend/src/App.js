@@ -3,6 +3,8 @@ import './App.css';
 import './light-theme.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Portfolio from './components/Portfolio';
+import AdminLogin from './components/AdminLogin';
+import AdminDashboard from './components/AdminDashboard';
 
 function App() {
   useEffect(() => {
@@ -20,6 +22,8 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Portfolio />} />
+          <Route path="/admin" element={<AdminLogin />} />
+          <Route path="/admin/dashboard" element={<AdminDashboard />} />
         </Routes>
       </BrowserRouter>
     </div>
