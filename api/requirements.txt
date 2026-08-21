@@ -1,0 +1,4 @@
+pymongo==4.6.1
+PyJWT==2.9.0
+bcrypt==4.2.0
+vercel_blob==0.4.0
