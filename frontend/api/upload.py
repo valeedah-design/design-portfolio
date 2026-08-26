@@ -63,6 +63,14 @@ class handler(BaseHTTPRequestHandler):
             file_bytes = file_field.file.read()
             unique_name = f"projects/{uuid.uuid4().hex}{ext}"
 
+            # The public Blob store's connection created a token under this
+            # longer name. vercel_blob reads BLOB_READ_WRITE_TOKEN by default,
+            # so copy it across before calling put(). Falls back to whatever
+            # BLOB_READ_WRITE_TOKEN already holds if the new one isn't set.
+            new_token = os.environ.get('BLOB_READ_WRITE_TOKEN_READ_WRITE_TOKEN')
+            if new_token:
+                os.environ['BLOB_READ_WRITE_TOKEN'] = new_token
+
             result = vercel_blob.put(unique_name, file_bytes, {"access": "public"})
 
             self._send_json(200, {"url": result.get("url")})
