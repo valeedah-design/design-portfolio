@@ -14,6 +14,15 @@ const emptyForm = {
   order: 0,
 };
 
+// The categories/subsections that actually exist on the live site.
+// Keeping this as one source of truth means the admin form can never
+// send a category/subsection that doesn't match a real section.
+const CATEGORY_OPTIONS = ['Digital Designs', 'Research Lab'];
+const SUBSECTION_OPTIONS_BY_CATEGORY = {
+  'Digital Designs': ['App Designs', 'App Icons', 'Web Design'],
+  'Research Lab': [], // Research Lab items don't use a subsection
+};
+
 const AdminDashboard = () => {
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -56,6 +65,19 @@ const AdminDashboard = () => {
     setForm((f) => ({ ...f, [field]: e.target.value }));
   };
 
+  // When Category changes, snap Subsection to the first valid option for
+  // that category (or blank, for categories with no subsections) so the
+  // two fields never end up mismatched.
+  const handleCategoryChange = (e) => {
+    const category = e.target.value;
+    const validSubsections = SUBSECTION_OPTIONS_BY_CATEGORY[category] || [];
+    setForm((f) => ({
+      ...f,
+      category,
+      subsection: validSubsections[0] || '',
+    }));
+  };
+
   const handleImageUpload = async (e) => {
     const file = e.target.files[0];
     if (!file) return;
@@ -92,10 +114,19 @@ const AdminDashboard = () => {
   const resetForm = () => setForm(emptyForm);
 
   const handleEdit = (project) => {
+    const category = project.category || 'Digital Designs';
+    const validSubsections = SUBSECTION_OPTIONS_BY_CATEGORY[category] || [];
+    // Fall back to the first valid subsection for this category if the
+    // stored value doesn't match one of the current dropdown options
+    // (e.g. old data saved before this was a dropdown).
+    const subsection = validSubsections.includes(project.subsection)
+      ? project.subsection
+      : validSubsections[0] || '';
+
     setForm({
       id: project.id,
-      category: project.category || 'Digital Designs',
-      subsection: project.subsection || '',
+      category,
+      subsection,
       title: project.title || '',
       description: project.description || '',
       tag: project.tag || '',
@@ -189,13 +220,23 @@ const AdminDashboard = () => {
           <div className="admin-form-grid">
             <label className="admin-label">
               Category
-              <input className="admin-input" value={form.category} onChange={handleChange('category')} required />
+              <select className="admin-input" value={form.category} onChange={handleCategoryChange} required>
+                {CATEGORY_OPTIONS.map((opt) => (
+                  <option key={opt} value={opt}>{opt}</option>
+                ))}
+              </select>
             </label>
 
-            <label className="admin-label">
-              Subsection (leave blank if none)
-              <input className="admin-input" value={form.subsection} onChange={handleChange('subsection')} placeholder="e.g. App Designs, App Icons, Web Design" />
-            </label>
+            {SUBSECTION_OPTIONS_BY_CATEGORY[form.category]?.length > 0 && (
+              <label className="admin-label">
+                Subsection
+                <select className="admin-input" value={form.subsection} onChange={handleChange('subsection')} required>
+                  {SUBSECTION_OPTIONS_BY_CATEGORY[form.category].map((opt) => (
+                    <option key={opt} value={opt}>{opt}</option>
+                  ))}
+                </select>
+              </label>
+            )}
 
             <label className="admin-label">
               Title
