@@ -98,6 +98,9 @@ class handler(BaseHTTPRequestHandler):
                 headers={
                     'Authorization': f'Bearer {api_key}',
                     'Content-Type': 'application/json',
+                    # Resend sits behind Cloudflare, which blocks the default
+                    # "Python-urllib/x.y" agent outright (error code 1010).
+                    'User-Agent': 'valeedah-portfolio/1.0',
                 },
                 method='POST',
             )
