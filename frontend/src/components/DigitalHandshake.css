@@ -1,0 +1,215 @@
+.handshake-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.92);
+  backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 20px;
+  animation: handshake-fade 0.25s ease;
+  font-family: 'Share Tech Mono', monospace;
+}
+
+@keyframes handshake-fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.handshake-stage {
+  width: 100%;
+  max-width: 520px;
+  text-align: center;
+}
+
+.handshake-nodes {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.handshake-node {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  opacity: 0.35;
+  transition: opacity 0.35s ease;
+  flex-shrink: 0;
+}
+
+.handshake-node.live {
+  opacity: 1;
+}
+
+.handshake-node-dot {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 2px solid #00FF00;
+  background: rgba(0, 255, 0, 0.15);
+  transition: box-shadow 0.35s ease, background 0.35s ease;
+}
+
+.handshake-node.live .handshake-node-dot {
+  background: #00FF00;
+  box-shadow: 0 0 16px rgba(0, 255, 0, 0.8);
+  animation: handshake-pulse 1.4s ease-in-out infinite;
+}
+
+@keyframes handshake-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.18); }
+}
+
+.handshake-node-label {
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  color: rgba(0, 255, 0, 0.85);
+}
+
+.handshake-wire {
+  position: relative;
+  flex: 1;
+  height: 54px;
+  display: flex;
+  align-items: center;
+}
+
+.handshake-line {
+  width: 100%;
+  height: 2px;
+  background: repeating-linear-gradient(
+    90deg,
+    rgba(0, 255, 0, 0.28) 0px,
+    rgba(0, 255, 0, 0.28) 6px,
+    transparent 6px,
+    transparent 12px
+  );
+  transition: background 0.4s ease, box-shadow 0.4s ease;
+}
+
+.handshake-line.established {
+  background: #00FF00;
+  box-shadow: 0 0 14px rgba(0, 255, 0, 0.7);
+}
+
+.handshake-packet {
+  position: absolute;
+  top: 2px;
+  padding: 3px 9px;
+  border: 1px solid #00FF00;
+  border-radius: 4px;
+  background: #000;
+  color: #00FF00;
+  font-size: 10px;
+  letter-spacing: 1px;
+  opacity: 0;
+  white-space: nowrap;
+}
+
+.handshake-packet.active.right {
+  animation: handshake-travel-right 0.62s ease forwards;
+}
+
+.handshake-packet.active.left {
+  animation: handshake-travel-left 0.62s ease forwards;
+}
+
+@keyframes handshake-travel-right {
+  0% { left: 0; opacity: 0; }
+  15% { opacity: 1; }
+  85% { opacity: 1; }
+  100% { left: calc(100% - 62px); opacity: 0; }
+}
+
+@keyframes handshake-travel-left {
+  0% { left: calc(100% - 62px); opacity: 0; }
+  15% { opacity: 1; }
+  85% { opacity: 1; }
+  100% { left: 0; opacity: 0; }
+}
+
+.handshake-status {
+  margin-top: 26px;
+  min-height: 26px;
+}
+
+.handshake-step-note {
+  color: rgba(255, 255, 255, 0.55);
+  font-size: 13px;
+  letter-spacing: 0.5px;
+}
+
+.handshake-established {
+  color: #00FF00;
+  font-size: 15px;
+  letter-spacing: 1.5px;
+  text-shadow: 0 0 14px rgba(0, 255, 0, 0.7);
+  animation: handshake-appear 0.35s ease;
+}
+
+@keyframes handshake-appear {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* The handshake button itself, sitting next to Download CV */
+.handshake-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 26px;
+  margin-left: 14px;
+  background: #00FF00;
+  border: 2px solid #00FF00;
+  border-radius: 8px;
+  color: #000;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: box-shadow 0.25s ease, transform 0.15s ease;
+}
+
+.handshake-btn:hover {
+  box-shadow: 0 0 22px rgba(0, 255, 0, 0.6);
+}
+
+.handshake-btn:active {
+  transform: scale(0.97);
+}
+
+@media (max-width: 640px) {
+  .handshake-btn {
+    margin-left: 0;
+    margin-top: 14px;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .handshake-node-label {
+    font-size: 9px;
+  }
+
+  .handshake-packet {
+    font-size: 9px;
+    padding: 2px 6px;
+  }
+
+  @keyframes handshake-travel-right {
+    0% { left: 0; opacity: 0; }
+    15% { opacity: 1; }
+    85% { opacity: 1; }
+    100% { left: calc(100% - 52px); opacity: 0; }
+  }
+
+  @keyframes handshake-travel-left {
+    0% { left: calc(100% - 52px); opacity: 0; }
+    15% { opacity: 1; }
+    85% { opacity: 1; }
+    100% { left: 0; opacity: 0; }
+  }
+}
