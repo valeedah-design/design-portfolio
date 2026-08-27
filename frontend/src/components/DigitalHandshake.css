@@ -39,11 +39,11 @@
 }
 
 .hand-left {
-  animation: hand-in-left 0.7s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  animation: hand-in-left 0.65s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
 .hand-right {
-  animation: hand-in-right 0.7s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  animation: hand-in-right 0.65s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
 @keyframes hand-in-left {
@@ -56,13 +56,45 @@
   100% { transform: translateX(46px) rotate(0deg); opacity: 1; }
 }
 
-/* --- Shake: hands clasp and shake up and down --- */
+/* --- A thin dotted signal line pulses between the hands while they close
+   the gap, tying the literal handshake back to the "digital" framing --- */
+.handshake-link {
+  position: absolute;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  animation: link-appear 0.3s ease 0.15s both;
+}
+
+.handshake-link-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #00FF00;
+  box-shadow: 0 0 8px rgba(0, 255, 0, 0.9);
+  animation: link-pulse 0.9s ease-in-out infinite;
+}
+
+.handshake-link-dot:nth-child(2) { animation-delay: 0.15s; }
+.handshake-link-dot:nth-child(3) { animation-delay: 0.3s; }
+
+@keyframes link-appear {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes link-pulse {
+  0%, 100% { opacity: 0.25; transform: scale(0.85); }
+  50%      { opacity: 1; transform: scale(1.15); }
+}
+
+/* --- Clasp: hands meet and shake --- */
 .handshake-clasp {
   position: relative;
   font-size: 92px;
   line-height: 1;
   filter: drop-shadow(0 0 22px rgba(0, 255, 0, 0.75));
-  animation: clasp-in 0.22s ease-out, clasp-shake 0.3s ease-in-out 0.22s 4;
+  animation: clasp-in 0.22s ease-out, clasp-shake 0.28s ease-in-out 0.22s 4;
   z-index: 2;
 }
 
@@ -85,6 +117,25 @@
 @keyframes clasp-settle {
   0%   { transform: scale(1.12); }
   100% { transform: scale(1); }
+}
+
+/* --- A quick flash at the moment of contact --- */
+.handshake-spark {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 130px;
+  height: 130px;
+  margin: -65px 0 0 -65px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0, 255, 0, 0.55) 0%, rgba(0, 255, 0, 0) 70%);
+  animation: spark-flash 0.35s ease-out forwards;
+  pointer-events: none;
+}
+
+@keyframes spark-flash {
+  0%   { opacity: 1; transform: scale(0.3); }
+  100% { opacity: 0; transform: scale(1.4); }
 }
 
 /* --- Rings bursting out on contact --- */
@@ -182,6 +233,7 @@
 
   .handshake-hand { font-size: 58px; }
   .handshake-clasp { font-size: 70px; }
+  .handshake-spark { width: 100px; height: 100px; margin: -50px 0 0 -50px; }
 
   @keyframes hand-in-left {
     0%   { transform: translateX(-160px) rotate(-25deg); opacity: 0; }
@@ -191,5 +243,19 @@
   @keyframes hand-in-right {
     0%   { transform: translateX(160px) rotate(25deg); opacity: 0; }
     100% { transform: translateX(34px) rotate(0deg); opacity: 1; }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .handshake-overlay,
+  .handshake-hand,
+  .handshake-clasp,
+  .handshake-link,
+  .handshake-link-dot,
+  .handshake-spark,
+  .handshake-ring,
+  .handshake-greet {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
   }
 }
