@@ -1,271 +1,138 @@
-import React, { useState, useEffect } from 'react';
-import { Download, CheckCircle } from 'lucide-react';
-import './ConnectPage.css';
-import DigitalHandshake from './DigitalHandshake';
-import ContactModal from './ContactModal';
+from http.server import BaseHTTPRequestHandler
+import json
+import os
+import html
+import re
+import urllib.request
+import urllib.error
 
-const socialLinks = [
-  {
-    id: 'behance',
-    name: 'Behance',
-    icon: 'Be',
-    url: 'https://www.behance.net/valeedah',
-    color: '#1769FF',
-    position: { x: 25, y: 30 }
-  },
-  {
-    id: 'medium',
-    name: 'Medium',
-    icon: 'M',
-    url: 'https://medium.com/@valeedah',
-    color: '#00AB6C',
-    position: { x: 75, y: 30 }
-  },
-  {
-    id: 'linkedin',
-    name: 'Linkedin',
-    icon: 'in',
-    url: 'https://www.linkedin.com/in/valeedah/',
-    color: '#0A66C2',
-    position: { x: 25, y: 70 }
-  },
-  {
-    id: 'mail',
-    name: 'Mail',
-    icon: '✉',
-    url: 'mailto:valeedah@gmail.com',
-    color: '#EA4335',
-    position: { x: 75, y: 70 }
-  }
-];
+# Where enquiries get sent. Falls back to the site owner's address if the
+# env var isn't set, so this still works without extra configuration.
+TO_EMAIL = os.environ.get('CONTACT_TO_EMAIL', 'valeedah@gmail.com')
 
-const ConnectPage = () => {
-  const [hoveredButton, setHoveredButton] = useState(null);
-  const [clickedButton, setClickedButton] = useState(null);
-  const [typedText, setTypedText] = useState('');
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const [trail, setTrail] = useState([]);
-  // 'idle' -> 'shaking' (animation playing) -> 'form' (contact form open)
-  const [handshakeStage, setHandshakeStage] = useState('idle');
-  const fullText = 'Send a digital handshake! Connect on socials or download my CV to see the full player stats.';
+# Resend's shared sender works without verifying a domain, but it can only
+# deliver to the address that owns the Resend account. Set CONTACT_FROM_EMAIL
+# to something like "Portfolio <hello@valeedah.com>" once your domain is verified.
+FROM_EMAIL = os.environ.get('CONTACT_FROM_EMAIL', 'Portfolio <onboarding@resend.dev>')
 
-  // Typing animation
-  useEffect(() => {
-    let index = 0;
-    const timer = setInterval(() => {
-      if (index <= fullText.length) {
-        setTypedText(fullText.slice(0, index));
-        index++;
-      } else {
-        clearInterval(timer);
-      }
-    }, 30);
+EMAIL_RE = re.compile(r'^[^@\s]+@[^@\s]+\.[^@\s]+$')
 
-    return () => clearInterval(timer);
-    // fullText is a constant, no need to include
+MAX_NAME = 100
+MAX_EMAIL = 200
 
-  }, []);
 
-  // Mouse tracking for interactive glow
-  useEffect(() => {
-    const handleMouseMove = (e) => {
-      const section = document.getElementById('connect');
-      if (section) {
-        const rect = section.getBoundingClientRect();
-        const x = ((e.clientX - rect.left) / rect.width) * 100;
-        const y = ((e.clientY - rect.top) / rect.height) * 100;
-        
-        setMousePosition({ x, y });
-        
-        // Add position to trail with timestamp
-        const now = Date.now();
-        setTrail(prevTrail => [
-          ...prevTrail,
-          { x, y, timestamp: now }
-        ]);
-      }
-    };
+class handler(BaseHTTPRequestHandler):
+    def _send_json(self, status, payload):
+        self.send_response(status)
+        self.send_header('Content-type', 'application/json')
+        self.send_header('Access-Control-Allow-Origin', '*')
+        self.send_header('Access-Control-Allow-Methods', 'POST, OPTIONS')
+        self.send_header('Access-Control-Allow-Headers', 'Content-Type')
+        self.end_headers()
+        self.wfile.write(json.dumps(payload).encode())
 
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
-    // handleMouseMove is defined in the effect, no external dependencies
+    def do_POST(self):
+        try:
+            length = int(self.headers.get('Content-Length', 0))
+            if length == 0 or length > 20000:
+                self._send_json(400, {"error": "Invalid request."})
+                return
 
-  }, []);
+            data = json.loads(self.rfile.read(length).decode('utf-8'))
 
-  // Clean up old trail positions after 4 seconds
-  useEffect(() => {
-    const interval = setInterval(() => {
-      const now = Date.now();
-      setTrail(prevTrail => 
-        prevTrail.filter(point => now - point.timestamp < 4000)
-      );
-    }, 100);
+            # Honeypot: real people never fill this in, bots usually do.
+            if data.get('website'):
+                self._send_json(200, {"success": True})
+                return
 
-    return () => clearInterval(interval);
-    // Using functional update for setTrail, no dependencies needed
+            name = (data.get('name') or '').strip()[:MAX_NAME]
+            email = (data.get('email') or '').strip()[:MAX_EMAIL]
+            service = (data.get('service') or 'General').strip()[:100]
 
-  }, []);
+            raw_rating = data.get('rating')
+            try:
+                rating = int(raw_rating)
+            except (TypeError, ValueError):
+                rating = None
 
-  const handleClick = (id, url) => {
-    setClickedButton(id);
-    setTimeout(() => {
-      window.open(url, '_blank');
-      setClickedButton(null);
-    }, 600);
-  };
+            if not name or not email:
+                self._send_json(400, {"error": "Please fill in every field."})
+                return
 
-  const handleDownloadCV = () => {
-    const link = document.createElement('a');
-    link.href = 'https://customer-assets.emergentagent.com/job_work-gallery-139/artifacts/irmcer3q_resume%20valeed.pdf';
-    link.download = 'Valeed_Resume.pdf';
-    link.target = '_blank';
-    link.click();
-  };
+            if rating is None or rating < 1 or rating > 5:
+                self._send_json(400, {"error": "Please pick a star rating."})
+                return
 
-  return (
-    <section id="connect" className="connect-section">
-      {/* Breathing Glow Effect */}
-      <div className="breathing-glow"></div>
-      
-      {/* Mouse Trail Drawing */}
-      <svg className="mouse-trail" viewBox="0 0 100 100" preserveAspectRatio="none">
-        {trail.length > 1 && trail.map((point, index) => {
-          if (index === 0) return null;
-          const prevPoint = trail[index - 1];
-          const now = Date.now();
-          const age = now - point.timestamp;
-          const opacity = Math.max(0, 1 - (age / 4000)); // Fade over 4 seconds
-          
-          return (
-            <line
-              key={`${point.timestamp}-${index}`}
-              x1={prevPoint.x}
-              y1={prevPoint.y}
-              x2={point.x}
-              y2={point.y}
-              stroke="#00FF00"
-              strokeWidth="0.3"
-              opacity={opacity}
-              strokeLinecap="round"
-            />
-          );
-        })}
-        
-        {/* Tail dot at cursor position */}
-        {trail.length > 0 && (
-          <circle
-            cx={mousePosition.x}
-            cy={mousePosition.y}
-            r="0.5"
-            fill="#00FF00"
-            opacity="0.8"
-            filter="url(#glow)"
-          />
-        )}
-        
-        {/* Glow filter definition */}
-        <defs>
-          <filter id="glow">
-            <feGaussianBlur stdDeviation="0.5" result="coloredBlur"/>
-            <feMerge>
-              <feMergeNode in="coloredBlur"/>
-              <feMergeNode in="SourceGraphic"/>
-            </feMerge>
-          </filter>
-        </defs>
-      </svg>
+            if not EMAIL_RE.match(email):
+                self._send_json(400, {"error": "That email address doesn't look right."})
+                return
 
-      <div className="connect-content">
-        <h1 className="connect-title">\Connect_me</h1>
+            api_key = os.environ.get('RESEND_API_KEY')
+            if not api_key:
+                self._send_json(500, {"error": "Email is not configured on the server yet."})
+                return
 
-        {/* Availability Status */}
-        <div className="availability-status">
-          <div className="status-dot"></div>
-          <span className="status-text">Available for opportunities</span>
-        </div>
+            safe_name = html.escape(name)
+            safe_email = html.escape(email)
+            safe_service = html.escape(service)
+            stars_html = '★' * rating + '☆' * (5 - rating)
 
-        <p className="connect-description">
-          {typedText}
-          <span className="cursor-blink">|</span>
-        </p>
-
-        {/* CV Download Button */}
-        <button className="cv-download-btn" onClick={handleDownloadCV}>
-          <Download size={20} />
-          <span>Download CV</span>
-          <div className="download-progress"></div>
-        </button>
-
-        <button
-          className="handshake-btn"
-          onClick={() => setHandshakeStage('shaking')}
-        >
-          <span>🤝</span>
-          <span>Send a digital handshake</span>
-        </button>
-
-        {/* Social Links Grid */}
-        <div className="social-grid">
-          {socialLinks.map((social) => (
-            <div
-              key={social.id}
-              className={`social-button ${hoveredButton === social.id ? 'hovered' : ''} ${clickedButton === social.id ? 'clicked' : ''}`}
-              onMouseEnter={() => setHoveredButton(social.id)}
-              onMouseLeave={() => setHoveredButton(null)}
-              onClick={() => handleClick(social.id, social.url)}
-            >
-              <div className="social-icon-wrapper">
-                <div className="social-icon" style={{ background: social.color }}>
-                  {social.icon}
-                </div>
-                <div className="ripple"></div>
+            body_html = f"""
+              <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; line-height: 1.6;">
+                <h2 style="margin-bottom: 4px;">New {rating}-star rating</h2>
+                <p style="color:#666; margin-top:0;">From your portfolio at valeedah.com</p>
+                <table cellpadding="6" style="border-collapse: collapse; margin: 16px 0;">
+                  <tr><td><strong>Name</strong></td><td>{safe_name}</td></tr>
+                  <tr><td><strong>Email</strong></td><td><a href="mailto:{safe_email}">{safe_email}</a></td></tr>
+                  <tr><td><strong>Rating</strong></td><td style="font-size:20px; letter-spacing:2px;">{stars_html} ({rating}/5)</td></tr>
+                  <tr><td><strong>Context</strong></td><td>{safe_service}</td></tr>
+                </table>
               </div>
-              <h3 className="social-name">{social.name}</h3>
-              
-              {clickedButton === social.id && (
-                <div className="connection-feedback">
-                  <CheckCircle size={24} />
-                  <span>Connected!</span>
-                </div>
-              )}
+            """
 
-              {/* Hover pulse rings */}
-              {hoveredButton === social.id && (
-                <>
-                  <div className="pulse-ring ring-1"></div>
-                  <div className="pulse-ring ring-2"></div>
-                  <div className="pulse-ring ring-3"></div>
-                </>
-              )}
-            </div>
-          ))}
-        </div>
+            payload = {
+                "from": FROM_EMAIL,
+                "to": [TO_EMAIL],
+                "subject": f"{name} rated your work {rating}/5",
+                "html": body_html,
+                # Lets you hit reply and answer the person directly.
+                "reply_to": email,
+            }
 
-        {/* Quick Contact Info */}
-        <div className="quick-contact">
-          <p className="contact-info">
-            <span className="label">Email:</span>
-            <a href="mailto:valeedah@gmail.com" className="contact-link">valeedah@gmail.com</a>
-          </p>
-          <p className="contact-info">
-            <span className="label">Location:</span>
-            <span className="value">Napoli, Italy 🇮🇹</span>
-          </p>
-        </div>
-      </div>
+            req = urllib.request.Request(
+                'https://api.resend.com/emails',
+                data=json.dumps(payload).encode('utf-8'),
+                headers={
+                    'Authorization': f'Bearer {api_key}',
+                    'Content-Type': 'application/json',
+                    # Resend sits behind Cloudflare, which blocks the default
+                    # "Python-urllib/x.y" agent outright (error code 1010).
+                    'User-Agent': 'valeedah-portfolio/1.0',
+                },
+                method='POST',
+            )
 
-      {handshakeStage === 'shaking' && (
-        <DigitalHandshake onComplete={() => setHandshakeStage('form')} />
-      )}
+            try:
+                with urllib.request.urlopen(req, timeout=15) as resp:
+                    if 200 <= resp.status < 300:
+                        self._send_json(200, {"success": True})
+                        return
+                    self._send_json(502, {"error": "Could not send the message. Please try again."})
+            except urllib.error.HTTPError as e:
+                detail = e.read().decode('utf-8', errors='replace')[:500]
+                print(f"Resend error {e.code}: {detail}")
+                self._send_json(502, {"error": "Could not send the message. Please try again."})
+            except Exception as e:
+                print(f"Resend request failed: {e}")
+                self._send_json(502, {"error": "Could not send the message. Please try again."})
 
-      {handshakeStage === 'form' && (
-        <ContactModal
-          service="Digital Handshake"
-          onClose={() => setHandshakeStage('idle')}
-        />
-      )}
-    </section>
-  );
-};
+        except Exception as e:
+            print(f"Contact handler error: {e}")
+            self._send_json(500, {"error": "Something went wrong. Please try again."})
 
-export default ConnectPage;
+    def do_OPTIONS(self):
+        self.send_response(200)
+        self.send_header('Access-Control-Allow-Origin', '*')
+        self.send_header('Access-Control-Allow-Methods', 'POST, OPTIONS')
+        self.send_header('Access-Control-Allow-Headers', 'Content-Type')
+        self.end_headers()
