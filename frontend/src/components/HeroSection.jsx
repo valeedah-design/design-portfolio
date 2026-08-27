@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './HeroSection.css';
 import MatrixGreeting from './MatrixGreeting';
+import ContactModal from './ContactModal';
 
 const HeroSection = () => {
   const titles = [
@@ -12,6 +13,7 @@ const HeroSection = () => {
   
   const [currentTitleIndex, setCurrentTitleIndex] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
+  const [showContact, setShowContact] = useState(false);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -42,7 +44,7 @@ const HeroSection = () => {
               <p className="about-description">
                 Think of me as a debugger for bad user experiences. Let&apos;s fix some problems and make them pretty!
               </p>
-              <button className="cta-button">Let me help you</button>
+              <button className="cta-button" onClick={() => setShowContact(true)}>Let me help you</button>
             </div>
           </div>
         </div>
@@ -62,6 +64,13 @@ const HeroSection = () => {
           </h2>
         </div>
       </div>
+
+      {showContact && (
+        <ContactModal
+          service="General enquiry"
+          onClose={() => setShowContact(false)}
+        />
+      )}
     </section>
   );
 };
