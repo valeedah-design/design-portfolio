@@ -1,8 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import './WorksPage.css';
+import ContactModal from './ContactModal';
 
-const HireMeCard = ({ title, subtitle }) => (
-  <div className="project-card hire-me-card">
+const HireMeCard = ({ title, subtitle, onClick }) => (
+  <div
+    className="project-card hire-me-card"
+    onClick={onClick}
+    role="button"
+    tabIndex={0}
+    onKeyDown={(e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        onClick();
+      }
+    }}
+  >
     <div className="matrix-rain">
       <div className="matrix-column" style={{ left: '10%', animationDelay: '0s', animationDuration: '3s' }}>01010101</div>
       <div className="matrix-column" style={{ left: '25%', animationDelay: '0.5s', animationDuration: '2.5s' }}>10110010</div>
@@ -46,6 +58,8 @@ const WorksPage = () => {
   const [activeCategory, setActiveCategory] = useState('Digital Designs');
   const [activeSubsection, setActiveSubsection] = useState('App Designs');
   const [hoveredIcon, setHoveredIcon] = useState(null);
+  // Holds the service name when the contact modal is open, null when closed.
+  const [enquiryService, setEnquiryService] = useState(null);
 
   useEffect(() => {
     fetch('/api/projects')
@@ -74,7 +88,7 @@ const WorksPage = () => {
   const appIcons = projectsFor('Digital Designs', 'App Icons');
   const duplicatedIcons = [...appIcons, ...appIcons, ...appIcons];
 
-  const renderProjectGrid = (list, hireTitle, hireSubtitle) => (
+  const renderProjectGrid = (list, hireTitle, hireSubtitle, hireService) => (
     <div className="projects-grid">
       {list.map((project) => (
         <div key={project.id} className={`project-card ${project.bgColor || 'black'}`}>
@@ -93,7 +107,11 @@ const WorksPage = () => {
           </div>
         </div>
       ))}
-      <HireMeCard title={hireTitle} subtitle={hireSubtitle} />
+      <HireMeCard
+        title={hireTitle}
+        subtitle={hireSubtitle}
+        onClick={() => setEnquiryService(hireService)}
+      />
     </div>
   );
 
@@ -102,7 +120,8 @@ const WorksPage = () => {
       return renderProjectGrid(
         projectsFor('Digital Designs', 'App Designs'),
         'This could be your app project',
-        "Let's create something amazing together"
+        "Let's create something amazing together",
+        'App Design'
       );
     } else if (activeSubsection === 'App Icons') {
       return (
@@ -123,7 +142,18 @@ const WorksPage = () => {
           </div>
 
           <div className="hire-me-icon-container">
-            <div className="hire-me-icon">
+            <div
+              className="hire-me-icon"
+              onClick={() => setEnquiryService('App Icon Design')}
+              role="button"
+              tabIndex={0}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault();
+                  setEnquiryService('App Icon Design');
+                }
+              }}
+            >
               <div className="hire-me-icon-plus">+</div>
               <div className="hire-me-icon-text">Your brand deserves its own spotlight</div>
             </div>
@@ -134,7 +164,8 @@ const WorksPage = () => {
       return renderProjectGrid(
         projectsFor('Digital Designs', 'Web Design'),
         'This could be your web project',
-        "Let's build something great together"
+        "Let's build something great together",
+        'Web Design'
       );
     }
     return null;
@@ -218,6 +249,13 @@ const WorksPage = () => {
       <div className="works-content">
         {renderContent()}
       </div>
+
+      {enquiryService && (
+        <ContactModal
+          service={enquiryService}
+          onClose={() => setEnquiryService(null)}
+        />
+      )}
     </section>
   );
 };

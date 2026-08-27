@@ -1,0 +1,166 @@
+.contact-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 20px;
+  animation: contact-fade-in 0.2s ease;
+}
+
+@keyframes contact-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.contact-modal {
+  position: relative;
+  width: 100%;
+  max-width: 460px;
+  max-height: 90vh;
+  overflow-y: auto;
+  background: #0a0a0a;
+  border: 1px solid #00ff41;
+  border-radius: 12px;
+  padding: 32px;
+  box-shadow: 0 0 40px rgba(0, 255, 65, 0.25);
+  font-family: 'Share Tech Mono', monospace;
+  animation: contact-slide-up 0.25s ease;
+}
+
+@keyframes contact-slide-up {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.contact-close {
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 28px;
+  line-height: 1;
+  cursor: pointer;
+  padding: 4px 8px;
+  transition: color 0.2s ease;
+}
+
+.contact-close:hover {
+  color: #00ff41;
+}
+
+.contact-title {
+  color: #00ff41;
+  font-size: 24px;
+  margin: 0 0 6px;
+  text-shadow: 0 0 12px rgba(0, 255, 65, 0.5);
+}
+
+.contact-subtitle {
+  color: rgba(255, 255, 255, 0.55);
+  font-size: 13px;
+  margin: 0 0 22px;
+}
+
+.contact-service {
+  color: #00ff41;
+}
+
+.contact-label {
+  display: block;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 12px;
+  margin-bottom: 16px;
+}
+
+.contact-input {
+  display: block;
+  width: 100%;
+  margin-top: 6px;
+  padding: 11px 13px;
+  background: #000;
+  border: 1px solid rgba(0, 255, 65, 0.35);
+  border-radius: 6px;
+  color: #fff;
+  font-size: 14px;
+  font-family: inherit;
+  box-sizing: border-box;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.contact-input:focus {
+  outline: none;
+  border-color: #00ff41;
+  box-shadow: 0 0 10px rgba(0, 255, 65, 0.3);
+}
+
+.contact-textarea {
+  resize: vertical;
+  min-height: 90px;
+}
+
+/* Hidden from real users; only bots tend to fill it in. */
+.contact-honeypot {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.contact-error {
+  color: #ff6b6b;
+  font-size: 13px;
+  margin: 0 0 14px;
+}
+
+.contact-submit {
+  width: 100%;
+  padding: 13px;
+  background: #00ff41;
+  border: none;
+  border-radius: 6px;
+  color: #000;
+  font-size: 15px;
+  font-weight: bold;
+  font-family: inherit;
+  cursor: pointer;
+  transition: opacity 0.2s ease, box-shadow 0.2s ease;
+}
+
+.contact-submit:hover:not(:disabled) {
+  box-shadow: 0 0 18px rgba(0, 255, 65, 0.5);
+}
+
+.contact-submit:disabled {
+  opacity: 0.55;
+  cursor: default;
+}
+
+.contact-success {
+  text-align: center;
+  padding: 12px 0;
+}
+
+.contact-success-mark {
+  font-size: 44px;
+  color: #00ff41;
+  margin-bottom: 10px;
+  text-shadow: 0 0 20px rgba(0, 255, 65, 0.6);
+}
+
+@media (max-width: 480px) {
+  .contact-modal {
+    padding: 26px 20px;
+  }
+
+  .contact-title {
+    font-size: 21px;
+  }
+}
