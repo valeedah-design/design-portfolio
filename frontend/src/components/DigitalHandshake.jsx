@@ -1,17 +1,25 @@
 import React, { useState, useEffect, useRef } from 'react';
 import './DigitalHandshake.css';
 
-// Phases: 'approach' (hands slide in) -> 'shake' (they clasp and shake)
-// -> 'greet' (confirmation) -> onComplete opens the contact form.
-const APPROACH_MS = 700;
-const SHAKE_MS = 1200;
+// A literal handshake, staged in three beats:
+// 'approach' -> two hands slide in from opposite edges
+// 'clasp'    -> they meet, lock, and shake
+// 'greet'    -> a settled confirmation, then onComplete opens the contact form.
+const APPROACH_MS = 650;
+const CLASP_MS = 1050;
 const GREET_MS = 800;
+
+const STATUS_COPY = {
+  approach: 'reaching out...',
+  clasp: 'shaking on it...',
+  greet: null,
+};
 
 const DigitalHandshake = ({ onComplete }) => {
   const [phase, setPhase] = useState('approach');
 
-  // The Connect page re-renders constantly (mouse-trail effect), handing us a
-  // fresh onComplete each time. A ref keeps the timers below from restarting.
+  // ConnectPage re-renders on every mouse move (its trail effect), handing us
+  // a fresh onComplete each time. A ref keeps the timers below from restarting.
   const onCompleteRef = useRef(onComplete);
   useEffect(() => {
     onCompleteRef.current = onComplete;
@@ -19,9 +27,9 @@ const DigitalHandshake = ({ onComplete }) => {
 
   useEffect(() => {
     const timers = [
-      setTimeout(() => setPhase('shake'), APPROACH_MS),
-      setTimeout(() => setPhase('greet'), APPROACH_MS + SHAKE_MS),
-      setTimeout(() => onCompleteRef.current(), APPROACH_MS + SHAKE_MS + GREET_MS),
+      setTimeout(() => setPhase('clasp'), APPROACH_MS),
+      setTimeout(() => setPhase('greet'), APPROACH_MS + CLASP_MS),
+      setTimeout(() => onCompleteRef.current(), APPROACH_MS + CLASP_MS + GREET_MS),
     ];
     return () => timers.forEach(clearTimeout);
   }, []);
@@ -38,11 +46,20 @@ const DigitalHandshake = ({ onComplete }) => {
     >
       <div className="handshake-stage">
         <div className={`handshake-hands phase-${phase}`}>
-          {(phase === 'shake' || phase === 'greet') && (
+          {phase !== 'approach' && (
             <>
+              <span className="handshake-spark" />
               <span className="handshake-ring ring-a" />
               <span className="handshake-ring ring-b" />
             </>
+          )}
+
+          {phase === 'approach' && (
+            <span className="handshake-link">
+              <span className="handshake-link-dot" />
+              <span className="handshake-link-dot" />
+              <span className="handshake-link-dot" />
+            </span>
           )}
 
           {phase === 'approach' ? (
@@ -56,14 +73,10 @@ const DigitalHandshake = ({ onComplete }) => {
         </div>
 
         <div className="handshake-status">
-          {phase === 'approach' && (
-            <span className="handshake-note">reaching out...</span>
-          )}
-          {phase === 'shake' && (
-            <span className="handshake-note">shaking on it...</span>
-          )}
-          {phase === 'greet' && (
-            <span className="handshake-greet">✓ NICE TO MEET YOU</span>
+          {phase === 'greet' ? (
+            <span className="handshake-greet">✓ CONNECTION ESTABLISHED</span>
+          ) : (
+            <span className="handshake-note">{STATUS_COPY[phase]}</span>
           )}
         </div>
 
