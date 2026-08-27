@@ -1,78 +1,73 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './DigitalHandshake.css';
 
-// A real TCP handshake is SYN -> SYN-ACK -> ACK, which is exactly what a
-// "digital handshake" is. Each step lights up in sequence, then we hand off
-// to the contact form.
-const STEPS = [
-  { id: 'syn', label: 'SYN', direction: 'right', note: 'reaching out' },
-  { id: 'synack', label: 'SYN-ACK', direction: 'left', note: 'valeed responds' },
-  { id: 'ack', label: 'ACK', direction: 'right', note: 'connection agreed' },
-];
-
-const STEP_MS = 620;
-const SETTLE_MS = 900;
+// Phases: 'approach' (hands slide in) -> 'shake' (they clasp and shake)
+// -> 'greet' (confirmation) -> onComplete opens the contact form.
+const APPROACH_MS = 700;
+const SHAKE_MS = 1200;
+const GREET_MS = 800;
 
 const DigitalHandshake = ({ onComplete }) => {
-  const [step, setStep] = useState(-1);
-  const [done, setDone] = useState(false);
+  const [phase, setPhase] = useState('approach');
 
+  // The Connect page re-renders constantly (mouse-trail effect), handing us a
+  // fresh onComplete each time. A ref keeps the timers below from restarting.
+  const onCompleteRef = useRef(onComplete);
   useEffect(() => {
-    const timers = [];
-
-    STEPS.forEach((_, i) => {
-      timers.push(setTimeout(() => setStep(i), i * STEP_MS));
-    });
-
-    timers.push(
-      setTimeout(() => setDone(true), STEPS.length * STEP_MS)
-    );
-
-    timers.push(
-      setTimeout(onComplete, STEPS.length * STEP_MS + SETTLE_MS)
-    );
-
-    return () => timers.forEach(clearTimeout);
+    onCompleteRef.current = onComplete;
   }, [onComplete]);
 
+  useEffect(() => {
+    const timers = [
+      setTimeout(() => setPhase('shake'), APPROACH_MS),
+      setTimeout(() => setPhase('greet'), APPROACH_MS + SHAKE_MS),
+      setTimeout(() => onCompleteRef.current(), APPROACH_MS + SHAKE_MS + GREET_MS),
+    ];
+    return () => timers.forEach(clearTimeout);
+  }, []);
+
+  // Let people skip straight to the form if they don't want to wait.
+  const skip = () => onCompleteRef.current();
+
   return (
-    <div className="handshake-overlay" role="status" aria-live="polite">
+    <div
+      className="handshake-overlay"
+      role="status"
+      aria-live="polite"
+      onClick={skip}
+    >
       <div className="handshake-stage">
-        <div className="handshake-nodes">
-          <div className={`handshake-node ${step >= 0 ? 'live' : ''}`}>
-            <div className="handshake-node-dot" />
-            <span className="handshake-node-label">YOU</span>
-          </div>
+        <div className={`handshake-hands phase-${phase}`}>
+          {(phase === 'shake' || phase === 'greet') && (
+            <>
+              <span className="handshake-ring ring-a" />
+              <span className="handshake-ring ring-b" />
+            </>
+          )}
 
-          <div className="handshake-wire">
-            {STEPS.map((s, i) => (
-              <div
-                key={s.id}
-                className={`handshake-packet ${s.direction} ${step === i ? 'active' : ''} ${step > i ? 'sent' : ''}`}
-              >
-                {s.label}
-              </div>
-            ))}
-            <div className={`handshake-line ${done ? 'established' : ''}`} />
-          </div>
-
-          <div className={`handshake-node ${step >= 1 ? 'live' : ''}`}>
-            <div className="handshake-node-dot" />
-            <span className="handshake-node-label">VALEED</span>
-          </div>
+          {phase === 'approach' ? (
+            <>
+              <span className="handshake-hand hand-left" role="img" aria-label="hand reaching out">🤚</span>
+              <span className="handshake-hand hand-right" role="img" aria-label="hand reaching back">✋</span>
+            </>
+          ) : (
+            <span className="handshake-clasp" role="img" aria-label="handshake">🤝</span>
+          )}
         </div>
 
         <div className="handshake-status">
-          {done ? (
-            <span className="handshake-established">
-              ✓ CONNECTION ESTABLISHED
-            </span>
-          ) : (
-            <span className="handshake-step-note">
-              {step >= 0 ? STEPS[step].note : 'initiating handshake...'}
-            </span>
+          {phase === 'approach' && (
+            <span className="handshake-note">reaching out...</span>
+          )}
+          {phase === 'shake' && (
+            <span className="handshake-note">shaking on it...</span>
+          )}
+          {phase === 'greet' && (
+            <span className="handshake-greet">✓ NICE TO MEET YOU</span>
           )}
         </div>
+
+        <span className="handshake-skip">click anywhere to skip</span>
       </div>
     </div>
   );
