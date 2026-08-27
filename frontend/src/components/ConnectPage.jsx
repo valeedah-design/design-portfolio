@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Download, CheckCircle } from 'lucide-react';
 import './ConnectPage.css';
+import DigitalHandshake from './DigitalHandshake';
+import ContactModal from './ContactModal';
 
 const socialLinks = [
   {
@@ -43,6 +45,8 @@ const ConnectPage = () => {
   const [typedText, setTypedText] = useState('');
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [trail, setTrail] = useState([]);
+  // 'idle' -> 'shaking' (animation playing) -> 'form' (contact form open)
+  const [handshakeStage, setHandshakeStage] = useState('idle');
   const fullText = 'Send a digital handshake! Connect on socials or download my CV to see the full player stats.';
 
   // Typing animation
@@ -192,6 +196,14 @@ const ConnectPage = () => {
           <div className="download-progress"></div>
         </button>
 
+        <button
+          className="handshake-btn"
+          onClick={() => setHandshakeStage('shaking')}
+        >
+          <span>🤝</span>
+          <span>Send a digital handshake</span>
+        </button>
+
         {/* Social Links Grid */}
         <div className="social-grid">
           {socialLinks.map((social) => (
@@ -241,6 +253,17 @@ const ConnectPage = () => {
           </p>
         </div>
       </div>
+
+      {handshakeStage === 'shaking' && (
+        <DigitalHandshake onComplete={() => setHandshakeStage('form')} />
+      )}
+
+      {handshakeStage === 'form' && (
+        <ContactModal
+          service="Digital Handshake"
+          onClose={() => setHandshakeStage('idle')}
+        />
+      )}
     </section>
   );
 };
