@@ -19,7 +19,6 @@ EMAIL_RE = re.compile(r'^[^@\s]+@[^@\s]+\.[^@\s]+$')
 
 MAX_NAME = 100
 MAX_EMAIL = 200
-MAX_MESSAGE = 5000
 
 
 class handler(BaseHTTPRequestHandler):
@@ -48,11 +47,20 @@ class handler(BaseHTTPRequestHandler):
 
             name = (data.get('name') or '').strip()[:MAX_NAME]
             email = (data.get('email') or '').strip()[:MAX_EMAIL]
-            message = (data.get('message') or '').strip()[:MAX_MESSAGE]
             service = (data.get('service') or 'General').strip()[:100]
 
-            if not name or not email or not message:
+            raw_rating = data.get('rating')
+            try:
+                rating = int(raw_rating)
+            except (TypeError, ValueError):
+                rating = None
+
+            if not name or not email:
                 self._send_json(400, {"error": "Please fill in every field."})
+                return
+
+            if rating is None or rating < 1 or rating > 5:
+                self._send_json(400, {"error": "Please pick a star rating."})
                 return
 
             if not EMAIL_RE.match(email):
@@ -67,26 +75,25 @@ class handler(BaseHTTPRequestHandler):
             safe_name = html.escape(name)
             safe_email = html.escape(email)
             safe_service = html.escape(service)
-            safe_message = html.escape(message).replace('\n', '<br>')
+            stars_html = '★' * rating + '☆' * (5 - rating)
 
             body_html = f"""
               <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; line-height: 1.6;">
-                <h2 style="margin-bottom: 4px;">New {safe_service} enquiry</h2>
+                <h2 style="margin-bottom: 4px;">New {rating}-star rating</h2>
                 <p style="color:#666; margin-top:0;">From your portfolio at valeedah.com</p>
                 <table cellpadding="6" style="border-collapse: collapse; margin: 16px 0;">
                   <tr><td><strong>Name</strong></td><td>{safe_name}</td></tr>
                   <tr><td><strong>Email</strong></td><td><a href="mailto:{safe_email}">{safe_email}</a></td></tr>
-                  <tr><td><strong>Interested in</strong></td><td>{safe_service}</td></tr>
+                  <tr><td><strong>Rating</strong></td><td style="font-size:20px; letter-spacing:2px;">{stars_html} ({rating}/5)</td></tr>
+                  <tr><td><strong>Context</strong></td><td>{safe_service}</td></tr>
                 </table>
-                <p><strong>Message</strong></p>
-                <p style="background:#f5f5f5; padding:12px; border-radius:6px;">{safe_message}</p>
               </div>
             """
 
             payload = {
                 "from": FROM_EMAIL,
                 "to": [TO_EMAIL],
-                "subject": f"New {service} enquiry from {name}",
+                "subject": f"{name} rated your work {rating}/5",
                 "html": body_html,
                 # Lets you hit reply and answer the person directly.
                 "reply_to": email,
