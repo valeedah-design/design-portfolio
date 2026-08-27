@@ -156,36 +156,42 @@
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* The handshake button itself, sitting next to Download CV */
+/* Matches .cv-download-btn's box exactly so the two sit level side by side,
+   but filled green instead of outlined to read as the primary action. */
 .handshake-btn {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
-  padding: 14px 26px;
-  margin-left: 14px;
-  background: #00FF00;
+  gap: 12px;
+  padding: 16px 32px;
+  margin-left: 16px;
+  margin-bottom: 60px;
+  vertical-align: top;
+  background: rgba(0, 255, 0, 0.1);
   border: 2px solid #00FF00;
-  border-radius: 8px;
-  color: #000;
-  font-family: 'Share Tech Mono', monospace;
+  border-radius: 12px;
+  color: #00FF00;
+  font-family: 'Share Tech Mono', 'Courier New', monospace;
   font-size: 16px;
-  font-weight: bold;
+  font-weight: 600;
   cursor: pointer;
-  transition: box-shadow 0.25s ease, transform 0.15s ease;
+  transition: all 0.3s ease;
 }
 
 .handshake-btn:hover {
-  box-shadow: 0 0 22px rgba(0, 255, 0, 0.6);
+  background: rgba(0, 255, 0, 0.2);
+  box-shadow: 0 0 30px rgba(0, 255, 0, 0.5);
+  transform: translateY(-2px);
 }
 
 .handshake-btn:active {
-  transform: scale(0.97);
+  transform: translateY(0);
 }
 
 @media (max-width: 640px) {
   .handshake-btn {
     margin-left: 0;
-    margin-top: 14px;
+    margin-top: 0;
+    margin-bottom: 60px;
     width: 100%;
     justify-content: center;
   }
