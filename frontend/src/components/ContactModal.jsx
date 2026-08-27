@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import './ContactModal.css';
 
+const STAR_LABELS = ['Not for me', 'Meh', 'Good', 'Great', 'Loved it'];
+
 const ContactModal = ({ service, onClose }) => {
-  const [form, setForm] = useState({ name: '', email: '', message: '', website: '' });
+  const [form, setForm] = useState({ name: '', email: '', website: '' });
+  const [rating, setRating] = useState(0);
+  const [hoverRating, setHoverRating] = useState(0);
   const [status, setStatus] = useState('idle'); // idle | sending | sent | error
   const [error, setError] = useState('');
 
@@ -26,6 +30,13 @@ const ContactModal = ({ service, onClose }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (rating === 0) {
+      setError('Pick a star rating first.');
+      setStatus('error');
+      return;
+    }
+
     setStatus('sending');
     setError('');
 
@@ -33,11 +44,11 @@ const ContactModal = ({ service, onClose }) => {
       const res = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...form, service }),
+        body: JSON.stringify({ ...form, rating, service }),
       });
       const data = await res.json();
 
-      if (!res.ok) throw new Error(data.error || 'Could not send your message.');
+      if (!res.ok) throw new Error(data.error || 'Could not send that.');
 
       setStatus('sent');
     } catch (err) {
@@ -46,6 +57,8 @@ const ContactModal = ({ service, onClose }) => {
     }
   };
 
+  const displayRating = hoverRating || rating;
+
   return (
     <div className="contact-overlay" onClick={onClose} role="presentation">
       <div
@@ -53,24 +66,24 @@ const ContactModal = ({ service, onClose }) => {
         onClick={(e) => e.stopPropagation()}
         role="dialog"
         aria-modal="true"
-        aria-label={`Enquire about ${service}`}
+        aria-label="Rate my work"
       >
         <button className="contact-close" onClick={onClose} aria-label="Close">×</button>
 
         {status === 'sent' ? (
           <div className="contact-success">
             <div className="contact-success-mark">✓</div>
-            <h2 className="contact-title">Message sent</h2>
+            <h2 className="contact-title">Thanks!</h2>
             <p className="contact-subtitle">
-              Thanks for reaching out. I'll get back to you soon.
+              Your rating just landed in my inbox.
             </p>
             <button className="contact-submit" onClick={onClose}>Close</button>
           </div>
         ) : (
           <form onSubmit={handleSubmit}>
-            <h2 className="contact-title">Let's talk</h2>
+            <h2 className="contact-title">Rate my work</h2>
             <p className="contact-subtitle">
-              You're enquiring about <span className="contact-service">{service}</span>
+              Name, email, and a quick rating — that's it.
             </p>
 
             <label className="contact-label">
@@ -95,16 +108,35 @@ const ContactModal = ({ service, onClose }) => {
               />
             </label>
 
-            <label className="contact-label">
-              What do you have in mind?
-              <textarea
-                className="contact-input contact-textarea"
-                value={form.message}
-                onChange={handleChange('message')}
-                rows={4}
-                required
-              />
-            </label>
+            <div className="contact-label">
+              Rating
+              <div
+                className="contact-stars"
+                role="radiogroup"
+                aria-label="Rating out of 5 stars"
+              >
+                {[1, 2, 3, 4, 5].map((n) => (
+                  <button
+                    key={n}
+                    type="button"
+                    className={`contact-star ${n <= displayRating ? 'filled' : ''}`}
+                    role="radio"
+                    aria-checked={rating === n}
+                    aria-label={`${n} star${n > 1 ? 's' : ''}`}
+                    onClick={() => setRating(n)}
+                    onMouseEnter={() => setHoverRating(n)}
+                    onMouseLeave={() => setHoverRating(0)}
+                    onFocus={() => setHoverRating(n)}
+                    onBlur={() => setHoverRating(0)}
+                  >
+                    ★
+                  </button>
+                ))}
+              </div>
+              {displayRating > 0 && (
+                <span className="contact-star-note">{STAR_LABELS[displayRating - 1]}</span>
+              )}
+            </div>
 
             {/* Honeypot field — hidden from people, tempting to bots. */}
             <input
@@ -120,7 +152,7 @@ const ContactModal = ({ service, onClose }) => {
             {error && <p className="contact-error">{error}</p>}
 
             <button className="contact-submit" type="submit" disabled={status === 'sending'}>
-              {status === 'sending' ? 'Sending...' : 'Send message'}
+              {status === 'sending' ? 'Sending...' : 'Send'}
             </button>
           </form>
         )}
