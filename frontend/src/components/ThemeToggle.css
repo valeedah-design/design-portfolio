@@ -67,18 +67,18 @@
 
 /* Light mode styles */
 body.light-mode .toggle-track {
-  background: rgba(27, 63, 14, 0.2);
-  border-color: #22510F;
-  box-shadow: 0 0 10px rgba(27, 63, 14, 0.3);
+  background: rgba(7, 110, 44, 0.2);
+  border-color: #076E2C;
+  box-shadow: 0 0 10px rgba(7, 110, 44, 0.3);
 }
 
 body.light-mode .theme-toggle:hover .toggle-track {
-  box-shadow: 0 0 20px rgba(27, 63, 14, 0.4);
+  box-shadow: 0 0 20px rgba(7, 110, 44, 0.4);
 }
 
 body.light-mode .toggle-thumb {
-  background: #22510F;
-  box-shadow: 0 0 10px rgba(27, 63, 14, 0.4);
+  background: #076E2C;
+  box-shadow: 0 0 10px rgba(7, 110, 44, 0.4);
 }
 
 body.light-mode .icon-sun {
@@ -86,7 +86,7 @@ body.light-mode .icon-sun {
 }
 
 body.light-mode .toggle-label {
-  color: #22510F;
+  color: #076E2C;
   text-shadow: none;
 }
 
