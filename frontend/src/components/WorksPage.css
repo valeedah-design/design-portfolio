@@ -177,13 +177,18 @@
 /* Projects Grid */
 .projects-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  /* minmax(0, 1fr) instead of a bare 1fr: a plain 1fr column's minimum
+     size defaults to the width of whatever's inside it, so a fixed-width
+     card can still force the column (and the whole page) wider than the
+     screen even though the card itself has max-width: 100%. minmax(0, 1fr)
+     removes that floor so the column actually shrinks to fit. */
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 40px;
   max-width: 1400px;
 }
 
 .research-grid {
-  grid-template-columns: 1fr;
+  grid-template-columns: minmax(0, 1fr);
   max-width: 900px;
 }
 
@@ -206,6 +211,7 @@
   background: #1a1a1a !important;
   padding: 80px 40px 120px 40px;
   max-width: 100%;
+  min-width: 0;
 }
 
 .project-card.green {
@@ -276,7 +282,7 @@
   position: absolute;
   bottom: 20px;
   left: 20px;
-  right: auto;
+  right: 20px;
   padding: 0;
   text-align: left;
   background: transparent;
@@ -342,6 +348,7 @@
   cursor: pointer;
   margin: 0 auto;
   max-width: 100%;
+  min-width: 0;
 }
 
 .hire-me-card::before {
@@ -632,7 +639,7 @@
 }
 @media (max-width: 1200px) {
   .projects-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 30px;
   }
 }
@@ -647,19 +654,24 @@
   }
 
   .projects-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
-  
+
   .projects-grid > .hire-me-card {
     max-width: 100%;
   }
 
   .project-card {
+    width: 100%;
+    min-width: 0;
     min-height: 270px;
     max-width: 100%;
+    padding: 60px 24px 90px 24px;
   }
-  
+
   .hire-me-card {
+    width: 100%;
+    min-width: 0;
     max-width: 100%;
     min-height: 270px;
   }
@@ -704,11 +716,31 @@
   }
 
   .project-card {
-    padding: 50px 24px 80px 24px;
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    padding: 40px 20px 70px 20px;
+  }
+
+  .hire-me-card {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  .project-image {
+    max-width: 90%;
+  }
+
+  .project-info {
+    left: 16px;
+    right: 16px;
+    bottom: 16px;
   }
 
   .project-title {
     font-size: 24px;
+    word-break: break-word;
   }
 
   .project-description {
