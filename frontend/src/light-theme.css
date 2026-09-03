@@ -1,41 +1,41 @@
 /* ================================================
-   LIGHT MODE THEME - Cream White & Green
+   LIGHT MODE THEME - Neon Paper (white & bright green)
    ================================================ */
 
 /* Global Color Variables */
 :root {
-  --cream-bg: #FFFEF5;
-  --cream-card: #FFF8E7;
+  --cream-bg: #FAFAF6;
+  --cream-card: #EEF5EC;
   
-  /* Olive Green Palette - All variations of olive green */
-  --olive-green: #6B8E23;           /* Main olive green */
-  --dark-olive: #556A1C;            /* Darker olive for primary elements */
-  --medium-olive: #6B8E23;          /* Medium olive for accents */
-  --light-olive: #8BA832;           /* Light olive for highlights */
-  --very-light-olive: #C5D9A4;      /* Very light olive for badges */
-  --pale-olive: #E8F0D8;            /* Pale olive for backgrounds */
+  /* Green palette - all variations of the accent green */
+  --olive-green: #00B84D;           /* Main accent green */
+  --dark-olive: #076E2C;            /* Darker green for primary elements */
+  --medium-olive: #00B84D;          /* Medium green for accents */
+  --light-olive: #2FD474;           /* Light green for highlights */
+  --very-light-olive: #A8E9C3;      /* Very light green for badges */
+  --pale-olive: #DCF5E6;            /* Pale green for backgrounds */
   
-  /* Mapped Variables - All using olive variations */
-  --dark-green: #556A1C;            /* dark olive - primary dark */
-  --medium-green: #6B8E23;          /* olive green - medium elements */
-  --accent-green: #6B8E23;          /* olive green - accents */
-  --light-green: #E8F0D8;           /* pale olive - light background */
-  --border-green: #C5D9A4;          /* very light olive - borders */
+  /* Mapped variables - all using the green variations above */
+  --dark-green: #076E2C;            /* primary dark green */
+  --medium-green: #00B84D;          /* medium green elements */
+  --accent-green: #00B84D;          /* accent green */
+  --light-green: #DCF5E6;           /* pale light background */
+  --border-green: #A8E9C3;          /* light green borders */
   
-  /* Additional olive variations */
-  --deep-forest-green: #556A1C;    /* dark olive */
-  --fern-green: #6B8E23;            /* olive green */
-  --sage-green: #C5D9A4;            /* very light olive */
-  --muted-natural-green: #8BA832;   /* light olive */
-  --rich-earthy-green: #556A1C;     /* dark olive */
+  /* Additional green variations */
+  --deep-forest-green: #076E2C;    /* = dark-green */
+  --fern-green: #00B84D;            /* = accent-green */
+  --sage-green: #A8E9C3;            /* = border-green */
+  --muted-natural-green: #2FD474;   /* = light-olive */
+  --rich-earthy-green: #076E2C;     /* = dark-green */
   
   /* Text Colors */
-  --text-primary: #2A2A2A;
+  --text-primary: #1A211C;
   --text-secondary: #5A5A5A;
   --text-grey: #707070;
   
   /* Shadow */
-  --shadow-green: rgba(107, 142, 35, 0.15);
+  --shadow-green: rgba(0, 184, 77, 0.15);
 }
 
 /* Portfolio Navigation */
@@ -77,16 +77,16 @@ body.light-mode .hero-section {
 body.light-mode .welcome-text {
   color: var(--dark-olive) !important;
   text-shadow: 
-    0 0 10px rgba(107, 142, 35, 0.3),
-    0 0 20px rgba(107, 142, 35, 0.15),
-    0 0 30px rgba(107, 142, 35, 0.1) !important;
+    0 0 10px rgba(0, 184, 77, 0.3),
+    0 0 20px rgba(0, 184, 77, 0.15),
+    0 0 30px rgba(0, 184, 77, 0.1) !important;
 }
 
 body.light-mode .brand-title {
   color: var(--olive-green) !important;
   text-shadow: 
-    0 0 15px rgba(107, 142, 35, 0.3),
-    0 0 25px rgba(107, 142, 35, 0.15) !important;
+    0 0 15px rgba(0, 184, 77, 0.3),
+    0 0 25px rgba(0, 184, 77, 0.15) !important;
 }
 
 body.light-mode .cta-button {
@@ -98,7 +98,7 @@ body.light-mode .cta-button {
 
 body.light-mode .cta-button:hover {
   background: var(--olive-green) !important;
-  box-shadow: 0 0 20px rgba(107, 142, 35, 0.4) !important;
+  box-shadow: 0 0 20px rgba(0, 184, 77, 0.4) !important;
 }
 
 body.light-mode .about-box {
@@ -117,8 +117,8 @@ body.light-mode .about-description {
 body.light-mode .profile-image-wrapper {
   border-color: var(--olive-green) !important;
   box-shadow: 
-    0 0 30px rgba(107, 142, 35, 0.3),
-    -8px 8px 0 rgba(107, 142, 35, 0.2) !important;
+    0 0 30px rgba(0, 184, 77, 0.3),
+    -8px 8px 0 rgba(0, 184, 77, 0.2) !important;
 }
 
 body.light-mode .profile-image-wrapper::before {
@@ -129,7 +129,7 @@ body.light-mode .profile-image-wrapper::after {
   background: linear-gradient(
     90deg,
     transparent,
-    rgba(107, 142, 35, 0.3),
+    rgba(0, 184, 77, 0.3),
     transparent
   ) !important;
 }
@@ -154,7 +154,7 @@ body.light-mode .matrix-greeting {
   box-shadow: none !important;
   padding: 0 !important;
   color: var(--olive-green) !important;
-  text-shadow: 0 0 10px rgba(107, 142, 35, 0.3) !important;
+  text-shadow: 0 0 10px rgba(0, 184, 77, 0.3) !important;
 }
 
 body.light-mode .matrix-greeting .char {
@@ -163,9 +163,9 @@ body.light-mode .matrix-greeting .char {
 
 body.light-mode .matrix-greeting.animating {
   text-shadow: 
-    0 0 20px rgba(107, 142, 35, 0.4),
-    0 0 40px rgba(107, 142, 35, 0.3),
-    0 0 60px rgba(107, 142, 35, 0.15) !important;
+    0 0 20px rgba(0, 184, 77, 0.4),
+    0 0 40px rgba(0, 184, 77, 0.3),
+    0 0 60px rgba(0, 184, 77, 0.15) !important;
 }
 
 body.light-mode .greeting-text {
@@ -193,8 +193,8 @@ body.light-mode .timeline-line {
   background: linear-gradient(
     to bottom,
     transparent,
-    rgba(107, 142, 35, 0.5) 10%,
-    rgba(107, 142, 35, 0.5) 90%,
+    rgba(0, 184, 77, 0.5) 10%,
+    rgba(0, 184, 77, 0.5) 90%,
     transparent
   ) !important;
 }
@@ -205,7 +205,7 @@ body.light-mode .year-blob {
   border-color: var(--olive-green) !important;
   box-shadow: 
     0 0 15px var(--shadow-green),
-    0 8px 16px rgba(107, 142, 35, 0.2),
+    0 8px 16px rgba(0, 184, 77, 0.2),
     inset 0 2px 10px rgba(255, 255, 255, 0.5) !important;
 }
 
@@ -215,7 +215,7 @@ body.light-mode .year-blob:hover {
   border-color: var(--dark-olive) !important;
   box-shadow: 
     0 0 20px var(--shadow-green),
-    0 10px 20px rgba(107, 142, 35, 0.25) !important;
+    0 10px 20px rgba(0, 184, 77, 0.25) !important;
 }
 
 body.light-mode .event-dot.white {
@@ -227,7 +227,7 @@ body.light-mode .event-dot.white {
 body.light-mode .event-dot.green {
   background: var(--rich-earthy-green) !important;
   border-color: var(--rich-earthy-green) !important;
-  box-shadow: 0 0 15px rgba(58, 90, 64, 0.4) !important;
+  box-shadow: 0 0 15px rgba(7, 110, 44, 0.4) !important;
 }
 
 body.light-mode .event-title {
@@ -304,7 +304,7 @@ body.light-mode .project-card {
 
 body.light-mode .project-card:hover {
   border-color: var(--accent-green) !important;
-  box-shadow: 0 8px 30px rgba(107, 142, 35, 0.25) !important;
+  box-shadow: 0 8px 30px rgba(0, 184, 77, 0.25) !important;
 }
 
 body.light-mode .project-title {
@@ -325,21 +325,21 @@ body.light-mode .icon-item.hovered {
   border-color: var(--dark-olive) !important;
   background: var(--very-light-olive) !important;
   box-shadow: 
-    0 0 60px rgba(107, 142, 35, 0.4),
-    0 10px 30px rgba(107, 142, 35, 0.15),
-    inset 0 0 50px rgba(107, 142, 35, 0.1) !important;
+    0 0 60px rgba(0, 184, 77, 0.4),
+    0 10px 30px rgba(0, 184, 77, 0.15),
+    inset 0 0 50px rgba(0, 184, 77, 0.1) !important;
 }
 
 body.light-mode .icon-image {
   filter: 
-    drop-shadow(0 4px 12px rgba(107, 142, 35, 0.15))
-    drop-shadow(0 0 20px rgba(107, 142, 35, 0.1)) !important;
+    drop-shadow(0 4px 12px rgba(0, 184, 77, 0.15))
+    drop-shadow(0 0 20px rgba(0, 184, 77, 0.1)) !important;
 }
 
 body.light-mode .icon-item.hovered .icon-image {
   filter: 
-    drop-shadow(0 8px 20px rgba(107, 142, 35, 0.25))
-    drop-shadow(0 0 40px rgba(107, 142, 35, 0.3)) !important;
+    drop-shadow(0 8px 20px rgba(0, 184, 77, 0.25))
+    drop-shadow(0 0 40px rgba(0, 184, 77, 0.3)) !important;
 }
 
 body.light-mode .icon-item:hover {
@@ -422,7 +422,7 @@ body.light-mode .service-icon-svg {
 }
 
 body.light-mode .service-card:hover .service-icon-svg {
-  filter: drop-shadow(0 0 15px rgba(107, 142, 35, 0.5)) !important;
+  filter: drop-shadow(0 0 15px rgba(0, 184, 77, 0.5)) !important;
 }
 
 body.light-mode .cta-text {
@@ -445,19 +445,19 @@ body.light-mode .connect-section {
 body.light-mode .breathing-glow {
   background: radial-gradient(
     circle at 50% 50%,
-    rgba(107, 142, 35, 0.1) 0%,
-    rgba(107, 142, 35, 0.05) 30%,
+    rgba(0, 184, 77, 0.1) 0%,
+    rgba(0, 184, 77, 0.05) 30%,
     transparent 70%
   ) !important;
 }
 
 body.light-mode .connect-section::after {
   background-image: 
-    linear-gradient(135deg, transparent 48%, rgba(107, 142, 35, 0.08) 48%, rgba(107, 142, 35, 0.08) 52%, transparent 52%),
-    linear-gradient(45deg, transparent 48%, rgba(107, 142, 35, 0.06) 48%, rgba(107, 142, 35, 0.06) 52%, transparent 52%),
-    radial-gradient(circle at 20% 30%, rgba(107, 142, 35, 0.04) 0%, transparent 8%),
-    radial-gradient(circle at 80% 70%, rgba(107, 142, 35, 0.04) 0%, transparent 8%),
-    radial-gradient(circle at 50% 90%, rgba(107, 142, 35, 0.04) 0%, transparent 8%) !important;
+    linear-gradient(135deg, transparent 48%, rgba(0, 184, 77, 0.08) 48%, rgba(0, 184, 77, 0.08) 52%, transparent 52%),
+    linear-gradient(45deg, transparent 48%, rgba(0, 184, 77, 0.06) 48%, rgba(0, 184, 77, 0.06) 52%, transparent 52%),
+    radial-gradient(circle at 20% 30%, rgba(0, 184, 77, 0.04) 0%, transparent 8%),
+    radial-gradient(circle at 80% 70%, rgba(0, 184, 77, 0.04) 0%, transparent 8%),
+    radial-gradient(circle at 50% 90%, rgba(0, 184, 77, 0.04) 0%, transparent 8%) !important;
 }
 
 body.light-mode .mouse-trail line {
@@ -478,7 +478,7 @@ body.light-mode .connect-title {
 
 body.light-mode .status-dot {
   background: var(--olive-green) !important;
-  box-shadow: 0 0 10px rgba(107, 142, 35, 0.5) !important;
+  box-shadow: 0 0 10px rgba(0, 184, 77, 0.5) !important;
 }
 
 body.light-mode .status-text {
@@ -501,7 +501,7 @@ body.light-mode .cv-download-btn {
 
 body.light-mode .cv-download-btn:hover {
   background: var(--olive-green) !important;
-  box-shadow: 0 0 30px rgba(107, 142, 35, 0.4) !important;
+  box-shadow: 0 0 30px rgba(0, 184, 77, 0.4) !important;
 }
 
 body.light-mode .download-progress {
@@ -515,7 +515,7 @@ body.light-mode .social-button {
 
 body.light-mode .social-button:hover {
   border-color: var(--olive-green) !important;
-  box-shadow: 0 0 30px rgba(107, 142, 35, 0.3) !important;
+  box-shadow: 0 0 30px rgba(0, 184, 77, 0.3) !important;
 }
 
 body.light-mode .pulse-ring {
@@ -538,7 +538,7 @@ body.light-mode .social-frame {
 
 body.light-mode .social-frame:hover {
   border-color: var(--olive-green) !important;
-  box-shadow: 0 8px 30px rgba(107, 142, 35, 0.25) !important;
+  box-shadow: 0 8px 30px rgba(0, 184, 77, 0.25) !important;
 }
 
 body.light-mode .social-name {
@@ -574,7 +574,7 @@ body.light-mode .value {
 
 /* Mouse Trail */
 body.light-mode .trail-point {
-  background: radial-gradient(circle, rgba(107, 142, 35, 0.3), transparent) !important;
+  background: radial-gradient(circle, rgba(0, 184, 77, 0.3), transparent) !important;
 }
 
 /* Scrollbar */
@@ -609,7 +609,7 @@ body.light-mode .card-glow {
 }
 
 body.light-mode .card-scanline {
-  background: linear-gradient(90deg, transparent, rgba(107, 142, 35, 0.4), transparent) !important;
+  background: linear-gradient(90deg, transparent, rgba(0, 184, 77, 0.4), transparent) !important;
 }
 
 body.light-mode .card-border rect {
