@@ -489,3 +489,48 @@
     font-size: 12px;
   }
 }
+
+@media (max-width: 480px) {
+  .timeline-section {
+    padding: 60px 16px;
+  }
+
+  .timeline-title {
+    font-size: 40px;
+  }
+
+  .timeline-line {
+    left: 30px;
+  }
+
+  .year-blob {
+    width: 64px;
+    height: 84px;
+    font-size: 15px;
+    padding: 10px;
+  }
+
+  .timeline-event {
+    padding-left: 66px !important;
+    padding-right: 4px !important;
+  }
+
+  .event-dot {
+    left: 30px;
+  }
+
+  .event-connector {
+    left: 30px !important;
+    margin-left: 4px !important;
+    width: 24px !important;
+  }
+
+  .event-content {
+    max-width: none;
+    padding: 12px 8px;
+  }
+
+  .event-title {
+    font-size: 16px;
+  }
+}

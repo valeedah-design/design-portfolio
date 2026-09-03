@@ -50,3 +50,55 @@
   margin-left: 80px;
   position: relative;
 }
+
+/* Tablet landscape / small desktop: sidebar stays put, nothing to adjust yet. */
+
+/* Phone & tablet portrait: the left rail becomes a bottom tab bar instead of
+   permanently eating 80px of a narrow viewport, and instead of risking the
+   5 icons + their gaps overflowing a short landscape-phone viewport. */
+@media (max-width: 768px) {
+  .sidebar-nav {
+    left: 0;
+    right: 0;
+    top: auto;
+    bottom: 0;
+    height: 64px;
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    padding-top: 0;
+    gap: 0;
+    border-right: none;
+    border-top: 1px solid rgba(0, 255, 0, 0.15);
+    padding-bottom: env(safe-area-inset-bottom, 0);
+  }
+
+  .nav-icon.active {
+    border-left: none;
+    border-top: 3px solid #00FF00;
+  }
+
+  .nav-icon:hover {
+    transform: none;
+  }
+
+  .main-content {
+    margin-left: 0;
+    padding-bottom: calc(64px + env(safe-area-inset-bottom, 0px));
+  }
+}
+
+@media (max-width: 480px) {
+  .sidebar-nav {
+    height: 56px;
+  }
+
+  .nav-icon {
+    padding: 8px;
+  }
+
+  .main-content {
+    padding-bottom: calc(56px + env(safe-area-inset-bottom, 0px));
+  }
+}

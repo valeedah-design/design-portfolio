@@ -223,7 +223,7 @@
   transform: translateY(0);
 }
 
-@media (max-width: 640px) {
+@media (max-width: 768px) {
   .handshake-btn {
     margin-left: 0;
     margin-bottom: 60px;

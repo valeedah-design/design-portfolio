@@ -24,7 +24,8 @@
 /* Category Tabs */
 .category-tabs {
   display: flex;
-  gap: 40px;
+  flex-wrap: wrap;
+  gap: 24px 40px;
   margin-bottom: 60px;
   border-bottom: 2px solid rgba(0, 255, 0, 0.2);
 }
@@ -77,7 +78,8 @@
 /* Subsection Tabs (for Digital Designs sub-categories) */
 .subsection-tabs {
   display: flex;
-  gap: 40px;
+  flex-wrap: wrap;
+  gap: 16px 40px;
   margin-bottom: 50px;
   padding-bottom: 15px;
   border-bottom: 1px solid rgba(0, 255, 0, 0.15);
@@ -203,6 +205,7 @@
   margin: 0 auto;
   background: #1a1a1a !important;
   padding: 80px 40px 120px 40px;
+  max-width: 100%;
 }
 
 .project-card.green {
@@ -338,6 +341,7 @@
   transition: all 0.5s ease;
   cursor: pointer;
   margin: 0 auto;
+  max-width: 100%;
 }
 
 .hire-me-card::before {
@@ -671,8 +675,61 @@
   .hire-me-subtitle {
     font-size: 11px;
   }
+
+  .category-tabs {
+    gap: 16px 24px;
+    margin-bottom: 40px;
+  }
+
+  .subsection-tabs {
+    gap: 12px 24px;
+  }
 }
 
+@media (max-width: 480px) {
+  .works-section {
+    padding: 60px 16px;
+  }
+
+  .works-title {
+    font-size: 38px;
+  }
+
+  .category-tab {
+    font-size: 15px;
+  }
+
+  .subsection-tab {
+    font-size: 14px;
+  }
+
+  .project-card {
+    padding: 50px 24px 80px 24px;
+  }
+
+  .project-title {
+    font-size: 24px;
+  }
+
+  .project-description {
+    font-size: 13px;
+  }
+}
+
+/* Decorative hover effects (matrix rain, network lines, star burst, icon
+   glow) never fire on touch, since there's no hover state to trigger them.
+   Give touch devices a quieter always-on version instead of nothing. */
+@media (hover: none) {
+  .matrix-rain,
+  .network-lines,
+  .star-burst {
+    opacity: 0.3;
+  }
+
+  .icon-item::before {
+    opacity: 0.4;
+  }
+}
 
 /* App Icons Continuous Loop */
 .icons-marquee-container {

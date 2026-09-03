@@ -275,6 +275,7 @@
     0 0 40px rgba(0, 255, 0, 0.3);
   transition: opacity 0.5s ease, transform 0.5s ease;
   white-space: nowrap;
+  max-width: 100%;
 }
 
 .brand-title.fade-out {
@@ -317,6 +318,10 @@
 
 /* Responsive */
 @media (max-width: 1200px) {
+  .hero-section {
+    padding: 70px 48px;
+  }
+
   .hero-content {
     flex-direction: column;
     gap: 60px;
@@ -342,7 +347,7 @@
 
 @media (max-width: 768px) {
   .hero-section {
-    padding: 60px 30px;
+    padding: 50px 24px;
   }
 
   .welcome-text {
@@ -362,7 +367,53 @@
   }
 
   .profile-image-wrapper {
-    width: 280px;
-    height: 350px;
+    width: min(280px, 100%);
+    height: auto;
+    aspect-ratio: 4 / 5;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-section {
+    padding: 40px 20px;
+  }
+
+  .welcome-text {
+    font-size: 30px;
+    letter-spacing: -1px;
+    margin-bottom: 48px;
+  }
+
+  .greeting {
+    font-size: 24px;
+    margin-bottom: 36px;
+  }
+
+  .about-title {
+    font-size: 20px;
+  }
+
+  .about-description {
+    font-size: 14px;
+  }
+
+  .cta-button {
+    padding: 12px 24px;
+    font-size: 14px;
+    width: 100%;
+  }
+
+  .brand-title {
+    font-size: 26px;
+    letter-spacing: -0.5px;
+    white-space: normal;
+    word-break: break-word;
+  }
+
+  .profile-image-wrapper {
+    width: min(220px, 80vw);
+    box-shadow:
+      0 0 20px rgba(0, 255, 0, 0.3),
+      -5px 5px 0 rgba(0, 255, 0, 0.2);
   }
 }
