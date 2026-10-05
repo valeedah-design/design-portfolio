@@ -628,3 +628,17 @@ body.light-mode .research-title {
 body.light-mode .research-title {
   color: var(--text-primary) !important;
 }
+
+/* App Icons marquee: fade the edges into the light background instead of black */
+body.light-mode .icons-marquee-container::before {
+  background: linear-gradient(to right, var(--cream-bg) 0%, transparent 100%);
+}
+
+body.light-mode .icons-marquee-container::after {
+  background: linear-gradient(to left, var(--cream-bg) 0%, transparent 100%);
+}
+
+/* "Your brand deserves its own spotlight" was white on white in light mode */
+body.light-mode .hire-me-icon-text {
+  color: var(--dark-green);
+}
