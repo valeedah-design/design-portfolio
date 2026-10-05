@@ -53,7 +53,7 @@ const HeroSection = () => {
           <div className="profile-card">
             <div className="profile-image-wrapper">
               <img
-                src="https://customer-assets.emergentagent.com/job_work-gallery-139/artifacts/5oyuzxaw_DSC_2084.jpg"
+                src="/profile.jpg"
                 alt="Valeed"
                 className="profile-image"
               />
