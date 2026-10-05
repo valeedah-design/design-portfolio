@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './WorksPage.css';
 import ContactModal from './ContactModal';
+import ProjectDetailModal from './ProjectDetailModal';
 
 const HireMeCard = ({ title, subtitle, onClick }) => (
   <div
@@ -60,6 +61,8 @@ const WorksPage = () => {
   const [hoveredIcon, setHoveredIcon] = useState(null);
   // Holds the service name when the contact modal is open, null when closed.
   const [enquiryService, setEnquiryService] = useState(null);
+  // Holds the App Design project whose detail popup is open, null when closed.
+  const [detailProject, setDetailProject] = useState(null);
 
   useEffect(() => {
     fetch('/api/projects')
@@ -88,10 +91,25 @@ const WorksPage = () => {
   const appIcons = projectsFor('Digital Designs', 'App Icons');
   const duplicatedIcons = [...appIcons, ...appIcons, ...appIcons];
 
-  const renderProjectGrid = (list, hireTitle, hireSubtitle, hireService) => (
+  const renderProjectGrid = (list, hireTitle, hireSubtitle, hireService, onOpen) => (
     <div className="projects-grid">
       {list.map((project) => (
-        <div key={project.id} className={`project-card ${project.bgColor || 'black'}`}>
+        <div
+          key={project.id}
+          className={`project-card ${project.bgColor || 'black'}`}
+          {...(onOpen && {
+            onClick: () => onOpen(project),
+            role: 'button',
+            tabIndex: 0,
+            'aria-label': `Open ${project.title} details`,
+            onKeyDown: (e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                onOpen(project);
+              }
+            },
+          })}
+        >
           {project.tag && <span className="project-tag">{project.tag}</span>}
           {project.tags && project.tags.map((tag, idx) => (
             <span key={`${project.id}-tag-${tag}`} className="project-tag" style={{ top: `${12 + idx * 35}px` }}>{tag}</span>
@@ -121,7 +139,8 @@ const WorksPage = () => {
         projectsFor('Digital Designs', 'App Designs'),
         'This could be your app project',
         "Let's create something amazing together",
-        'App Design'
+        'App Design',
+        setDetailProject
       );
     } else if (activeSubsection === 'App Icons') {
       return (
@@ -249,6 +268,13 @@ const WorksPage = () => {
       <div className="works-content">
         {renderContent()}
       </div>
+
+      {detailProject && (
+        <ProjectDetailModal
+          project={detailProject}
+          onClose={() => setDetailProject(null)}
+        />
+      )}
 
       {enquiryService && (
         <ContactModal
