@@ -75,6 +75,10 @@ class handler(BaseHTTPRequestHandler):
                 "image": data.get('image'),
                 "bgColor": data.get('bgColor', 'black'),
                 "order": data.get('order', 0),
+                "detailImage": data.get('detailImage'),
+                "detailDescription": data.get('detailDescription', ''),
+                "roles": data.get('roles', []),
+                "readMoreUrl": data.get('readMoreUrl'),
                 "createdAt": datetime.now(timezone.utc).isoformat(),
             }
 
@@ -101,7 +105,8 @@ class handler(BaseHTTPRequestHandler):
             post_data = self.rfile.read(content_length) if content_length else b'{}'
             data = json.loads(post_data.decode('utf-8'))
 
-            allowed_fields = ['category', 'subsection', 'title', 'description', 'tag', 'tags', 'image', 'bgColor', 'order']
+            allowed_fields = ['category', 'subsection', 'title', 'description', 'tag', 'tags', 'image', 'bgColor', 'order',
+                              'detailImage', 'detailDescription', 'roles', 'readMoreUrl']
             update_doc = {k: v for k, v in data.items() if k in allowed_fields}
 
             if not update_doc:
