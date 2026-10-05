@@ -12,6 +12,11 @@ const emptyForm = {
   image: '',
   bgColor: 'black',
   order: 0,
+  // Detail popup (App Designs only)
+  detailImage: '',
+  detailDescription: '',
+  roles: '', // comma-separated in the form, stored as a list
+  readMoreUrl: '',
 };
 
 // The categories/subsections that actually exist on the live site.
@@ -78,7 +83,8 @@ const AdminDashboard = () => {
     }));
   };
 
-  const handleImageUpload = async (e) => {
+  // field: which form field receives the uploaded URL ('image' or 'detailImage')
+  const handleImageUpload = (field) => async (e) => {
     const file = e.target.files[0];
     if (!file) return;
 
@@ -103,7 +109,7 @@ const AdminDashboard = () => {
         throw new Error(data.error || 'Upload failed');
       }
 
-      setForm((f) => ({ ...f, image: data.url }));
+      setForm((f) => ({ ...f, [field]: data.url }));
     } catch (err) {
       setError(err.message);
     } finally {
@@ -133,6 +139,10 @@ const AdminDashboard = () => {
       image: project.image || '',
       bgColor: project.bgColor || 'black',
       order: project.order || 0,
+      detailImage: project.detailImage || '',
+      detailDescription: project.detailDescription || '',
+      roles: Array.isArray(project.roles) ? project.roles.join(', ') : '',
+      readMoreUrl: project.readMoreUrl || '',
     });
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -169,6 +179,13 @@ const AdminDashboard = () => {
       image: form.image || null,
       bgColor: form.bgColor,
       order: Number(form.order) || 0,
+      detailImage: form.detailImage || null,
+      detailDescription: form.detailDescription || '',
+      roles: form.roles
+        .split(',')
+        .map((r) => r.trim())
+        .filter(Boolean),
+      readMoreUrl: form.readMoreUrl.trim() || null,
     };
 
     try {
@@ -269,12 +286,61 @@ const AdminDashboard = () => {
 
             <label className="admin-label admin-label-wide">
               Image
-              <input className="admin-input" type="file" accept="image/*" onChange={handleImageUpload} />
+              <input className="admin-input" type="file" accept="image/*" onChange={handleImageUpload('image')} />
               {uploading && <span className="admin-hint">Uploading...</span>}
               {form.image && (
                 <img src={form.image} alt="preview" className="admin-image-preview" />
               )}
             </label>
+
+            {form.subsection === 'App Designs' && (
+              <>
+                <h3 className="admin-subtitle admin-label-wide">Detail popup</h3>
+
+                <label className="admin-label admin-label-wide">
+                  Project description (long)
+                  <textarea
+                    className="admin-input"
+                    value={form.detailDescription}
+                    onChange={handleChange('detailDescription')}
+                    rows={6}
+                    placeholder="Shown under 'Project Description' when the card is clicked"
+                  />
+                </label>
+
+                <label className="admin-label admin-label-wide">
+                  Roles
+                  <input
+                    className="admin-input"
+                    value={form.roles}
+                    onChange={handleChange('roles')}
+                    placeholder="UX Research, UX Design, Wireframe, Prototype"
+                  />
+                  <span className="admin-hint">Separate roles with commas</span>
+                </label>
+
+                <label className="admin-label admin-label-wide">
+                  Read more link
+                  <input
+                    className="admin-input"
+                    type="url"
+                    value={form.readMoreUrl}
+                    onChange={handleChange('readMoreUrl')}
+                    placeholder="https://www.behance.net/..."
+                  />
+                  <span className="admin-hint">Leave empty to hide the Read more button</span>
+                </label>
+
+                <label className="admin-label admin-label-wide">
+                  Popup image (optional)
+                  <input className="admin-input" type="file" accept="image/*" onChange={handleImageUpload('detailImage')} />
+                  <span className="admin-hint">Max 4 MB. If empty, the card image is used.</span>
+                  {form.detailImage && (
+                    <img src={form.detailImage} alt="popup preview" className="admin-image-preview" />
+                  )}
+                </label>
+              </>
+            )}
           </div>
 
           <div className="admin-form-actions">

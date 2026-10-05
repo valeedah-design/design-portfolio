@@ -1,0 +1,266 @@
+/* ================================================
+   Project detail modal (App Designs)
+   ================================================ */
+
+.pdm-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  animation: pdm-fade 0.2s ease;
+}
+
+@keyframes pdm-fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.pdm-dialog {
+  position: relative;
+  width: min(1300px, 100%);
+  max-height: calc(100vh - 48px);
+  overflow-y: auto;
+  background: #222222;
+  border-radius: 16px;
+  padding: 64px 40px 40px;
+  font-family: 'Share Tech Mono', 'Courier New', monospace;
+  color: #ffffff;
+  animation: pdm-rise 0.25s ease;
+}
+
+@keyframes pdm-rise {
+  from { transform: translateY(12px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.pdm-close {
+  position: absolute;
+  top: 20px;
+  left: 28px;
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.6);
+  cursor: pointer;
+  padding: 4px;
+  transition: color 0.2s ease;
+}
+
+.pdm-close:hover,
+.pdm-close:focus-visible {
+  color: #39FF14;
+  outline: none;
+}
+
+.pdm-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+  gap: 32px;
+  align-items: stretch;
+}
+
+/* Angular sci-fi frame: an outer green shape with clipped corners,
+   and a dark inner panel inset from it. */
+.pdm-frame {
+  position: relative;
+  padding: 14px;
+  background: #39b54a;
+  filter: drop-shadow(0 0 18px rgba(57, 255, 20, 0.35));
+  clip-path: polygon(
+    0 12%, 6% 6%, 50% 6%, 54% 0, 100% 0,
+    100% 52%, 97% 56%, 97% 92%, 92% 100%,
+    10% 100%, 6% 96%, 0 96%
+  );
+}
+
+.pdm-frame-info {
+  clip-path: polygon(
+    4% 0, 100% 0, 100% 72%, 96% 78%, 96% 100%,
+    0 100%, 0 60%, 3% 55%, 3% 4%
+  );
+}
+
+.pdm-frame-inner {
+  height: 100%;
+  background: #1c1c1c;
+  border: 1px solid rgba(57, 255, 20, 0.6);
+  clip-path: inherit;
+}
+
+.pdm-frame-image .pdm-frame-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 24px;
+  min-height: 460px;
+}
+
+.pdm-image {
+  max-width: 100%;
+  max-height: 480px;
+  object-fit: contain;
+}
+
+.pdm-info {
+  padding: 40px 48px 36px;
+  display: flex;
+  flex-direction: column;
+}
+
+.pdm-title {
+  font-size: 34px;
+  font-weight: 400;
+  margin: 0 0 28px;
+  letter-spacing: 1px;
+}
+
+.pdm-heading {
+  font-size: 28px;
+  font-weight: 400;
+  margin: 0 0 20px;
+  letter-spacing: 2px;
+}
+
+.pdm-description {
+  font-size: 14px;
+  line-height: 1.35;
+  color: rgba(255, 255, 255, 0.92);
+  margin: 0 0 36px;
+  white-space: pre-line;
+}
+
+.pdm-subheading {
+  font-size: 20px;
+  font-weight: 400;
+  margin: 0 0 20px;
+  letter-spacing: 1px;
+}
+
+.pdm-roles {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 14px;
+  padding: 0;
+  margin: 0 0 28px;
+  max-width: 70%;
+}
+
+.pdm-role {
+  border: 1px solid #39b54a;
+  border-radius: 4px;
+  padding: 6px 8px;
+  font-size: 15px;
+  letter-spacing: 1px;
+}
+
+.pdm-read-more {
+  align-self: flex-end;
+  margin-top: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 24px;
+  padding: 10px 16px 10px 18px;
+  border: 1px solid #39b54a;
+  border-radius: 10px;
+  color: rgba(255, 255, 255, 0.55);
+  text-decoration: underline;
+  font-size: 15px;
+  letter-spacing: 1px;
+  transition: color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.pdm-read-more:hover,
+.pdm-read-more:focus-visible {
+  color: #ffffff;
+  box-shadow: 0 0 16px rgba(57, 255, 20, 0.4);
+  outline: none;
+}
+
+.pdm-chevrons {
+  text-decoration: none;
+  letter-spacing: -4px;
+  font-size: 18px;
+}
+
+/* Tablet / phone: stack the two panels */
+@media (max-width: 900px) {
+  .pdm-dialog {
+    padding: 56px 16px 24px;
+  }
+
+  .pdm-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .pdm-frame-image .pdm-frame-inner {
+    min-height: 280px;
+    padding: 24px 16px;
+  }
+
+  .pdm-image {
+    max-height: 320px;
+  }
+
+  .pdm-info {
+    padding: 28px 24px;
+  }
+
+  .pdm-title { font-size: 26px; }
+  .pdm-heading { font-size: 22px; }
+  .pdm-roles { max-width: 100%; }
+  .pdm-read-more { align-self: stretch; justify-content: space-between; }
+}
+
+/* Light mode */
+body.light-mode .pdm-dialog {
+  background: #FAFAF6;
+  color: #076E2C;
+}
+
+body.light-mode .pdm-frame {
+  background: #00B84D;
+  filter: drop-shadow(0 0 14px rgba(0, 184, 77, 0.25));
+}
+
+body.light-mode .pdm-frame-inner {
+  background: #EEF5EC;
+  border-color: rgba(0, 184, 77, 0.6);
+}
+
+body.light-mode .pdm-description {
+  color: #1d3b27;
+}
+
+body.light-mode .pdm-close {
+  color: rgba(7, 110, 44, 0.6);
+}
+
+body.light-mode .pdm-close:hover {
+  color: #00B84D;
+}
+
+body.light-mode .pdm-role,
+body.light-mode .pdm-read-more {
+  border-color: #00B84D;
+}
+
+body.light-mode .pdm-read-more {
+  color: rgba(7, 110, 44, 0.7);
+}
+
+body.light-mode .pdm-read-more:hover {
+  color: #076E2C;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pdm-overlay,
+  .pdm-dialog {
+    animation: none;
+  }
+}
