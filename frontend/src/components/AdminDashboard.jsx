@@ -293,7 +293,7 @@ const AdminDashboard = () => {
               )}
             </label>
 
-            {form.subsection === 'App Designs' && (
+            {(form.subsection === 'App Designs' || form.subsection === 'Web Design') && (
               <>
                 <h3 className="admin-subtitle admin-label-wide">Detail popup</h3>
 

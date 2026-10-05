@@ -58,85 +58,92 @@
 
 .pdm-grid {
   display: grid;
-  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
-  gap: 32px;
-  align-items: stretch;
+  /* Column widths follow the two frame artworks' aspect ratios
+     (494x605 and 801x598) so both panels share the same height. */
+  grid-template-columns: minmax(0, 0.817fr) minmax(0, 1.34fr);
+  gap: 28px;
+  align-items: start;
 }
 
-/* Angular sci-fi frame: an outer green shape with clipped corners,
-   and a dark inner panel inset from it. */
+/* Each panel = the frame artwork (stretched to the box) + content
+   positioned inside the artwork's inner area. */
 .pdm-frame {
   position: relative;
-  padding: 14px;
-  background: #39b54a;
-  filter: drop-shadow(0 0 18px rgba(57, 255, 20, 0.35));
-  clip-path: polygon(
-    0 12%, 6% 6%, 50% 6%, 54% 0, 100% 0,
-    100% 52%, 97% 56%, 97% 92%, 92% 100%,
-    10% 100%, 6% 96%, 0 96%
-  );
+  width: 100%;
 }
 
-.pdm-frame-info {
-  clip-path: polygon(
-    4% 0, 100% 0, 100% 72%, 96% 78%, 96% 100%,
-    0 100%, 0 60%, 3% 55%, 3% 4%
-  );
-}
+.pdm-frame-image { aspect-ratio: 494 / 605; }
+.pdm-frame-info  { aspect-ratio: 801 / 598; container-type: inline-size; }
 
-.pdm-frame-inner {
+.pdm-frame-art {
+  position: absolute;
+  inset: 0;
+  width: 100%;
   height: 100%;
-  background: #1c1c1c;
-  border: 1px solid rgba(57, 255, 20, 0.6);
-  clip-path: inherit;
+  pointer-events: none;
+  user-select: none;
+  filter: drop-shadow(0 0 10px rgba(57, 255, 20, 0.25));
 }
 
-.pdm-frame-image .pdm-frame-inner {
+.pdm-frame-content {
+  position: absolute;
   display: flex;
+}
+
+/* Inner area of frame-image.png */
+.pdm-frame-image .pdm-frame-content {
+  top: 10%;
+  right: 12%;
+  bottom: 7%;
+  left: 10%;
   align-items: center;
   justify-content: center;
-  padding: 40px 24px;
-  min-height: 460px;
 }
 
 .pdm-image {
   max-width: 100%;
-  max-height: 480px;
+  max-height: 100%;
   object-fit: contain;
 }
 
+/* Inner area of frame-info.png */
 .pdm-info {
-  padding: 40px 48px 36px;
-  display: flex;
+  top: 7%;
+  right: 8%;
+  bottom: 6%;
+  left: 10%;
   flex-direction: column;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #39b54a transparent;
 }
 
 .pdm-title {
-  font-size: 34px;
+  font-size: clamp(20px, 3.8cqw, 32px);
   font-weight: 400;
-  margin: 0 0 28px;
+  margin: 0 0 2.4cqw;
   letter-spacing: 1px;
 }
 
 .pdm-heading {
-  font-size: 28px;
+  font-size: clamp(18px, 3.8cqw, 30px);
   font-weight: 400;
-  margin: 0 0 20px;
+  margin: 0 0 2cqw;
   letter-spacing: 2px;
 }
 
 .pdm-description {
-  font-size: 14px;
-  line-height: 1.35;
+  font-size: clamp(11px, 1.9cqw, 15px);
+  line-height: 1.25;
   color: rgba(255, 255, 255, 0.92);
-  margin: 0 0 36px;
+  margin: 0 0 3cqw;
   white-space: pre-line;
 }
 
 .pdm-subheading {
-  font-size: 20px;
+  font-size: clamp(15px, 2.8cqw, 22px);
   font-weight: 400;
-  margin: 0 0 20px;
+  margin: 0 0 1.8cqw;
   letter-spacing: 1px;
 }
 
@@ -144,32 +151,33 @@
   list-style: none;
   display: flex;
   flex-wrap: wrap;
-  gap: 12px 14px;
+  gap: 1.2cqw 1.6cqw;
   padding: 0;
-  margin: 0 0 28px;
-  max-width: 70%;
+  margin: 0 0 2cqw;
+  max-width: 68%;
 }
 
 .pdm-role {
   border: 1px solid #39b54a;
-  border-radius: 4px;
-  padding: 6px 8px;
-  font-size: 15px;
+  border-radius: 3px;
+  padding: 0.5cqw 0.8cqw;
+  font-size: clamp(11px, 1.75cqw, 14px);
   letter-spacing: 1px;
 }
 
 .pdm-read-more {
-  align-self: flex-end;
-  margin-top: auto;
+  position: absolute;
+  right: 0;
+  bottom: 0;
   display: inline-flex;
   align-items: center;
   gap: 24px;
-  padding: 10px 16px 10px 18px;
+  padding: 1.2cqw 2cqw;
   border: 1px solid #39b54a;
   border-radius: 10px;
   color: rgba(255, 255, 255, 0.55);
   text-decoration: underline;
-  font-size: 15px;
+  font-size: clamp(11px, 1.9cqw, 15px);
   letter-spacing: 1px;
   transition: color 0.2s ease, box-shadow 0.2s ease;
 }
@@ -187,7 +195,8 @@
   font-size: 18px;
 }
 
-/* Tablet / phone: stack the two panels */
+/* Tablet / phone: stack panels; the text panel drops its fixed
+   aspect ratio so long descriptions can grow. */
 @media (max-width: 900px) {
   .pdm-dialog {
     padding: 56px 16px 24px;
@@ -198,39 +207,45 @@
     gap: 20px;
   }
 
-  .pdm-frame-image .pdm-frame-inner {
-    min-height: 280px;
-    padding: 24px 16px;
+  .pdm-frame-image {
+    width: min(100%, 420px);
+    margin: 0 auto;
   }
 
-  .pdm-image {
-    max-height: 320px;
+  .pdm-frame-info {
+    aspect-ratio: auto;
+  }
+
+  .pdm-frame-info .pdm-frame-art {
+    display: none;
   }
 
   .pdm-info {
-    padding: 28px 24px;
+    position: static;
+    padding: 24px 20px;
+    border: 2px solid #39b54a;
+    box-shadow: 0 0 14px rgba(57, 255, 20, 0.25);
+    overflow: visible;
   }
 
   .pdm-title { font-size: 26px; }
   .pdm-heading { font-size: 22px; }
   .pdm-roles { max-width: 100%; }
-  .pdm-read-more { align-self: stretch; justify-content: space-between; }
+  .pdm-read-more { position: static; margin-top: 8px; justify-content: space-between; }
 }
 
 /* Light mode */
+body.light-mode .pdm-frame-art {
+  filter: drop-shadow(0 0 8px rgba(0, 184, 77, 0.2));
+}
+
+body.light-mode .pdm-info {
+  border-color: #00B84D;
+}
+
 body.light-mode .pdm-dialog {
   background: #FAFAF6;
   color: #076E2C;
-}
-
-body.light-mode .pdm-frame {
-  background: #00B84D;
-  filter: drop-shadow(0 0 14px rgba(0, 184, 77, 0.25));
-}
-
-body.light-mode .pdm-frame-inner {
-  background: #EEF5EC;
-  border-color: rgba(0, 184, 77, 0.6);
 }
 
 body.light-mode .pdm-description {

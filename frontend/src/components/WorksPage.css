@@ -1009,3 +1009,17 @@
     height: 160px;
   }
 }
+
+/* Web Design cards: landscape laptop+phone mockups need the full card
+   width (the default 80% cap is sized for portrait phone mockups), and
+   sit a little higher so they clear the title at the bottom. */
+.web-design-grid .project-image {
+  max-width: 100%;
+  max-height: 100%;
+  width: 100%;
+  transform: translateY(-10%);
+}
+
+.web-design-grid .project-card:hover .project-image {
+  transform: translateY(-10%) scale(1.04);
+}

@@ -1,7 +1,9 @@
 import React, { useEffect } from 'react';
 import './ProjectDetailModal.css';
+import frameImage from './pdm-frame-image.png';
+import frameInfo from './pdm-frame-info.png';
 
-// Full-screen detail view for an App Design project.
+// Full-screen detail view for an App Design or Web Design project.
 // Uses the project's detail fields, falling back to the card fields
 // so older projects without detail data still open cleanly.
 const ProjectDetailModal = ({ project, onClose }) => {
@@ -39,13 +41,15 @@ const ProjectDetailModal = ({ project, onClose }) => {
 
         <div className="pdm-grid">
           <div className="pdm-frame pdm-frame-image">
-            <div className="pdm-frame-inner">
+            <img src={frameImage} alt="" aria-hidden="true" className="pdm-frame-art" />
+            <div className="pdm-frame-content">
               {image && <img src={image} alt={project.title} className="pdm-image" />}
             </div>
           </div>
 
           <div className="pdm-frame pdm-frame-info">
-            <div className="pdm-frame-inner pdm-info">
+            <img src={frameInfo} alt="" aria-hidden="true" className="pdm-frame-art" />
+            <div className="pdm-frame-content pdm-info">
               <h2 id="pdm-title" className="pdm-title">{project.title}</h2>
 
               {description && (

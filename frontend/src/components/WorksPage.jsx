@@ -180,11 +180,16 @@ const WorksPage = () => {
         </>
       );
     } else if (activeSubsection === 'Web Design') {
-      return renderProjectGrid(
-        projectsFor('Digital Designs', 'Web Design'),
-        'This could be your web project',
-        "Let's build something great together",
-        'Web Design'
+      return (
+        <div className="web-design-grid">
+          {renderProjectGrid(
+            projectsFor('Digital Designs', 'Web Design'),
+            'This could be your web project',
+            "Let's build something great together",
+            'Web Design',
+            setDetailProject
+          )}
+        </div>
       );
     }
     return null;
