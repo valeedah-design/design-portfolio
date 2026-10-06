@@ -14,24 +14,66 @@ def _get_secret():
     return secret
 
 
-def check_credentials(username, password):
-    """Verify a submitted username/password against env vars.
-    ADMIN_USERNAME is plain text.
-    ADMIN_PASSWORD_HASH is a bcrypt hash (generate with generate_password_hash.py).
-    """
-    expected_username = os.environ.get("ADMIN_USERNAME")
-    expected_hash = os.environ.get("ADMIN_PASSWORD_HASH")
+def _get_db():
+    from pymongo import MongoClient
+    client = MongoClient(os.environ.get("MONGO_URL"), serverSelectionTimeoutMS=8000)
+    return client, client[os.environ.get("DB_NAME", "portfolio_db")]
 
-    if not expected_username or not expected_hash:
+
+def get_stored_credentials():
+    """Credentials saved from the admin panel (settings collection), or None.
+    When none are saved yet, the ADMIN_USERNAME / ADMIN_PASSWORD_HASH env vars apply."""
+    try:
+        client, db = _get_db()
+        doc = db.settings.find_one({"_id": "admin_credentials"})
+        client.close()
+    except Exception:
+        return None
+    if doc and doc.get("username") and doc.get("password_hash"):
+        return doc["username"], doc["password_hash"]
+    return None
+
+
+def _expected_credentials():
+    stored = get_stored_credentials()
+    if stored:
+        return stored
+    username = (os.environ.get("ADMIN_USERNAME") or "").strip()
+    pw_hash = (os.environ.get("ADMIN_PASSWORD_HASH") or "").strip().strip('"').strip("'")
+    if not username or not pw_hash:
         raise RuntimeError("ADMIN_USERNAME / ADMIN_PASSWORD_HASH not configured")
+    return username, pw_hash
 
-    if username != expected_username:
+
+def check_credentials(username, password):
+    """Verify a submitted username/password. Credentials changed from the admin
+    panel (stored in MongoDB) take priority over the env vars.
+    The username check ignores case and surrounding spaces."""
+    expected_username, expected_hash = _expected_credentials()
+
+    if (username or "").strip().lower() != expected_username.strip().lower():
         return False
 
     try:
         return bcrypt.checkpw(password.encode("utf-8"), expected_hash.encode("utf-8"))
     except ValueError:
         return False
+
+
+def save_credentials(username, new_password):
+    """Hash and store new admin credentials in MongoDB."""
+    pw_hash = bcrypt.hashpw(new_password.encode("utf-8"), bcrypt.gensalt()).decode("utf-8")
+    client, db = _get_db()
+    db.settings.update_one(
+        {"_id": "admin_credentials"},
+        {"$set": {
+            "username": username.strip(),
+            "password_hash": pw_hash,
+            "updatedAt": datetime.now(timezone.utc).isoformat(),
+        }},
+        upsert=True,
+    )
+    client.close()
 
 
 def create_token(username):
