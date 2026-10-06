@@ -188,7 +188,9 @@
 }
 
 .research-grid {
-  grid-template-columns: minmax(0, 1fr);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
   max-width: 900px;
 }
 
@@ -1022,4 +1024,55 @@
 
 .web-design-grid .project-card:hover .project-image {
   transform: translateY(-10%) scale(1.04);
+}
+
+/* Research Lab: cards with an article link open it in a new tab */
+.research-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.research-card-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.research-card-link:focus-visible {
+  outline: 2px solid #39FF14;
+  outline-offset: 4px;
+}
+
+.research-description {
+  font-family: 'Share Tech Mono', 'Courier New', monospace;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.6);
+  margin: 10px 0 0;
+}
+
+.research-arrow {
+  flex-shrink: 0;
+  font-size: 28px;
+  line-height: 1;
+  color: #00FF00;
+  transition: transform 0.3s ease;
+}
+
+.research-card-link:hover .research-arrow {
+  transform: translate(4px, -4px);
+}
+
+body.light-mode .research-description {
+  color: rgba(7, 110, 44, 0.75);
+}
+
+body.light-mode .research-arrow {
+  color: #00B84D;
+}
+
+@media (max-width: 600px) {
+  .research-card {
+    padding: 24px;
+  }
 }

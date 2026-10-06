@@ -223,9 +223,28 @@ const WorksPage = () => {
     return (
       <div className="research-grid">
         {projectsFor(activeCategory, null).map((project) => (
-          <div key={project.id} className="research-card">
-            <h3 className="research-title">{project.title}</h3>
-          </div>
+          project.readMoreUrl ? (
+            <a
+              key={project.id}
+              className="research-card research-card-link"
+              href={project.readMoreUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <div className="research-text">
+                <h3 className="research-title">{project.title}</h3>
+                {project.description && <p className="research-description">{project.description}</p>}
+              </div>
+              <span className="research-arrow" aria-hidden="true">&#8599;</span>
+            </a>
+          ) : (
+            <div key={project.id} className="research-card">
+              <div className="research-text">
+                <h3 className="research-title">{project.title}</h3>
+                {project.description && <p className="research-description">{project.description}</p>}
+              </div>
+            </div>
+          )
         ))}
       </div>
     );

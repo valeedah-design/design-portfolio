@@ -293,6 +293,20 @@ const AdminDashboard = () => {
               )}
             </label>
 
+            {form.category === 'Research Lab' && (
+              <label className="admin-label admin-label-wide">
+                Article link
+                <input
+                  className="admin-input"
+                  type="url"
+                  value={form.readMoreUrl}
+                  onChange={handleChange('readMoreUrl')}
+                  placeholder="https://medium.com/@you/your-article"
+                />
+                <span className="admin-hint">Clicking the card opens this link in a new tab. Title and Description are shown on the card.</span>
+              </label>
+            )}
+
             {(form.subsection === 'App Designs' || form.subsection === 'Web Design') && (
               <>
                 <h3 className="admin-subtitle admin-label-wide">Detail popup</h3>
