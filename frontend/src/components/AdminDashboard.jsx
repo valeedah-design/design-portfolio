@@ -61,6 +61,51 @@ const AdminDashboard = () => {
     loadProjects();
   }, [token, navigate, loadProjects]);
 
+  // ---- Change password ----
+  const emptyPw = { currentUsername: '', currentPassword: '', newUsername: '', newPassword: '', confirmPassword: '' };
+  const [showPw, setShowPw] = useState(false);
+  const [pwForm, setPwForm] = useState(emptyPw);
+  const [pwStatus, setPwStatus] = useState({ type: '', message: '' });
+  const [pwSaving, setPwSaving] = useState(false);
+
+  const handlePwChange = (field) => (e) => {
+    setPwForm((f) => ({ ...f, [field]: e.target.value }));
+  };
+
+  const handlePasswordSubmit = async (e) => {
+    e.preventDefault();
+    if (pwForm.newPassword !== pwForm.confirmPassword) {
+      setPwStatus({ type: 'error', message: "The new passwords don't match." });
+      return;
+    }
+    setPwSaving(true);
+    setPwStatus({ type: '', message: '' });
+    try {
+      const res = await fetch('/api/change_password', {
+        method: 'POST',
+        headers: authHeaders({ 'Content-Type': 'application/json' }),
+        body: JSON.stringify({
+          currentUsername: pwForm.currentUsername,
+          currentPassword: pwForm.currentPassword,
+          newUsername: pwForm.newUsername,
+          newPassword: pwForm.newPassword,
+        }),
+      });
+      if (res.status === 401) {
+        handleLogout();
+        return;
+      }
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || 'Could not change the password');
+      setPwForm(emptyPw);
+      setPwStatus({ type: 'success', message: `Saved. Next time, log in as "${data.username}" with your new password.` });
+    } catch (err) {
+      setPwStatus({ type: 'error', message: err.message });
+    } finally {
+      setPwSaving(false);
+    }
+  };
+
   const handleLogout = () => {
     localStorage.removeItem('admin_token');
     navigate('/admin');
@@ -224,10 +269,56 @@ const AdminDashboard = () => {
       <div className="admin-dashboard">
         <div className="admin-dashboard-header">
           <h1 className="admin-title">Projects</h1>
-          <button className="admin-button admin-button-secondary" onClick={handleLogout}>
-            Log out
-          </button>
+          <div className="admin-header-actions">
+            <button
+              className="admin-button admin-button-secondary"
+              onClick={() => { setShowPw((v) => !v); setPwStatus({ type: '', message: '' }); }}
+              aria-expanded={showPw}
+            >
+              {showPw ? 'Close' : 'Change password'}
+            </button>
+            <button className="admin-button admin-button-secondary" onClick={handleLogout}>
+              Log out
+            </button>
+          </div>
         </div>
+
+        {showPw && (
+          <form className="admin-card admin-form" onSubmit={handlePasswordSubmit}>
+            <h2 className="admin-subtitle">Change password</h2>
+            <div className="admin-form-grid">
+              <label className="admin-label">
+                Current username
+                <input className="admin-input" value={pwForm.currentUsername} onChange={handlePwChange('currentUsername')} autoComplete="username" required />
+              </label>
+              <label className="admin-label">
+                Current password
+                <input className="admin-input" type="password" value={pwForm.currentPassword} onChange={handlePwChange('currentPassword')} autoComplete="current-password" required />
+              </label>
+              <label className="admin-label admin-label-wide">
+                New username (optional)
+                <input className="admin-input" value={pwForm.newUsername} onChange={handlePwChange('newUsername')} placeholder="Leave empty to keep your current username" autoComplete="off" />
+              </label>
+              <label className="admin-label">
+                New password
+                <input className="admin-input" type="password" value={pwForm.newPassword} onChange={handlePwChange('newPassword')} minLength={10} autoComplete="new-password" required />
+                <span className="admin-hint">At least 10 characters</span>
+              </label>
+              <label className="admin-label">
+                Confirm new password
+                <input className="admin-input" type="password" value={pwForm.confirmPassword} onChange={handlePwChange('confirmPassword')} minLength={10} autoComplete="new-password" required />
+              </label>
+            </div>
+            {pwStatus.message && (
+              <p className={pwStatus.type === 'error' ? 'admin-error' : 'admin-success'} role="status">{pwStatus.message}</p>
+            )}
+            <div className="admin-form-actions">
+              <button className="admin-button" type="submit" disabled={pwSaving}>
+                {pwSaving ? 'Saving...' : 'Save new password'}
+              </button>
+            </div>
+          </form>
+        )}
 
         {error && <p className="admin-error">{error}</p>}
 

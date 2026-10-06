@@ -184,3 +184,15 @@
     grid-template-columns: 1fr;
   }
 }
+
+.admin-header-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.admin-success {
+  color: #39FF14;
+  font-family: 'Share Tech Mono', 'Courier New', monospace;
+  margin: 12px 0 0;
+}
