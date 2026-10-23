@@ -45,7 +45,6 @@ const HeroSection = () => {
               <p className="about-description">
                 Think of me as a debugger for bad user experiences. Let&apos;s fix some problems and make them pretty!
               </p>
-              <VenomButton className="cta-button" onClick={() => setShowContact(true)}>Let me help you</VenomButton>
             </div>
           </div>
         </div>
@@ -64,6 +63,10 @@ const HeroSection = () => {
             {titles[currentTitleIndex]}
           </h2>
         </div>
+      </div>
+
+      <div className="hero-cta">
+        <VenomButton className="cta-button" onClick={() => setShowContact(true)}>Let me help you</VenomButton>
       </div>
 
       {showContact && (
