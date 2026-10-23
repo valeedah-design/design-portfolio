@@ -1,0 +1,88 @@
+/* Wrapper keeps the button in normal flow; the tendril layer floats around it. */
+.venom-wrap {
+  --venom: 0;
+  position: relative;
+  display: inline-block;
+}
+
+.venom-svg {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  opacity: 0;
+  overflow: visible;
+  z-index: 0;
+  filter: drop-shadow(0 0 6px rgba(0, 255, 0, 0.55));
+}
+
+/* neon edge of the symbiote */
+.venom-rim path,
+.venom-rim circle {
+  fill: #00FF00;
+}
+
+/* liquid body: deep green at the heart, near-black at the edges */
+.venom-core path,
+.venom-core circle {
+  fill: url(#venom-body);
+}
+
+.venom-body-0 { stop-color: #0d4a12; }
+.venom-body-1 { stop-color: #052a08; }
+.venom-body-2 { stop-color: #010a02; }
+
+/* wet highlight along each tendril */
+.venom-sheen path {
+  fill: rgba(190, 255, 190, 0.3);
+}
+
+.venom-button {
+  position: relative;
+  z-index: 1;
+  will-change: transform;
+}
+
+/* While the tendrils hold it, the button glows harder the more it's pulled. */
+.venom-wrap .venom-button {
+  box-shadow: 0 0 calc(var(--venom) * 26px) rgba(0, 255, 0, calc(var(--venom) * 0.55));
+}
+
+/* The existing hover lift would fight the pull animation */
+.venom-wrap .cta-button:hover {
+  transform: none;
+}
+
+/* Light mode: dark-green symbiote with a bright green rim */
+body.light-mode .venom-svg {
+  filter: drop-shadow(0 0 5px rgba(0, 184, 77, 0.45));
+}
+
+body.light-mode .venom-rim path,
+body.light-mode .venom-rim circle {
+  fill: #00B84D;
+}
+
+body.light-mode .venom-body-0 { stop-color: #1f7a3a; }
+body.light-mode .venom-body-1 { stop-color: #0f4a22; }
+body.light-mode .venom-body-2 { stop-color: #082e15; }
+
+body.light-mode .venom-sheen path {
+  fill: rgba(220, 255, 225, 0.55);
+}
+
+@media (max-width: 768px) {
+  .venom-wrap {
+    display: block;
+  }
+}
+
+/* Solid fill so the symbiote sits behind the button, not across the label */
+.venom-wrap .cta-button {
+  background: #000;
+}
+
+.venom-wrap .cta-button:hover {
+  background: #00FF00;
+}

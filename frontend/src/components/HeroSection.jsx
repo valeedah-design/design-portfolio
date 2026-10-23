@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './HeroSection.css';
 import MatrixGreeting from './MatrixGreeting';
 import ContactModal from './ContactModal';
+import VenomButton from './VenomButton';
 
 const HeroSection = () => {
   const titles = [
@@ -44,7 +45,7 @@ const HeroSection = () => {
               <p className="about-description">
                 Think of me as a debugger for bad user experiences. Let&apos;s fix some problems and make them pretty!
               </p>
-              <button className="cta-button" onClick={() => setShowContact(true)}>Let me help you</button>
+              <VenomButton className="cta-button" onClick={() => setShowContact(true)}>Let me help you</VenomButton>
             </div>
           </div>
         </div>
